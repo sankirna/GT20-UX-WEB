@@ -17,6 +17,8 @@ import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, Ng
 import { FilePreviewComponent } from './file-preview/file-preview.component';
 import { QrCodeGeneratorComponent } from './qr-code-generator/qr-code-generator.component';
 import { QrCodeScannerComponent } from './qr-code-scanner/qr-code-scanner.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -55,7 +57,9 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FileUploadComponent,
         FilePreviewComponent,
         QrCodeGeneratorComponent,
-        QrCodeScannerComponent
+        QrCodeScannerComponent,
+        HeaderComponent,
+        FooterComponent
     ],
     exports: [
         FormsModule,
@@ -73,6 +77,7 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FileUploadComponent,
         FilePreviewComponent,
         QrCodeScannerComponent,
+        
         // NgxMatDatetimePickerModule,
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,
