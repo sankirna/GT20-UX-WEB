@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { PagedListModel } from 'src/app/models/base-paged-list.model';
 import { FileUploadRequestModel } from 'src/app/models/file.model';
-import { ProductModel, ProductSearchModel } from 'src/app/models/product.model';
+import { ProductForSiteSearchModel, ProductModel, ProductSearchModel } from 'src/app/models/product.model';
 import { FileService } from './file.service';
 import { ProductTicketCategoriesRequestModel, ProductTicketCategoryMapModel } from 'src/app/models/product-ticket-category-map.model';
 import { VenueService } from './venue.service';
@@ -26,6 +26,11 @@ export class ProductService {
 
   list(model: ProductSearchModel) {
     const api = 'Product/List';
+    return this.http.post<PagedListModel<ProductModel>>(api, model, { params: { isPageType: true } });
+  }
+
+  listForSite(model: ProductForSiteSearchModel) {
+    const api = 'Product/ProductListForSite';
     return this.http.post<PagedListModel<ProductModel>>(api, model, { params: { isPageType: true } });
   }
 

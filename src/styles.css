@@ -1,0 +1,12 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+
+.site-navbar .site-logo a {
+    border: none;
+}

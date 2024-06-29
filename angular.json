@@ -91,6 +91,9 @@
               "browserTarget": "gt20:build:staging"
             }
           },
+          "options": {
+                "port": 4201
+                     },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

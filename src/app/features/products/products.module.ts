@@ -23,6 +23,9 @@ import { NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, 
 import { ProductTicketCategoryListComponent } from './shared/product-ticket-category-list/product-ticket-category-list.component';
 import { ProductTicketComboListComponent } from './shared/product-ticket-combo-list/product-ticket-combo-list.component';
 import { ProductComboTeamComponent } from './shared/product-combo-team/product-combo-team.component';
+import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
@@ -33,6 +36,7 @@ import { ProductComboTeamComponent } from './shared/product-combo-team/product-c
     , ProductTicketCategoryListComponent
     , ProductTicketComboListComponent
     , ProductComboTeamComponent
+    , ProductDetailComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,8 @@ import { ProductComboTeamComponent } from './shared/product-combo-team/product-c
     MatStepperModule,
     SharedModule,
     ProductsRoutingModule,
+    MatRadioModule,
+    MatSliderModule
   ],
   providers: [
     ProductService

@@ -1,77 +1,57 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center none">
-    <div fxFlex="95%">
-        <mat-card>
-            <mat-card-content>
-                <h2>Products</h2>
-                <div fxLayout="row"  fxLayout.sm="column" fxLayout.xs="column">
-                    <div fxLayout="row" fxFlex="35%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayoutGap="10px"
-                        fxLayoutAlign="start center">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Filter</mat-label>
-                            <input matInput placeholder="Name" #input [(ngModel)]="searchModel.name">
-                        </mat-form-field>
-                        <button mat-raised-button color="primary" (click)="applyFilter()">Apply Filter</button>
+<div class="row mb-5">
+    <div class="col-md-9 order-2">
+        <div class="row mb-5" >
+                <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up" *ngFor="let product of list">
+                    <div class="block-4 text-center border">
+                        <figure class="block-4-image">
+                            <a href="shop-single.html"><img src="assets/images/cloth_1.jpg" alt="Image placeholder"
+                                    class="img-fluid"></a>
+                        </figure>
+                        <div class="block-4-text p-4">
+                            <h3><a (click)="detail(product)">Tank Top</a></h3>
+                            <p class="mb-0">Finding perfect t-shirt</p>
+                            <p class="text-primary font-weight-bold">$50</p>
+                        </div>
                     </div>
-                    <div fxLayout="row" fxFlex="65%" fxFlex.sm="95%" fxFlex.xs="950%" fxLayoutAlign="end center">
-                        <button mat-raised-button color="primary" (click)="addNew()">Add New</button>
-                    </div>
-
                 </div>
-                    <table mat-table [dataSource]="dataSource" matSort>
-
-                        <!-- Code Column -->
-                        <ng-container matColumnDef="Name">
-                            <th mat-header-cell *matHeaderCellDef> Name </th>
-                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="categoryName">
-                            <th mat-header-cell *matHeaderCellDef> Category Name </th>
-                            <td mat-cell *matCellDef="let element"> {{element.categoryDetail?.name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="ProductType">
-                            <th mat-header-cell *matHeaderCellDef> Product Type </th>
-                            <td mat-cell *matCellDef="let element"> {{element.productTypeEnum==0 ? 'Regular':'Combo'}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="VenueName">
-                            <th mat-header-cell *matHeaderCellDef> Venue </th>
-                            <td mat-cell *matCellDef="let element"> {{element.venueDetail?.stadiumName}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Team1">
-                            <th mat-header-cell *matHeaderCellDef> Team1 </th>
-                            <td mat-cell *matCellDef="let element"> {{element.team1Detail?.name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Team2">
-                            <th mat-header-cell *matHeaderCellDef> Team2 </th>
-                            <td mat-cell *matCellDef="let element"> {{element.team2Detail?.name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="startDateTime">
-                            <th mat-header-cell *matHeaderCellDef> Start Date Time </th>
-                            <td mat-cell *matCellDef="let element"> {{element.startDateTime | date:'dd-MM-YYYY HH:mm'}} </td>
-                        </ng-container>
-                        <!-- <ng-container matColumnDef="endDateTime">
-                            <th mat-header-cell *matHeaderCellDef> End Date Time </th>
-                            <td mat-cell *matCellDef="let element"> {{element.endDateTime | date:'dd-MM-YYYY HH:MM'}} </td>
-                        </ng-container> -->
-                        <ng-container matColumnDef="Actions">
-                            <th mat-header-cell *matHeaderCellDef> Actions </th>
-                            <td mat-cell *matCellDef="let row">
-                                <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary"
-                                    (click)="edit(row)">
-                                    <mat-icon>edit</mat-icon>
-                                </button>
-                                <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn"
-                                    (click)="delete(row)">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                    <app-custom-paginator [paggerModel]="paggerModel"
-                        (changePage)="ChangePage($event)"></app-custom-paginator>
-            </mat-card-content>
-        </mat-card>
+        </div>
+        <div class="row" data-aos="fade-up">
+            <div class="col-md-12 text-center">
+                <app-custom-paginator [paggerModel]="paggerModel"
+                (changePage)="ChangePage($event)"></app-custom-paginator>
+            </div>
+        </div>
     </div>
-</div>
+
+    <div class="col-md-3 order-1 mb-5 mb-md-0">
+
+        <div class="border p-4 rounded mb-4">
+            <div class="mb-4">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
+                <mat-slider min="200" max="500">
+                    <input value="{{searchModel.minimumPrice}}" matSliderStartThumb>
+                    <input value="{{searchModel.maximumPrice}}" matSliderEndThumb>
+                </mat-slider>
+
+            </div>
+
+            <div class="mb-4">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Teams</h3>
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="searchModel.teamId" (change)="search()">
+                    <mat-radio-button checked value="0">All</mat-radio-button>
+                    <div *ngFor="let team of teams">
+                        <mat-radio-button value="{{team.id}}">{{team.name}}</mat-radio-button>
+                    </div>
+                </mat-radio-group>
+
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="searchModel.categoryId" (change)="search()">
+                    <mat-radio-button checked value="0">All</mat-radio-button>
+                    <div *ngFor="let category of categories">
+                        <mat-radio-button value="{{category.id}}">{{category.name}}</mat-radio-button>
+                    </div>
+                </mat-radio-group>
+
+            </div>
+        </div>
+    </div>

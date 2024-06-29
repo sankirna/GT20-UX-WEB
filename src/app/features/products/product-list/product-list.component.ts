@@ -5,8 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaggerModel } from 'src/app/models/base-paged-list.model';
 import { ConfirmDialogComponent, ConfirmDialogModel } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { BaseSearchModel } from 'src/app/models/base-search.model';
-import { ProductModel, ProductSearchModel } from 'src/app/models/product.model';
+import { ProductForSiteSearchModel, ProductModel, ProductSearchModel } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/core/services/product.service';
+import { TeamModel, TeamSearchModel } from 'src/app/models/team.model';
+import { TeamService } from 'src/app/core/services/team.service';
+import { CategoryModel, CategorySearchModel } from 'src/app/models/category.model';
+import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,21 +19,24 @@ import { ProductService } from 'src/app/core/services/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  searchModel: ProductSearchModel = new ProductSearchModel();
+  searchModel: ProductForSiteSearchModel = new ProductForSiteSearchModel();
   paggerModel: PaggerModel = new PaggerModel();
   list: ProductModel[] = [];
-  displayedColumns: string[] = ['Name','categoryName','ProductType','VenueName','Team1','Team2','startDateTime', 'Actions'];
-  dataSource: MatTableDataSource<ProductModel>;
+  teams: TeamModel[] = [];
+  categories: CategoryModel[] = [];
 
   constructor(private productService: ProductService
+     , private teamService: TeamService
+     , private categoryService: CategoryService
      , private router: Router
      , private route: ActivatedRoute
      , private dialog: MatDialog
   ) {
-    this.dataSource = new MatTableDataSource(this.list);
   }
 
   ngOnInit() {
+    this.getTeams();
+    this.getCategories();
     this.search();
   }
 
@@ -38,13 +45,11 @@ export class ProductListComponent implements OnInit {
     this.search();
   }
 
-  search() {
-    this.productService.list(this.searchModel).subscribe(
+  getTeams() {
+    let  teamSearchModel: TeamSearchModel = new TeamSearchModel();
+    this.teamService.list(teamSearchModel).subscribe(
       (response) => {
-        this.list = <ProductModel[]>response.data;
-        this.dataSource = new MatTableDataSource(this.list);
-        this.paggerModel = <PaggerModel>response.paggerModel;
-        console.log(this.paggerModel);
+        this.teams = <TeamModel[]>response.data;
       },
       (error) => {
         console.error(error);
@@ -52,34 +57,35 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  edit(row: ProductModel){
-    this.router.navigateByUrl('/products/edit/'+ row.id);
-  }
-
-
-  delete(row: ProductModel){
-    const message = `Are you sure you want to do delete?`;
-    const dialogData = new ConfirmDialogModel("Confirm Action", message);
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: "400px",
-      data: dialogData
-    });
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if(dialogResult){
-        this.productService.delete(<number>row.id).subscribe(
-          (response) => {
-            console.log(response);
-            this.applyFilter();
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
+  getCategories() {
+    let  categorySearchModel: CategorySearchModel = new CategorySearchModel();
+    this.categoryService.list(categorySearchModel).subscribe(
+      (response) => {
+        this.categories = <CategoryModel[]>response.data;
+      },
+      (error) => {
+        console.error(error);
       }
-    });
-    
+    );
   }
+
+  search() {
+    this.productService.listForSite(this.searchModel).subscribe(
+      (response) => {
+        this.list = <ProductModel[]>response.data;
+        this.paggerModel = <PaggerModel>response.paggerModel;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+
+  detail(row: ProductModel){
+    this.router.navigateByUrl('/products/details/'+ row.id);
+  }
+
 
   ChangePage($event: BaseSearchModel) {
     this.searchModel.start = $event.start;

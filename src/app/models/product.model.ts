@@ -13,6 +13,16 @@ export class ProductSearchModel extends BaseSearchModel {
   productTypeId: number | undefined ;
 }
 
+export class ProductForSiteSearchModel extends BaseSearchModel {
+  searchText: string | undefined = "";
+  productTypeId: number | undefined ;
+  teamId: string | undefined = "0";
+  categoryId: string | undefined = "0";
+  minimumPrice: number | undefined ;
+  maximumPrice: number | undefined ;
+}
+
+
 // This class represents a product.
 export class ProductModel {
   id: number | undefined = 0;
