@@ -22,8 +22,18 @@ const appRoutes: Routes = [
     loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule),
   },
   {
-    path: 'products',
-    loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule),
+    path: 'shopping-cart',
+    loadChildren: () => import('./features/shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./features/checkout/checkout.module').then(m => m.CheckoutModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'thank-you',
+    loadChildren: () => import('./features/thank-you/thank-you.module').then(m => m.ThankYouModule),
     canActivate: [AuthGuard]
   },
   {

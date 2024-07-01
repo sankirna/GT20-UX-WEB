@@ -1,0 +1,105 @@
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="row mb-5">
+            <div class="col-md-12" *ngIf="form">
+                <form [formGroup]="form">
+                    <h2 class="h3 mb-3 text-black">Personal Information</h2>
+                    <div class="p-3 p-lg-5 border">
+                        <div class="input-group w-75">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Name" formControlName="name">
+                            </mat-form-field>
+                        </div>
+                        <div class="input-group w-75">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="Email" formControlName="email">
+                            </mat-form-field>
+                        </div>
+                        <div class="input-group w-75">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Phone Number</mat-label>
+                                <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Coupon Code</h2>
+                <div class="p-3 p-lg-5 border">
+
+                    <label for="c_code" class="text-black mb-3">Enter your coupon code if you have one</label>
+                    <div class="input-group w-75">
+                        <input type="text" class="form-control" id="c_code" placeholder="Coupon Code"
+                            aria-label="Coupon Code" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary btn-sm" type="button" id="button-addon2">Apply</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row mb-5" *ngIf="shoppingCart">
+            <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Your Order</h2>
+                <div class="p-3 p-lg-5 border">
+                    <table class="table site-block-order-table mb-5">
+                        <thead>
+                            <th>Product</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let shoppingCartItem of shoppingCart?.items">
+                                <td>{{shoppingCartItem.productDetail?.name}} <strong class="mx-2">x</strong>
+                                    {{shoppingCartItem.quantity}}</td>
+                                <td>${{shoppingCartItem.total}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-black font-weight-bold"><strong>Gross Total</strong></td>
+                                <td class="text-black font-weight-bold"><strong>${{shoppingCart.grossTotal}}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-black font-weight-bold"><strong>Discount</strong></td>
+                                <td class="text-black font-weight-bold"><strong>${{shoppingCart.discount}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                <td class="text-black font-weight-bold"><strong>${{shoppingCart.grandTotal}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="border p-3 mb-3">
+                        <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#cash" role="button"
+                                aria-expanded="false" aria-controls="collapsebank">Cash</a></h3>
+
+                        <div class="collapse" id="cash">
+                            <div class="py-2">
+                                <p class="mb-0">Cash</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg py-3 btn-block"
+                             (click)="onSubmit()">Place Order</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- </form> -->

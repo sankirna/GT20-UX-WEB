@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntypedFormControl, Validators, UntypedFormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-login',
@@ -18,7 +19,9 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router,
         private titleService: Title,
         private notificationService: NotificationService,
-        private authenticationService: AuthenticationService) {
+        private authenticationService: AuthenticationService,
+        @Inject(MAT_DIALOG_DATA) public data: LoginComponentDialogModel,
+        public dialogRef: MatDialogRef<LoginComponent>) {
     }
 
     ngOnInit() {
@@ -52,7 +55,8 @@ export class LoginComponent implements OnInit {
                     } else {
                         localStorage.removeItem('savedUserEmail');
                     }
-                    this.router.navigate(['/']);
+                    this.onConfirm();
+                    //this.router.navigate(['/']);
                 },
                 error => {
                     this.notificationService.openSnackBar(error.error.title);
@@ -64,4 +68,25 @@ export class LoginComponent implements OnInit {
     resetPassword() {
         this.router.navigate(['/auth/password-reset-request']);
     }
+
+    onConfirm(): void {
+        this.dialogRef.close(true);
+    }
+    
+    onDismiss(): void {
+        this.dialogRef.close(false);
+    }
 }
+
+
+
+/**
+ * Class to represent confirm dialog model.
+ *
+ * It has been kept here to keep it as part of shared component.
+ */
+export class LoginComponentDialogModel {
+
+    constructor() {
+    }
+  }

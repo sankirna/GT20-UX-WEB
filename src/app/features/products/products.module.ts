@@ -9,14 +9,9 @@ import { MatRippleModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductListComponent } from './product-list/product-list.component';
-import { ProductCreateComponent } from './product-create/product-create.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProductService } from 'src/app/core/services/product.service';
-import { CountryService } from 'src/app/core/services/country.service';
-import { StateService } from 'src/app/core/services/state.service';
-import { CityService } from 'src/app/core/services/city.service';
-import { FileService } from 'src/app/core/services/file.service';
 import { ProductInformationComponent } from './shared/product-information/product-information.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
@@ -26,17 +21,20 @@ import { ProductComboTeamComponent } from './shared/product-combo-team/product-c
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductInformationRegularComponent } from './shared/product-information-regular/product-information-regular.component';
+import { ProductInformationComboComponent } from './shared/product-information-combo/product-information-combo.component';
 
 
 @NgModule({
   declarations: [
       ProductListComponent
-    , ProductCreateComponent
     , ProductInformationComponent
     , ProductTicketCategoryListComponent
     , ProductTicketComboListComponent
     , ProductComboTeamComponent
     , ProductDetailComponent
+    , ProductInformationRegularComponent
+    , ProductInformationComboComponent
   ],
   imports: [
     CommonModule,

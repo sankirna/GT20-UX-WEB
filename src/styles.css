@@ -10,3 +10,7 @@
 .site-navbar .site-logo a {
     border: none;
 }
+
+.site-footer {
+    padding: 0;
+}

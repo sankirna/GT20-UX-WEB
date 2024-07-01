@@ -21,7 +21,7 @@ export class DashboardHomeComponent implements OnInit {
     this.titleService.setTitle('gt20 - Dashboard');
 
     setTimeout(() => {
-      this.notificationService.openSnackBar('Welcome!');
+      //this.notificationService.openSnackBar('Welcome!');
     });
   }
 }

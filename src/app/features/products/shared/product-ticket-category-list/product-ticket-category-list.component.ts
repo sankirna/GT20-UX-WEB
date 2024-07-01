@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
+import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
+import { ProductTicketCategoryMapModel } from 'src/app/models/product-ticket-category-map.model';
 
 @Component({
   selector: 'app-product-ticket-category-list',
@@ -9,26 +11,28 @@ import * as _ from 'lodash';
   styleUrls: ['./product-ticket-category-list.component.css']
 })
 export class ProductTicketCategoryListComponent {
-  @Input() forms: FormArray = this.fb.array([]);
-  displayedColumns = ['TicketCategoryName','Total','Available','Block','Sold','Price'];
-  dataSource: MatTableDataSource<any> | undefined;
+  @Input() selectedProductTicketCategorId : number | undefined;
+  @Input() productTicketCategories: ProductTicketCategoryMapModel[] | undefined=[];
+  @Output() changeProductTicketCategory: EventEmitter<ProductTicketCategoryMapModel> = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private  shoppingCartService: ShoppingCartService
+  ) {
   }
 
   ngOnInit() {    
-    this.dataSource = new MatTableDataSource(this.forms.controls);
   }
 
-  resetForm() {
+  selectedCategory(productTicketCategoryMapModel: ProductTicketCategoryMapModel) {
   }
 
-  cancelEvent($event: boolean) {
-    this.resetForm();
+  changeEvent(){
+    let selectedId:number=this.selectedProductTicketCategorId as number;
+    if(this.changeProductTicketCategory){
+      var productTicketCategory=   _.find(this.productTicketCategories, ['id', selectedId]);
+      this.changeProductTicketCategory.emit(productTicketCategory);
+    }
   }
+  
 
-  delete(index: number) {
-    this.forms.removeAt(index);
-    this.dataSource = new MatTableDataSource(this.forms.controls);
-  }
 }

@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 import { environment } from 'src/environments/environment';
 import { ProductCombosModel } from 'src/app/models/product-combos.model';
 import { TicketCategoryModel, TicketCategorySearchModel } from 'src/app/models/ticket-category.model';
+import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -21,7 +22,6 @@ import { TicketCategoryModel, TicketCategorySearchModel } from 'src/app/models/t
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  form: FormGroup = new FormGroup({});
   model: ProductModel | undefined;
   countries: CountryModel[] = [];
   states: StateModel[] = [];
@@ -35,11 +35,13 @@ export class ProductDetailComponent implements OnInit {
   ticketPrice: number = 0;
   quantity: number = 0;
   totalPrice: number = 0;
-  selectedTicketCategory: ProductTicketCategoryMapModel | undefined; 
+  selectedProductTicketCategory: ProductTicketCategoryMapModel | undefined; 
+  selectedProductTicketCategoryId: number | undefined; 
   constructor(
     private router: Router
     , private route: ActivatedRoute
     , public productService: ProductService
+    , public shoppingCartService: ShoppingCartService
     , public fileService: FileService
     , private fb: FormBuilder) {
   }
@@ -48,86 +50,26 @@ export class ProductDetailComponent implements OnInit {
     return (this.id && this.id > 0 ? true : false);
   }
 
-  get isCombo(): boolean {
-    return this.productService.isCombo(this.form);
-  }
 
-
-  get productTicketCategoriesForm() {
-    return this.form.get("productTicketCategories") as FormArray;
-  }
-
-  get productCombosForm() {
-    return this.form.get("productCombos") as FormArray;
-  }
 
   ngOnInit() {
     this.id = <number><unknown>this.route.snapshot.paramMap.get('id');
-    if (this.isEdit) {
       this.getData();
 
-    } else {
-      this.buildForm();
-    }
+   
   }
 
-  get fileDataForm() {
-    return this.form.get("file") as FormGroup;
-  }
+
 
   buildForm() {
     this.isLoad = false;
-    if (!this.model) {
-      this.model = new ProductModel();
-      this.model.id = 0;
-      this.model.productTypeId = 0;
-    }
-    this.form = this.productService.getProductInformationForm(this.model);
-    if (this.isEdit) {
-      this.buildProductTicketCategoryMapModelForm(this.model.productTicketCategories);
-      this.productService.getRegularProducts().subscribe(data => {
-        if (data.data) {
-          this.productService.regularProducts = data.data;
-        }
-      });
-    }
-    if (this.model.productCombos) {
-      this.buildProductsComboModelForm(this.model.productCombos);
+    if(this.model?.productTicketCategories){
+      this.selectedProductTicketCategory=_.head( this.model?.productTicketCategories);
+      this.selectedProductTicketCategoryId=this.selectedProductTicketCategory?.id;
     }
     this.isLoad = true;
   }
 
-  buildProductTicketCategoryMapModelForm(productTicketCategoryMapModels: ProductTicketCategoryMapModel[]) {
-    var self = this;
-    _.forEach(productTicketCategoryMapModels, function (value, key) {
-      let productTicketCategoryMapForm: FormGroup = self.productService.getProductTicketCategoryMapModelForm(value);
-      self.productTicketCategoriesForm.push(productTicketCategoryMapForm);
-    });
-  }
-
-  buildProductsComboModelForm(productCombos: ProductCombosModel[]) {
-    var self = this;
-    _.forEach(productCombos, function (value, key) {
-      let productComboForm: FormGroup = self.productService.getProductsComboForm(value);
-      self.productCombosForm.push(productComboForm);
-    });
-  }
-
-  isValid(): boolean {
-    return this.form.valid;
-  }
-
-  uploadFile(event: FileUploadRequestModel) {
-    this.fileDataForm.controls["fileName"].setValue(event.fileName);
-    this.fileDataForm.controls["fileAsBase64"].setValue(event.fileAsBase64);
-    this.fileDataForm.controls["id"].setValue(0);
-  }
-
-  removeFile(event: FileUploadRequestModel) {
-    this.fileDataForm.controls["fileName"].setValue("");
-    this.fileDataForm.controls["fileAsBase64"].setValue("");
-    this.fileDataForm.controls["id"].setValue(0);
-  }
 
   getData() {
     this.productService.get(this.id).subscribe(
@@ -144,6 +86,7 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
+
   removeTimezoneOffset(dateTimeString: any) {
     // Create a new Date object from the input string
     const date = new Date(dateTimeString);
@@ -159,32 +102,7 @@ export class ProductDetailComponent implements OnInit {
     // Format the date and time without timezone offset
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   }
-  onSubmit() {
 
-    if (this.isValid()) {
-      this.model = <ProductModel>this.form.getRawValue();
-      if (!this.isEdit) {
-        this.productService.create(this.model).subscribe(
-          (response) => {
-            this.router.navigateByUrl('/products/list');
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-      } else {
-        this.productService.update(this.model).subscribe(
-          (response) => {
-            this.router.navigateByUrl('/products/list');
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-      }
-
-    }
-  }
 
   onClear() {
 
@@ -203,35 +121,50 @@ export class ProductDetailComponent implements OnInit {
       this.totalPrice = this.ticketPrice * this.quantity;
     }
   }
-  selectedCategory(category: any) {
-    this.selectedTicketCategory = category;
-    this.ticketPrice = category.price;
+
+  selectedProductTicketCategorytegory(productTicketCategorytegory: ProductTicketCategoryMapModel) {
+    this.selectedProductTicketCategory = productTicketCategorytegory;
+    if(productTicketCategorytegory && productTicketCategorytegory.price){
+      this.ticketPrice = productTicketCategorytegory.price;
+    }
   }
+
   addToCart() {
-    this.productService.cartItems.push({
-      "id": 0,
-      "productId": this.model?.id,
-      "productTicketCategoryMapId": this.selectedTicketCategory?.id,
-      "quantity": this.quantity,
-      "price": this.totalPrice
-    });
-    var objCart =
-    {
-      "id": 0,
-      "couponCode": "324243",
-      "couponId": 0,
-      "grossTotal": this.totalPrice,
-      "discount": 0,
-      "items": this.productService.cartItems
-    }  
-    this.productService.addProductInCart(objCart).subscribe(
-      (response) => { 
-        alert('Ticket added successfully in cart.')
-        //this.router.navigateByUrl('/products/list');
-      },
-      (error) => {
-        console.error(error);
+    if(this.selectedProductTicketCategory
+      && this.selectedProductTicketCategory.productId
+      && this.selectedProductTicketCategory.id
+      && this.quantity
+    )
+      {
+        this.shoppingCartService.addTicketProductCateory(
+          this.selectedProductTicketCategory.productId
+          ,this.selectedProductTicketCategory.id
+          , this.quantity);
       }
-    );
-  }
+  //   this.productService.cartItems.push({
+  //     "id": 0,
+  //     "productId": this.model?.id,
+  //     "productTicketCategoryMapId": this.selectedTicketCategory?.id,
+  //     "quantity": this.quantity,
+  //     "price": this.totalPrice
+  //   });
+  //   var objCart =
+  //   {
+  //     "id": 0,
+  //     "couponCode": "324243",
+  //     "couponId": 0,
+  //     "grossTotal": this.totalPrice,
+  //     "discount": 0,
+  //     "items": this.productService.cartItems
+  //   }  
+  //   this.productService.addProductInCart(objCart).subscribe(
+  //     (response) => { 
+  //       alert('Ticket added successfully in cart.')
+  //       //this.router.navigateByUrl('/products/list');
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+   }
 }

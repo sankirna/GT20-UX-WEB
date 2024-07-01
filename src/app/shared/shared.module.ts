@@ -19,6 +19,7 @@ import { QrCodeGeneratorComponent } from './qr-code-generator/qr-code-generator.
 import { QrCodeScannerComponent } from './qr-code-scanner/qr-code-scanner.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ImageComponent } from './image/image.component';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -59,7 +60,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         QrCodeGeneratorComponent,
         QrCodeScannerComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        ImageComponent
     ],
     exports: [
         FormsModule,
@@ -77,7 +79,7 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FileUploadComponent,
         FilePreviewComponent,
         QrCodeScannerComponent,
-        
+        ImageComponent,
         // NgxMatDatetimePickerModule,
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,

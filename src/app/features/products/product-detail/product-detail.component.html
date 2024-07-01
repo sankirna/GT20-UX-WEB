@@ -15,20 +15,12 @@
 
 <div class="row pt-5">
   <div class="col-md-6" style="text-align: center;">
-    <img *ngIf="selectedTicketCategory" src="{{selectedTicketCategory?.file?.url}}" style="width: 60% !important;" alt="Image" class="img-fluid">
-    <img *ngIf="!selectedTicketCategory" src="./assets/images/01.png" alt="Image" style="width: 60% !important;" class="img-fluid">
+    <img *ngIf="selectedProductTicketCategory" src="{{selectedProductTicketCategory?.file?.url}}" style="width: 60% !important;" alt="Image" class="img-fluid">
+    <img *ngIf="!selectedProductTicketCategory" src="./assets/images/01.png" alt="Image" style="width: 60% !important;" class="img-fluid">
   </div>
   <div class="col-md-6">
-    <div class="mb-1 d-flex">
-      <label for="option-sm" class="d-flex flex-column mr-3 mb-3" *ngFor="let category of ticketcategories">
-         
-        <span class="d-flex align-items-center">
-          <input type="radio" id="option-sm" name="shop-sizes" (change)="selectedCategory(category)">
-          <span class="d-inline-block text-black ml-2">{{category?.ticketCategoryName}}</span>
-        </span>
-        <span class="d-inline-block text-black ml-4">${{category?.price}}</span>
-      </label>
-       
+    <div class="mb-1 d-flex" >
+       <app-product-ticket-category-list [productTicketCategories]="model?.productTicketCategories" [selectedProductTicketCategorId]="selectedProductTicketCategoryId" (changeProductTicketCategory)="selectedProductTicketCategorytegory($event)"> </app-product-ticket-category-list>
     </div>
     <div class="mb-5">
       <div class="input-group mb-3" style="max-width: 120px;">
