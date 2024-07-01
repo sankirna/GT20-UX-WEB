@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CityService } from 'src/app/core/services/city.service';
-import { CommonService } from 'src/app/core/services/common.service';
-import { CountryService } from 'src/app/core/services/country.service';
 import { FileService } from 'src/app/core/services/file.service';
-import { StateService } from 'src/app/core/services/state.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import { CityModel, CitySearchModel } from 'src/app/models/city.model';
 import { EnumModel } from 'src/app/models/common.model';
@@ -17,6 +13,7 @@ import { ProductTicketCategoryMapModel } from 'src/app/models/product-ticket-cat
 import * as _ from 'lodash';
 import { environment } from 'src/environments/environment';
 import { ProductCombosModel } from 'src/app/models/product-combos.model';
+import { TicketCategoryModel, TicketCategorySearchModel } from 'src/app/models/ticket-category.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -32,9 +29,13 @@ export class ProductDetailComponent implements OnInit {
   files: File[] = []
   id: number = 0;
   isLoad: boolean = false;
-  fileName :any='';
+  fileName: any = '';
   defaulturl = environment.defaultUrl;
-
+  ticketcategories: any[] = [];
+  ticketPrice: number = 0;
+  quantity: number = 0;
+  totalPrice: number = 0;
+  selectedTicketCategory: ProductTicketCategoryMapModel | undefined; 
   constructor(
     private router: Router
     , private route: ActivatedRoute
@@ -59,11 +60,12 @@ export class ProductDetailComponent implements OnInit {
   get productCombosForm() {
     return this.form.get("productCombos") as FormArray;
   }
- 
+
   ngOnInit() {
     this.id = <number><unknown>this.route.snapshot.paramMap.get('id');
     if (this.isEdit) {
       this.getData();
+
     } else {
       this.buildForm();
     }
@@ -83,13 +85,13 @@ export class ProductDetailComponent implements OnInit {
     this.form = this.productService.getProductInformationForm(this.model);
     if (this.isEdit) {
       this.buildProductTicketCategoryMapModelForm(this.model.productTicketCategories);
-      this.productService. getRegularProducts().subscribe(data => {
+      this.productService.getRegularProducts().subscribe(data => {
         if (data.data) {
-          this.productService.regularProducts=data.data;
+          this.productService.regularProducts = data.data;
         }
       });
     }
-    if(this.model.productCombos){
+    if (this.model.productCombos) {
       this.buildProductsComboModelForm(this.model.productCombos);
     }
     this.isLoad = true;
@@ -131,9 +133,10 @@ export class ProductDetailComponent implements OnInit {
     this.productService.get(this.id).subscribe(
       (response) => {
         this.model = response;
+        this.ticketcategories = this.model.productTicketCategories;
         this.model.startDateTime = this.removeTimezoneOffset(response.startDateTime);
         this.model.endDateTime = this.removeTimezoneOffset(response.endDateTime);
-        this.fileName= this.model.file;
+        this.fileName = this.model.file;
         this.buildForm();
       },
       (error) => {
@@ -141,10 +144,10 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
-   removeTimezoneOffset(dateTimeString:any) {
+  removeTimezoneOffset(dateTimeString: any) {
     // Create a new Date object from the input string
     const date = new Date(dateTimeString);
-  
+
     // Get the date and time parts
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -152,7 +155,7 @@ export class ProductDetailComponent implements OnInit {
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-  
+
     // Format the date and time without timezone offset
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   }
@@ -188,5 +191,47 @@ export class ProductDetailComponent implements OnInit {
   }
   gotoList() {
     this.router.navigateByUrl('/products/list');
+  }
+  increaseQuantity() {
+    this.quantity++;
+    this.totalPrice = this.ticketPrice * this.quantity;
+  }
+
+  decreaseQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+      this.totalPrice = this.ticketPrice * this.quantity;
+    }
+  }
+  selectedCategory(category: any) {
+    this.selectedTicketCategory = category;
+    this.ticketPrice = category.price;
+  }
+  addToCart() {
+    this.productService.cartItems.push({
+      "id": 0,
+      "productId": this.model?.id,
+      "productTicketCategoryMapId": this.selectedTicketCategory?.id,
+      "quantity": this.quantity,
+      "price": this.totalPrice
+    });
+    var objCart =
+    {
+      "id": 0,
+      "couponCode": "324243",
+      "couponId": 0,
+      "grossTotal": this.totalPrice,
+      "discount": 0,
+      "items": this.productService.cartItems
+    }  
+    this.productService.addProductInCart(objCart).subscribe(
+      (response) => { 
+        alert('Ticket added successfully in cart.')
+        //this.router.navigateByUrl('/products/list');
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

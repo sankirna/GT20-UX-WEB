@@ -17,7 +17,7 @@ import { ProductCombosModel } from 'src/app/models/product-combos.model';
 export class ProductService {
 
   regularProducts: ProductModel[] = [];
-
+cartItems:any[]=[];
   constructor(private http: HttpClient
     , private fb: FormBuilder
     , private fileService: FileService
@@ -165,7 +165,10 @@ export class ProductService {
     return this.http.post<any>(api, null, { params: { productId: productId } });
   }
 
-
+  addProductInCart(model: any) {
+    const api = 'ShoppingCart/post';
+    return this.http.post<any>(api, model);
+  }
 }
 export function dateTimeRangeValidator(startControlName: string, endControlName: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
