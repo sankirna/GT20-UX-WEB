@@ -9,7 +9,7 @@ import { ShoppingCartModel } from 'src/app/models/shopping-cart.model';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit{
-  shoppingCart: ShoppingCartModel | undefined;
+  //shoppingCart: ShoppingCartModel | undefined;
   /**
    *
    */
@@ -17,11 +17,15 @@ export class ShoppingCartComponent implements OnInit{
     , private router: Router
   ) {
   }
+
+  get shoppingCart(){
+    return this.shoppingCartService.getShoppingCartModel();
+  }
  
   ngOnInit() {
     this.shoppingCartService.get().subscribe(
       (response) => {
-        this.shoppingCart = <ShoppingCartModel>response;
+        this.shoppingCartService.setShoppingCartModel(response);
       },
       (error) => {
         console.error(error);

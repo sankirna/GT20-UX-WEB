@@ -112,6 +112,15 @@ export class ShoppingCartService {
         );
     }
 
+    applyCouponCode(couponCode: string){
+        let shoppingCartModel=this.getShoppingCartModel();
+        if(shoppingCartModel){
+           shoppingCartModel.couponCode=couponCode;
+            return this.post(shoppingCartModel);
+        }
+        return null;
+    }
+
     post(model: ShoppingCartModel) {
         const api = 'ShoppingCart/post';
         return this.http.post<ShoppingCartModel>(api, model);

@@ -56,10 +56,8 @@ export class CheckoutComponent {
   }
 
   onSubmit() {
-    debugger
     if (this.isValid()) {
       this.checkoutRequestModel = <CheckoutRequestModel>this.form.getRawValue();
-  
         this.checkoutService.post(this.checkoutRequestModel).subscribe(
           (response) => {
             this.shoppingCartService.clearShoppingCartModel();
