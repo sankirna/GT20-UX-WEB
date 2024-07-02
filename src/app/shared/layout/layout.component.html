@@ -1,5 +1,13 @@
 <app-header>
 </app-header>
+<div class="bg-light py-3" *ngIf="spinnerService.visibility | async">
+    <div class="container">
+        <div class="row">
+            <mat-progress-bar color="accent" mode="indeterminate">
+            </mat-progress-bar>
+        </div>
+    </div>
+</div>
 <div class="site-section">
     <div class="container">
         <router-outlet></router-outlet>
