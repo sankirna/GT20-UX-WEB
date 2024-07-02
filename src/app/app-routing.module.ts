@@ -49,7 +49,7 @@ const appRoutes: Routes = [
   
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'products',
     pathMatch: 'full'
   }
 ];

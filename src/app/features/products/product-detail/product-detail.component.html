@@ -5,7 +5,7 @@
   <div class="col-md-6">
     <h2 class="text-black">{{model?.name}}</h2>
     <p class="mb-4">{{model?.venueDetail?.stadiumName}}</p>
-    <p class="mb-4">{{model?.startDateTime | date:'MMM-dd-yyyy hh:mm:a'}}</p>
+    <p class="mb-4"><i class="icon icon-calendar mr-2"></i>{{model?.startDateTime | date:'MMM-dd-yyyy hh:mm:a'}}</p>
     <p>{{model?.description}}</p>
     <!-- <p class="mb-4">Ex numquam veritatis debitis minima quo error quam eos dolorum quidem perferendis. Quos repellat dignissimos minus, eveniet nam voluptatibus molestias omnis reiciendis perspiciatis illum hic magni iste, velit aperiam quis.</p> -->
     <p><strong class="text-danger h4">${{ticketPrice}}</strong></p>
