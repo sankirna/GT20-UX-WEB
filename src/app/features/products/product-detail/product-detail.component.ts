@@ -25,15 +25,10 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 })
 export class ProductDetailComponent implements OnInit {
   model: ProductModel | undefined;
-  countries: CountryModel[] = [];
-  states: StateModel[] = [];
-  cities: CityModel[] = [];
   files: File[] = []
   id: number = 0;
   isLoad: boolean = false;
-  fileName: any = '';
   defaulturl = environment.defaultUrl;
-  ticketcategories: any[] = [];
   ticketPrice: number = 0;
   quantity: number = 0;
   totalPrice: number = 0;
@@ -54,7 +49,9 @@ export class ProductDetailComponent implements OnInit {
     return (this.id && this.id > 0 ? true : false);
   }
 
-
+  get shoppingCart() {
+    return this.shoppingCartService.getShoppingCartModel();
+  }
 
   ngOnInit() {
     this.id = <number><unknown>this.route.snapshot.paramMap.get('id');
@@ -63,26 +60,24 @@ export class ProductDetailComponent implements OnInit {
 
   }
 
-
-
   buildForm() {
     this.isLoad = false;
     if (this.model?.productTicketCategories) {
-      this.selectedProductTicketCategory = _.head(this.model?.productTicketCategories);
-      this.selectedProductTicketCategoryId = this.selectedProductTicketCategory?.id;
+      let selectedProductTicketCategory = _.head(this.model?.productTicketCategories);
+      if (selectedProductTicketCategory) {
+        this.selectedProductTicketCategorytegory(selectedProductTicketCategory);
+        this.selectedProductTicketCategoryId = this.selectedProductTicketCategory?.id;
+      }
     }
     this.isLoad = true;
   }
-
 
   getData() {
     this.productService.get(this.id).subscribe(
       (response) => {
         this.model = response;
-        this.ticketcategories = this.model.productTicketCategories;
         this.model.startDateTime = this.removeTimezoneOffset(response.startDateTime);
         this.model.endDateTime = this.removeTimezoneOffset(response.endDateTime);
-        this.fileName = this.model.file;
         this.buildForm();
       },
       (error) => {
@@ -94,7 +89,6 @@ export class ProductDetailComponent implements OnInit {
   removeTimezoneOffset(dateTimeString: any) {
     // Create a new Date object from the input string
     const date = new Date(dateTimeString);
-
     // Get the date and time parts
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -107,13 +101,10 @@ export class ProductDetailComponent implements OnInit {
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   }
 
-
   onClear() {
 
   }
-  gotoList() {
-    this.router.navigateByUrl('/products/list');
-  }
+
   increaseQuantity() {
     this.quantity++;
     this.totalPrice = this.ticketPrice * this.quantity;
@@ -127,9 +118,19 @@ export class ProductDetailComponent implements OnInit {
   }
 
   selectedProductTicketCategorytegory(productTicketCategorytegory: ProductTicketCategoryMapModel) {
+    this.ticketPrice=0;
+    this.quantity=0;
+    this.totalPrice=0;
     this.selectedProductTicketCategory = productTicketCategorytegory;
     if (productTicketCategorytegory && productTicketCategorytegory.price) {
       this.ticketPrice = productTicketCategorytegory.price;
+    }
+    if (this.selectedProductTicketCategory.id) {
+      let cartProductTicketCategory = this.shoppingCartService.getProductTicketCategory(this.selectedProductTicketCategory.id);
+      if (cartProductTicketCategory && cartProductTicketCategory.quantity) {
+        this.quantity = cartProductTicketCategory.quantity;
+        this.totalPrice = this.ticketPrice * this.quantity;
+      }
     }
   }
 
@@ -143,36 +144,12 @@ export class ProductDetailComponent implements OnInit {
       && this.quantity
     ) {
 
-        this.shoppingCartService.addTicketProductCateory(
-          this.selectedProductTicketCategory.productId
-          , this.selectedProductTicketCategory.id
-          , this.quantity);
+      this.shoppingCartService.addUpdateProductTicketCategory(
+        this.selectedProductTicketCategory.productId
+        , this.selectedProductTicketCategory.id
+        , this.quantity);
 
     }
-    //   this.productService.cartItems.push({
-    //     "id": 0,
-    //     "productId": this.model?.id,
-    //     "productTicketCategoryMapId": this.selectedTicketCategory?.id,
-    //     "quantity": this.quantity,
-    //     "price": this.totalPrice
-    //   });
-    //   var objCart =
-    //   {
-    //     "id": 0,
-    //     "couponCode": "324243",
-    //     "couponId": 0,
-    //     "grossTotal": this.totalPrice,
-    //     "discount": 0,
-    //     "items": this.productService.cartItems
-    //   }  
-    //   this.productService.addProductInCart(objCart).subscribe(
-    //     (response) => { 
-    //       alert('Ticket added successfully in cart.')
-    //       //this.router.navigateByUrl('/products/list');
-    //     },
-    //     (error) => {
-    //       console.error(error);
-    //     }
-    //   );
+
   }
 }

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <img src="{{fileName.url}}" alt="Image" class="img-fluid">
+    <img src="{{model?.file?.url}}" alt="Image" class="img-fluid">
   </div>
   <div class="col-md-6">
     <h2 class="text-black">{{model?.name}}</h2>
@@ -33,8 +33,8 @@
         </div>
       </div>
     </div>
-    Total Amount : {{totalPrice}}
-    <p><a href="javascript:void(0)" (click)="addToCart()" class="buy-now btn btn-sm btn-danger">Add To Cart</a></p>
+     <p *ngIf="totalPrice>0">Total Amount : {{totalPrice}}</p> 
+    <p><button  (click)="addToCart()" class="buy-now btn btn-sm btn-danger">Add To Cart</button></p>
 
   </div>
 </div>

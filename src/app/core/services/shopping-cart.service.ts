@@ -46,7 +46,15 @@ export class ShoppingCartService {
         return totalItems;
     }
 
-    addTicketProductCateory(productId: number
+    getProductTicketCategory(productTicketCategoryMapId: number): ShoppingCartItemModel|undefined {
+        let shoppingCart = this.getShoppingCartModel();
+        if (shoppingCart && shoppingCart.items) {
+            return _.find(shoppingCart.items, function (o) { return o.productTicketCategoryMapId == productTicketCategoryMapId; });
+        }
+        return undefined;
+    }
+
+    addUpdateProductTicketCategory(productId: number
         , productTicketCategoryMapId: number
         , quantity: number) {
 
@@ -79,7 +87,7 @@ export class ShoppingCartService {
 
         shoppingCart.items = shoppingCart.items ?? [];
         if (shoppingCart.items) {
-            var productTicketCategory = _.find(shoppingCart.items, ['id', productTicketCategoryMapId]);
+            var productTicketCategory = _.find(shoppingCart.items, ['productTicketCategoryMapId', productTicketCategoryMapId]);
             if (productTicketCategory) {
                 productTicketCategory.productId = productId
                 productTicketCategory.productTicketCategoryMapId = productTicketCategoryMapId;
