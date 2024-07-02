@@ -32,7 +32,7 @@ export class ShoppingCartService {
     addTicketProductCateory(productId: number
         , productTicketCategoryMapId: number
         , quantity: number) {
-            debugger
+             
         let shoppingCart = this.getShoppingCartModel();
         if (!shoppingCart) {
             shoppingCart = new ShoppingCartModel();

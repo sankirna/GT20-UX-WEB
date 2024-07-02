@@ -2,7 +2,7 @@
   <div *ngFor="let productTicketCategory of productTicketCategories">
       <mat-radio-button [value]="productTicketCategory.id">
         <span class="d-inline-block text-black ml-2">{{productTicketCategory?.ticketCategoryName}}</span>
-        <span class="inline-block text-black ml-4">{{productTicketCategory?.price}}</span>
+        <span class="inline-block text-black ml-4">${{productTicketCategory?.price}}</span>
       </mat-radio-button>
   </div>
 </mat-radio-group>

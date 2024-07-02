@@ -1,3 +1,12 @@
+<div class="row" *ngIf="!shoppingCart">
+  <div class="col-md-12 text-center">
+    <span class="icon icon-shopping_cart display-3 text-success"></span>
+    <!-- <h2 class="display-3 text-black">Thank you!</h2> -->
+    <p class="lead mb-5">There is no item in cart.</p>
+    <p><a href="/products/list" class="btn btn-sm btn-danger">Shop now</a></p>
+  </div>
+</div>
+
 <div class="row mb-5" *ngIf="shoppingCart">
     <form class="col-md-12" method="post" >
       <div class="site-blocks-table">
@@ -23,13 +32,14 @@
               <td>{{ shoppingCartItem.price}}</td>
               <td>
                 <div class="input-group mb-3" style="max-width: 120px;">
-                  <div class="input-group-prepend">
+                  {{shoppingCartItem.quantity}}
+                  <!-- <div class="input-group-prepend">
                     <button class="btn btn-outline-danger js-btn-minus" type="button">&minus;</button>
                   </div>
                   <input type="text" class="form-control text-center" [(ngModel)]="shoppingCartItem.quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                   <div class="input-group-append">
                     <button class="btn btn-outline-danger js-btn-plus" type="button">&plus;</button>
-                  </div>
+                  </div> -->
                 </div>
 
               </td>
