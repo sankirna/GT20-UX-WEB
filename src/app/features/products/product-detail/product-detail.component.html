@@ -8,7 +8,7 @@
     <p class="mb-4">{{model?.startDateTime | date:'MMM-dd-yyyy hh:mm:a'}}</p>
     <p>{{model?.description}}</p>
     <!-- <p class="mb-4">Ex numquam veritatis debitis minima quo error quam eos dolorum quidem perferendis. Quos repellat dignissimos minus, eveniet nam voluptatibus molestias omnis reiciendis perspiciatis illum hic magni iste, velit aperiam quis.</p> -->
-    <p><strong class="text-primary h4">${{ticketPrice}}</strong></p>
+    <p><strong class="text-danger h4">${{ticketPrice}}</strong></p>
    
   </div>
 </div>
@@ -25,16 +25,16 @@
     <div class="mb-5">
       <div class="input-group mb-3" style="max-width: 120px;">
         <div class="input-group-prepend">
-          <button class="btn btn-outline-primary js-btn-minus" type="button" (click)="decreaseQuantity()">−</button>
+          <button class="btn btn-outline-danger js-btn-minus" type="button" (click)="decreaseQuantity()">−</button>
         </div>
         <input type="text" class="form-control text-center" [(ngModel)]="quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
         <div class="input-group-append">
-          <button class="btn btn-outline-primary js-btn-plus" type="button" (click)="increaseQuantity()">+</button>
+          <button class="btn btn-outline-danger js-btn-plus" type="button" (click)="increaseQuantity()">+</button>
         </div>
       </div>
     </div>
     Total Amount : {{totalPrice}}
-    <p><a href="javascript:void(0)" (click)="addToCart()" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+    <p><a href="javascript:void(0)" (click)="addToCart()" class="buy-now btn btn-sm btn-danger">Add To Cart</a></p>
 
   </div>
 </div>

@@ -1,16 +1,38 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1200px;
+
+
+@media (min-width: 768px) {
+    .site-section {
+        padding: 2.5em 0; 
+        min-height: 495px;
     }
+    
 }
-
-
+.site-navbar, .site-footer{
+    background-color: #aa000d;
+    color: #ffffff;
+}
+.site-navbar a{
+    color: #ffffff;
+}
 .site-navbar .site-logo a {
     border: none;
 }
 
 .site-footer {
     padding: 0;
+}
+
+ .mt-5, .my-5 {
+    padding: 1.5em 0 !important; 
+    margin: 0 !important;
+}
+
+.p-no-margin{
+    margin: 0 !important;
+}
+
+.product-box{
+   
 }

@@ -1,4 +1,4 @@
-<header class="site-navbar" role="banner" style="background-color:#aa000d ;">
+<header class="site-navbar" role="banner">
       
     <nav class="site-navigation text-right text-md-center" role="navigation">
       <div class="container">
@@ -18,15 +18,16 @@
             <div class="">
               <div class="site-top-icons">
                 <ul>
-                  <li *ngIf="!isLogin" (click)="loginPopup()">Login In</li>
-                  <li *ngIf="isLogin"><a href="#"><span class="icon icon-person"></span></a></li>
-                  <li *ngIf="isLogin" (click)="logout()"><a >LogOut</a></li>
-                  <li>
+                  <li *ngIf="isLogin">
                     <a [routerLink]="['/shopping-cart']" class="site-cart">
                       <span class="icon icon-shopping_cart"></span>
                       <span class="count">2</span>
                     </a>
                   </li> 
+                  <li *ngIf="!isLogin" (click)="loginPopup()">Login</li>
+                  <li *ngIf="isLogin"><a href="#"><span class="icon icon-person"></span></a></li>
+                  <li *ngIf="isLogin" (click)="logout()"><a >LogOut</a></li>
+                  
                   <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
                 </ul>
               </div> 

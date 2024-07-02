@@ -51,6 +51,7 @@ export class CheckoutComponent {
   
         this.checkoutService.post(this.checkoutRequestModel).subscribe(
           (response) => {
+            this.shoppingCartService.clearShoppingCartModel();
             this.router.navigateByUrl('/thank-you');
           },
           (error) => {

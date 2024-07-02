@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
 import { of, EMPTY, Observable } from 'rxjs';
+import { ShoppingCartService } from './shopping-cart.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +13,7 @@ import { of, EMPTY, Observable } from 'rxjs';
 export class AuthenticationService {
 
     constructor(private http: HttpClient,
+        private shoppingCartService: ShoppingCartService,
         @Inject('LOCALSTORAGE') private localStorage: Storage) {
     }
 
@@ -40,6 +42,7 @@ export class AuthenticationService {
     logout(): void {
         // clear token remove user from local storage to log user out
         this.localStorage.removeItem('currentUser');
+        this.shoppingCartService.clearShoppingCartModel();
     }
 
     getCurrentUser(): any {

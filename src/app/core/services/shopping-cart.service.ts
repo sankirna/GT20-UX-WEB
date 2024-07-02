@@ -25,6 +25,10 @@ export class ShoppingCartService {
         this.localStorage.setItem('shoppingCart',  JSON.stringify(model));
     }
 
+    clearShoppingCartModel() {
+        this.localStorage.removeItem('shoppingCart');
+    }
+
     addTicketProductCateory(productId: number
         , productTicketCategoryMapId: number
         , quantity: number) {
