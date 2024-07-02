@@ -28,8 +28,17 @@ export class CheckoutComponent {
   }
 
   ngOnInit() {
-    this.shoppingCart=this.shoppingCartService.getShoppingCartModel();
-    this.buildForm();
+    this.shoppingCartService.get().subscribe(
+      (response) => {
+        this.shoppingCart=this.shoppingCartService.getShoppingCartModel();
+        this.buildForm();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    
+    
   }
 
   buildForm() {

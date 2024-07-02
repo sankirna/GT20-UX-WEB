@@ -70,4 +70,10 @@ export class ShoppingCartService {
         return this.http.post<ShoppingCartModel>(api, model);
     }
 
+
+    get(){
+        const api = 'ShoppingCart/Get';
+        return this.http.post<ShoppingCartModel>(api, null);
+    }
+
 }

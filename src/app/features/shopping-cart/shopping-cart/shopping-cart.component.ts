@@ -19,7 +19,14 @@ export class ShoppingCartComponent implements OnInit{
   }
  
   ngOnInit() {
-    this.shoppingCart=this.shoppingCartService.getShoppingCartModel();
+    this.shoppingCartService.get().subscribe(
+      (response) => {
+        this.shoppingCart = <ShoppingCartModel>response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
   
   checkoutClick(){
