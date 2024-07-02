@@ -15,6 +15,8 @@ import { environment } from 'src/environments/environment';
 import { ProductCombosModel } from 'src/app/models/product-combos.model';
 import { TicketCategoryModel, TicketCategorySearchModel } from 'src/app/models/ticket-category.model';
 import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -43,7 +45,9 @@ export class ProductDetailComponent implements OnInit {
     , public productService: ProductService
     , public shoppingCartService: ShoppingCartService
     , public fileService: FileService
-    , private fb: FormBuilder) {
+    , private fb: FormBuilder
+    , private notificationService: NotificationService
+  ,private authenticationService: AuthenticationService) {
   }
 
   get isEdit(): boolean {
@@ -130,16 +134,28 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
+    if(this.quantity==0){
+      this.notificationService.openSnackBar('Please add quantity.');
+    }
     if(this.selectedProductTicketCategory
       && this.selectedProductTicketCategory.productId
       && this.selectedProductTicketCategory.id
       && this.quantity
     )
       {
-        this.shoppingCartService.addTicketProductCateory(
-          this.selectedProductTicketCategory.productId
-          ,this.selectedProductTicketCategory.id
-          , this.quantity);
+        
+        var userDetail =  this.authenticationService.getCurrentUser();
+        if(userDetail){
+          this.shoppingCartService.addTicketProductCateory(
+            this.selectedProductTicketCategory.productId
+            ,this.selectedProductTicketCategory.id
+            , this.quantity);
+  
+            this.notificationService.openSnackBar('Ticket added successfully in cart.!');
+        }else{
+          this.notificationService.openSnackBar('Please login before add ticket in cart.');
+        }
+        
       }
   //   this.productService.cartItems.push({
   //     "id": 0,
