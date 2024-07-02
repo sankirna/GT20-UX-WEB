@@ -28,10 +28,11 @@ export class CheckoutComponent {
   }
 
   ngOnInit() {
+    this.buildForm();
     this.shoppingCartService.get().subscribe(
       (response) => {
         this.shoppingCart=this.shoppingCartService.getShoppingCartModel();
-        this.buildForm();
+        
       },
       (error) => {
         console.error(error);
@@ -55,6 +56,7 @@ export class CheckoutComponent {
   }
 
   onSubmit() {
+    debugger
     if (this.isValid()) {
       this.checkoutRequestModel = <CheckoutRequestModel>this.form.getRawValue();
   
