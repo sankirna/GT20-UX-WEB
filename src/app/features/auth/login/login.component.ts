@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
 
 @Component({
     selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
         private titleService: Title,
         private notificationService: NotificationService,
         private authenticationService: AuthenticationService,
-        @Inject(MAT_DIALOG_DATA) public data: LoginComponentDialogModel,
+        private shoppingCartService: ShoppingCartService,
         public dialogRef: MatDialogRef<LoginComponent>) {
     }
 
@@ -55,6 +56,14 @@ export class LoginComponent implements OnInit {
                     } else {
                         localStorage.removeItem('savedUserEmail');
                     }
+                    this.shoppingCartService.get().subscribe(
+                        (response) => {
+                            this.shoppingCartService.setShoppingCartModel(response);
+                        },
+                        (error) => {
+                          console.error(error);
+                        }
+                      );;
                     this.onConfirm();
                     //this.router.navigate(['/']);
                 },

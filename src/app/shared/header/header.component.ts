@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
 import { LoginComponent, LoginComponentDialogModel } from 'src/app/features/auth/login/login.component';
 
 @Component({
@@ -11,12 +12,10 @@ import { LoginComponent, LoginComponentDialogModel } from 'src/app/features/auth
 })
 export class HeaderComponent {
 
-  /**
-   *
-   */
   constructor(private authenticationService: AuthenticationService
     , private dialog: MatDialog
     , private notificationService: NotificationService
+    , private shoppingCartService: ShoppingCartService
   ) {
     
   }
@@ -29,22 +28,17 @@ export class HeaderComponent {
     return this.user!=null;
   }
 
-  loginPopup(){
-    const dialogData = new LoginComponentDialogModel();
-    const dialogRef = this.dialog.open(LoginComponent, {
-      data: dialogData
-    });
+  get noOfCartItem(){
+    return this.shoppingCartService.getNumberOfItems();
+  }
 
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if(dialogResult){
-          this.notificationService.openSnackBar('User has been succefully logged in!');
-      }else{
-      }
-    });
+  loginPopup(){
+    this.authenticationService.loginPopup();
   }
 
   logout(){
-    this.notificationService.openSnackBar('User has been logged out!');
+    this.shoppingCartService.clearShoppingCartModel();
     this.authenticationService.logout();
+    this.notificationService.openSnackBar('User has been logged out!');
   }
 }

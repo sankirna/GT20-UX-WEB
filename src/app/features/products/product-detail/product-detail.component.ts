@@ -37,8 +37,8 @@ export class ProductDetailComponent implements OnInit {
   ticketPrice: number = 0;
   quantity: number = 0;
   totalPrice: number = 0;
-  selectedProductTicketCategory: ProductTicketCategoryMapModel | undefined; 
-  selectedProductTicketCategoryId: number | undefined; 
+  selectedProductTicketCategory: ProductTicketCategoryMapModel | undefined;
+  selectedProductTicketCategoryId: number | undefined;
   constructor(
     private router: Router
     , private route: ActivatedRoute
@@ -47,7 +47,7 @@ export class ProductDetailComponent implements OnInit {
     , public fileService: FileService
     , private fb: FormBuilder
     , private notificationService: NotificationService
-  ,private authenticationService: AuthenticationService) {
+    , private authenticationService: AuthenticationService) {
   }
 
   get isEdit(): boolean {
@@ -58,18 +58,18 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     this.id = <number><unknown>this.route.snapshot.paramMap.get('id');
-      this.getData();
+    this.getData();
 
-   
+
   }
 
 
 
   buildForm() {
     this.isLoad = false;
-    if(this.model?.productTicketCategories){
-      this.selectedProductTicketCategory=_.head( this.model?.productTicketCategories);
-      this.selectedProductTicketCategoryId=this.selectedProductTicketCategory?.id;
+    if (this.model?.productTicketCategories) {
+      this.selectedProductTicketCategory = _.head(this.model?.productTicketCategories);
+      this.selectedProductTicketCategoryId = this.selectedProductTicketCategory?.id;
     }
     this.isLoad = true;
   }
@@ -128,59 +128,51 @@ export class ProductDetailComponent implements OnInit {
 
   selectedProductTicketCategorytegory(productTicketCategorytegory: ProductTicketCategoryMapModel) {
     this.selectedProductTicketCategory = productTicketCategorytegory;
-    if(productTicketCategorytegory && productTicketCategorytegory.price){
+    if (productTicketCategorytegory && productTicketCategorytegory.price) {
       this.ticketPrice = productTicketCategorytegory.price;
     }
   }
 
   addToCart() {
-    if(this.quantity==0){
+    if (this.quantity == 0) {
       this.notificationService.openSnackBar('Please add quantity.');
     }
-    if(this.selectedProductTicketCategory
+    if (this.selectedProductTicketCategory
       && this.selectedProductTicketCategory.productId
       && this.selectedProductTicketCategory.id
       && this.quantity
-    )
-      {
-        
-        var userDetail =  this.authenticationService.getCurrentUser();
-        if(userDetail){
-          this.shoppingCartService.addTicketProductCateory(
-            this.selectedProductTicketCategory.productId
-            ,this.selectedProductTicketCategory.id
-            , this.quantity);
-  
-            this.notificationService.openSnackBar('Ticket added successfully in cart.!');
-        }else{
-          this.notificationService.openSnackBar('Please login before add ticket in cart.');
-        }
-        
-      }
-  //   this.productService.cartItems.push({
-  //     "id": 0,
-  //     "productId": this.model?.id,
-  //     "productTicketCategoryMapId": this.selectedTicketCategory?.id,
-  //     "quantity": this.quantity,
-  //     "price": this.totalPrice
-  //   });
-  //   var objCart =
-  //   {
-  //     "id": 0,
-  //     "couponCode": "324243",
-  //     "couponId": 0,
-  //     "grossTotal": this.totalPrice,
-  //     "discount": 0,
-  //     "items": this.productService.cartItems
-  //   }  
-  //   this.productService.addProductInCart(objCart).subscribe(
-  //     (response) => { 
-  //       alert('Ticket added successfully in cart.')
-  //       //this.router.navigateByUrl('/products/list');
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-   }
+    ) {
+
+        this.shoppingCartService.addTicketProductCateory(
+          this.selectedProductTicketCategory.productId
+          , this.selectedProductTicketCategory.id
+          , this.quantity);
+
+    }
+    //   this.productService.cartItems.push({
+    //     "id": 0,
+    //     "productId": this.model?.id,
+    //     "productTicketCategoryMapId": this.selectedTicketCategory?.id,
+    //     "quantity": this.quantity,
+    //     "price": this.totalPrice
+    //   });
+    //   var objCart =
+    //   {
+    //     "id": 0,
+    //     "couponCode": "324243",
+    //     "couponId": 0,
+    //     "grossTotal": this.totalPrice,
+    //     "discount": 0,
+    //     "items": this.productService.cartItems
+    //   }  
+    //   this.productService.addProductInCart(objCart).subscribe(
+    //     (response) => { 
+    //       alert('Ticket added successfully in cart.')
+    //       //this.router.navigateByUrl('/products/list');
+    //     },
+    //     (error) => {
+    //       console.error(error);
+    //     }
+    //   );
+  }
 }

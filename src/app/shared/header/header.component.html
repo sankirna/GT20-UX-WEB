@@ -21,13 +21,18 @@
                   <li *ngIf="isLogin">
                     <a [routerLink]="['/shopping-cart']" class="site-cart">
                       <span class="icon icon-shopping_cart"></span>
-                      <!-- <span class="count">2</span> -->
+                      <span class="count">{{noOfCartItem}}</span>
                     </a>
                   </li> 
                   <li *ngIf="!isLogin" (click)="loginPopup()">Login</li>
-                  <li *ngIf="isLogin"><a href="#"><span class="icon icon-person"></span></a></li>
-                  <li *ngIf="isLogin" (click)="logout()"><a >LogOut</a></li>
-                  
+                  <li *ngIf="isLogin">
+                    <div class="dropdown">
+                      <a  id="profileMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon icon-person"></span></a>
+                      <div class="dropdown-menu" aria-labelledby="profileMenuButton">
+                        <a class="dropdown-item" (click)="logout()">Logout</a>
+                      </div>
+                    </div>
+                  </li>
                   <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
                 </ul>
               </div> 

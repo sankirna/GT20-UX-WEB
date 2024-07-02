@@ -6,6 +6,9 @@ import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
 import { of, EMPTY, Observable } from 'rxjs';
 import { ShoppingCartService } from './shopping-cart.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent, LoginComponentDialogModel } from 'src/app/features/auth/login/login.component';
+import { NotificationService } from './notification.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,9 +16,24 @@ import { ShoppingCartService } from './shopping-cart.service';
 export class AuthenticationService {
 
     constructor(private http: HttpClient,
-        private shoppingCartService: ShoppingCartService,
-        @Inject('LOCALSTORAGE') private localStorage: Storage) {
+        @Inject('LOCALSTORAGE') private localStorage: Storage,
+        private dialog: MatDialog, 
+        private notificationService: NotificationService) {
     }
+
+    loginPopup(){
+        const dialogData = new LoginComponentDialogModel();
+        const dialogRef = this.dialog.open(LoginComponent, {
+          data: dialogData
+        });
+    
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if(dialogResult){
+              this.notificationService.openSnackBar('User has been succefully logged in!');
+          }else{
+          }
+        });
+      }
 
     login(user: any) {
         const api = 'Authenticate/login';
@@ -42,7 +60,7 @@ export class AuthenticationService {
     logout(): void {
         // clear token remove user from local storage to log user out
         this.localStorage.removeItem('currentUser');
-        this.shoppingCartService.clearShoppingCartModel();
+       // this.shoppingCartService.clearShoppingCartModel();
     }
 
     getCurrentUser(): any {
