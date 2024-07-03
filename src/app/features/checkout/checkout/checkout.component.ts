@@ -29,17 +29,19 @@ export class CheckoutComponent {
 
   ngOnInit() {
     this.buildForm();
+    this.getShoppingCart();
+  }
+
+  getShoppingCart() {
     this.shoppingCartService.get().subscribe(
       (response) => {
-        this.shoppingCart=this.shoppingCartService.getShoppingCartModel();
-        
+        this.shoppingCart = response;
+        this.shoppingCartService.setShoppingCartModel(response);
       },
       (error) => {
         console.error(error);
       }
     );
-    
-    
   }
 
   buildForm() {
@@ -49,6 +51,12 @@ export class CheckoutComponent {
       email: [this.checkoutRequestModel.email, Validators.required],
       phoneNumber: [this.checkoutRequestModel.phoneNumber],
     });
+  }
+
+  updateCouponCallback($event: boolean) {
+    if ($event) {
+      this.getShoppingCart();
+    }
   }
 
   isValid(): boolean {

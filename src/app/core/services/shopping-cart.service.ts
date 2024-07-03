@@ -46,7 +46,7 @@ export class ShoppingCartService {
         return totalItems;
     }
 
-    getProductTicketCategory(productTicketCategoryMapId: number): ShoppingCartItemModel|undefined {
+    getProductTicketCategory(productTicketCategoryMapId: number): ShoppingCartItemModel | undefined {
         let shoppingCart = this.getShoppingCartModel();
         if (shoppingCart && shoppingCart.items) {
             return _.find(shoppingCart.items, function (o) { return o.productTicketCategoryMapId == productTicketCategoryMapId; });
@@ -57,10 +57,9 @@ export class ShoppingCartService {
     addUpdateProductTicketCategory(productId: number
         , productTicketCategoryMapId: number
         , quantity: number) {
-
         if (quantity <= 0) {
             this.notificationService.openSnackBar('Please add quantity.');
-            return;
+            return null;
         }
 
         var userDetail = this.authenticationService.getCurrentUser();
@@ -78,8 +77,11 @@ export class ShoppingCartService {
                 }
             });
 
-            return;
+            return null;
         }
+
+        
+
         let shoppingCart = this.getShoppingCartModel();
         if (!shoppingCart) {
             shoppingCart = new ShoppingCartModel();
@@ -101,21 +103,37 @@ export class ShoppingCartService {
                 shoppingCart.items.push(productTicketCategory);
             }
         }
-        this.post(shoppingCart).subscribe(
-            (response) => {
-                this.setShoppingCartModel(response);
-                this.notificationService.openSnackBar('Ticket added successfully in cart.!');
-            },
-            (error) => {
-                console.error(error);
-            }
-        );
+        return this.post(shoppingCart);
+        // .subscribe(
+        //         (response) => {
+        //             this.setShoppingCartModel(response);
+        //             this.notificationService.openSnackBar('Shopping cart item(s) updated successfully !');
+        //         },
+        //         (error) => {
+        //             console.error(error);
+        //         }
+        //     );
     }
 
-    applyCouponCode(couponCode: string){
-        let shoppingCartModel=this.getShoppingCartModel();
-        if(shoppingCartModel){
-           shoppingCartModel.couponCode=couponCode;
+    deleteProductTicketCategroy(productTicketCategoryMapId: number) {
+        if (!productTicketCategoryMapId) {
+            this.notificationService.openSnackBar('Invalid ticket category.');
+            return null;
+        }
+        let shoppingCart = this.getShoppingCartModel();
+        if (shoppingCart) {
+            shoppingCart.items = _.filter(shoppingCart.items, function (i) {
+                                                                        return i.productTicketCategoryMapId != productTicketCategoryMapId;
+                                                                    });
+            return this.post(shoppingCart);
+        }
+        return null;
+    }
+
+    applyCouponCode(couponCode: string) {
+        let shoppingCartModel = this.getShoppingCartModel();
+        if (shoppingCartModel) {
+            shoppingCartModel.couponCode = couponCode;
             return this.post(shoppingCartModel);
         }
         return null;

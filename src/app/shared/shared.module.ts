@@ -20,6 +20,7 @@ import { QrCodeScannerComponent } from './qr-code-scanner/qr-code-scanner.compon
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ImageComponent } from './image/image.component';
+import { ShoppingCartCouponComponent } from './shopping-cart-coupon/shopping-cart-coupon.component';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -61,7 +62,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         QrCodeScannerComponent,
         HeaderComponent,
         FooterComponent,
-        ImageComponent
+        ImageComponent,
+        ShoppingCartCouponComponent
     ],
     exports: [
         FormsModule,
@@ -80,6 +82,7 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FilePreviewComponent,
         QrCodeScannerComponent,
         ImageComponent,
+        ShoppingCartCouponComponent
         // NgxMatDatetimePickerModule,
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,

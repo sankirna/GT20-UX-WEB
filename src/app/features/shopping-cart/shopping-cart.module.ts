@@ -4,14 +4,13 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { ShoppingCartCouponComponent } from './coupon/coupon.component';
 
 @NgModule({
-    declarations: [ShoppingCartComponent, ShoppingCartCouponComponent],
+    declarations: [ShoppingCartComponent],
     imports: [
         CommonModule,
+        SharedModule,
         ShoppingCartRoutingModule,
-        SharedModule
     ]
 })
 export class ShoppingCartModule { }

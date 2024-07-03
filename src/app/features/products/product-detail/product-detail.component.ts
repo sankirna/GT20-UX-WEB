@@ -115,12 +115,15 @@ export class ProductDetailComponent implements OnInit {
       this.quantity--;
       this.totalPrice = this.ticketPrice * this.quantity;
     }
+    else {
+      this.notificationService.openSnackBar('Quantity should no be less or zero.');
+    }
   }
 
   selectedProductTicketCategorytegory(productTicketCategorytegory: ProductTicketCategoryMapModel) {
-    this.ticketPrice=0;
-    this.quantity=0;
-    this.totalPrice=0;
+    this.ticketPrice = 0;
+    this.quantity = 0;
+    this.totalPrice = 0;
     this.selectedProductTicketCategory = productTicketCategorytegory;
     if (productTicketCategorytegory && productTicketCategorytegory.price) {
       this.ticketPrice = productTicketCategorytegory.price;
@@ -144,11 +147,21 @@ export class ProductDetailComponent implements OnInit {
       && this.quantity
     ) {
 
-      this.shoppingCartService.addUpdateProductTicketCategory(
+      var updatedCall = this.shoppingCartService.addUpdateProductTicketCategory(
         this.selectedProductTicketCategory.productId
         , this.selectedProductTicketCategory.id
         , this.quantity);
-
+      if (updatedCall) {
+        updatedCall.subscribe(
+          (response) => {
+            this.shoppingCartService.setShoppingCartModel(response);
+            this.notificationService.openSnackBar('Shopping cart item(s) updated successfully !');
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+      }
     }
 
   }
