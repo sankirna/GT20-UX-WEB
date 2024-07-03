@@ -21,7 +21,7 @@ export class OrderListComponent implements OnInit {
   paggerModel: PaggerModel = new PaggerModel();
   list: OrderDetailModel[] = [];
   orderStatuses: EnumModel[] |undefined =[];
-  displayedColumns: string[] = [ 'Email', 'PhoneNumber','Actions'];
+  displayedColumns: string[] = ['Name','Email', 'PhoneNumber','GrossTotal','Discount','GrandTotal','CreatedDate','Actions'];
   dataSource: MatTableDataSource<OrderDetailModel>;
 
   constructor(private orderService: OrderService
@@ -53,6 +53,7 @@ export class OrderListComponent implements OnInit {
   }
 
   search() {
+    this.searchModel.userId=14;
     this.orderService.getOrders(this.searchModel).subscribe(
       (response) => {
         this.list = <OrderDetailModel[]>response.data;
