@@ -45,6 +45,7 @@ export class AuthenticationService {
                     // store email and jwt token in local storage to keep user logged in between page refreshes
                     this.localStorage.setItem('currentUser', JSON.stringify({
                         token: response.token,
+                        user: response.user,
                         isAdmin: true,
                         email: user.email,
                         id: '12312323232',

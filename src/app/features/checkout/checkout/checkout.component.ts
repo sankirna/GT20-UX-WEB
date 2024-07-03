@@ -5,6 +5,7 @@ import { CheckoutService } from 'src/app/core/services/checkout.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheckoutRequestModel } from 'src/app/models/checkout.model';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,10 +23,16 @@ export class CheckoutComponent {
     ,public checkoutService: CheckoutService 
     , private fb: FormBuilder
     , private router: Router
+    , private authenticationService: AuthenticationService
 
   ) {
     
   }
+
+  get user(){
+    return this.authenticationService.getCurrentUser();
+  }
+
 
   ngOnInit() {
     this.buildForm();
@@ -46,10 +53,11 @@ export class CheckoutComponent {
 
   buildForm() {
     this.checkoutRequestModel= new CheckoutRequestModel();
+    debugger
     this.form = this.fb.group({
-      name: [this.checkoutRequestModel.name, Validators.required],
-      email: [this.checkoutRequestModel.email, Validators.required],
-      phoneNumber: [this.checkoutRequestModel.phoneNumber],
+      name: [this.checkoutRequestModel.name? this.checkoutRequestModel.name: this.user.user.userName, Validators.required],
+      email: [this.checkoutRequestModel.email ? this.checkoutRequestModel.email: this.user.user.email, Validators.required],
+      phoneNumber: [this.checkoutRequestModel.phoneNumber ? this.checkoutRequestModel.phoneNumber: this.user.user.phoneNumber],
     });
   }
 

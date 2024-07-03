@@ -30,6 +30,7 @@
                       <a  id="profileMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon icon-person"></span></a>
                       
                       <div class="dropdown-menu" aria-labelledby="profileMenuButton">
+                        <a class="dropdown-item" >{{user.user.userName}}</a>
                         <a class="dropdown-item" (click)="viewOrders()">Orders</a>
                         <a class="dropdown-item" (click)="logout()">Logout</a>
                       </div>
