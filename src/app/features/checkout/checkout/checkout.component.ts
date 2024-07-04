@@ -53,11 +53,11 @@ export class CheckoutComponent {
 
   buildForm() {
     this.checkoutRequestModel= new CheckoutRequestModel();
-    debugger
     this.form = this.fb.group({
       name: [this.checkoutRequestModel.name? this.checkoutRequestModel.name: this.user.user.userName, Validators.required],
       email: [this.checkoutRequestModel.email ? this.checkoutRequestModel.email: this.user.user.email, Validators.required],
       phoneNumber: [this.checkoutRequestModel.phoneNumber ? this.checkoutRequestModel.phoneNumber: this.user.user.phoneNumber],
+      paymentTypeId: [1],
     });
   }
 
