@@ -48,7 +48,7 @@ export class AuthenticationService {
                         user: response.user,
                         isAdmin: true,
                         email: user.email,
-                        id: '12312323232',
+                        id: user.id,
                         alias: user.email.split('@')[0],
                         expiration: moment().add(1, 'days').toDate(),
                         fullName: user.email
