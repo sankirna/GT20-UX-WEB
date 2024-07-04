@@ -21,7 +21,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ImageComponent } from './image/image.component';
 import { ShoppingCartCouponComponent } from './shopping-cart-coupon/shopping-cart-coupon.component';
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastContainerComponent } from './toast-container/toast-container.component';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -43,7 +44,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
-        NgbToastModule
+        NgbModule,
+        NgbToastModule 
         // NgxMatDatetimePickerModule,
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,
@@ -65,7 +67,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         HeaderComponent,
         FooterComponent,
         ImageComponent,
-        ShoppingCartCouponComponent
+        ShoppingCartCouponComponent,
+        ToastContainerComponent
     ],
     exports: [
         FormsModule,
@@ -84,7 +87,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FilePreviewComponent,
         QrCodeScannerComponent,
         ImageComponent,
-        ShoppingCartCouponComponent
+        ShoppingCartCouponComponent,
+        ToastContainerComponent
         // NgxMatDatetimePickerModule,
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,
