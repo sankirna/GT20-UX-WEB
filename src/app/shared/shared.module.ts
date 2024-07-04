@@ -21,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ImageComponent } from './image/image.component';
 import { ShoppingCartCouponComponent } from './shopping-cart-coupon/shopping-cart-coupon.component';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -42,6 +43,7 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FormsModule,
         ReactiveFormsModule,
         FlexLayoutModule,
+        NgbToastModule
         // NgxMatDatetimePickerModule,
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,
