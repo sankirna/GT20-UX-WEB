@@ -9,6 +9,7 @@ import { OrderDetailModel, OrderListRequestModel } from 'src/app/models/order.mo
 import { OrderService } from 'src/app/core/services/order.service';
 import { CommonService } from 'src/app/core/services/common.service';
 import { EnumModel } from 'src/app/models/common.model';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-order-list',
@@ -29,6 +30,7 @@ export class OrderListComponent implements OnInit {
      , private router: Router
      , private route: ActivatedRoute
      , private dialog: MatDialog
+     ,private authService: AuthenticationService,
   ) {
     this.dataSource = new MatTableDataSource(this.list);
   }
@@ -53,7 +55,8 @@ export class OrderListComponent implements OnInit {
   }
 
   search() {
-    this.searchModel.userId=14;
+    const user = this.authService.getCurrentUser();
+    this.searchModel.userId=user.id;
     this.orderService.getOrders(this.searchModel).subscribe(
       (response) => {
         this.list = <OrderDetailModel[]>response.data;

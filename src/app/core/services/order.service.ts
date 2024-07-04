@@ -10,7 +10,7 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   getOrders(model: OrderListRequestModel) {
-    const api = 'Order/GetOrders';
+    const api = 'UserOrder/GetOrderHistory';
     return this.http.post<PagedListModel<OrderDetailModel>>(api, model, { params: { isPageType: true } });
   }
    
