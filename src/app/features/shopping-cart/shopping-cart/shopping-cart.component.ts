@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { ShoppingCartItemModel, ShoppingCartModel } from 'src/app/models/shopping-cart.model';
 
 @Component({
@@ -16,6 +17,7 @@ export class ShoppingCartComponent implements OnInit {
    */
   constructor(public shoppingCartService: ShoppingCartService
     , public notificationService: NotificationService
+    , public toastService: ToastService
     , private router: Router
   ) {
   }
@@ -41,6 +43,8 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   increaseQuantity(shoppingCartItemModel: ShoppingCartItemModel) {
+    //this.toastService.show('This is a toast message!', { classname: 'bg-success text-light', delay: 10000 });
+
     shoppingCartItemModel.quantity = <number>shoppingCartItemModel.quantity + 1;
     shoppingCartItemModel.total = <number>shoppingCartItemModel.price * shoppingCartItemModel.quantity;
     this.updateCartItem(shoppingCartItemModel);
