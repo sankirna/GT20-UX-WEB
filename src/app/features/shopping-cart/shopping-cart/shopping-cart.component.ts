@@ -43,7 +43,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   increaseQuantity(shoppingCartItemModel: ShoppingCartItemModel) {
-    //this.toastService.show('This is a toast message!', { classname: 'bg-success text-light', delay: 10000 });
+    this.toastService.success('This is a toast message!');
 
     shoppingCartItemModel.quantity = <number>shoppingCartItemModel.quantity + 1;
     shoppingCartItemModel.total = <number>shoppingCartItemModel.price * shoppingCartItemModel.quantity;

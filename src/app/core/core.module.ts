@@ -14,8 +14,10 @@ import { RequestInterceptor } from './interceptors/request.interceptor';
 import { initializeApp } from '../app-init.factory';
 import { CommonService } from './services/common.service';
 import { FileService } from './services/file.service';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
-@NgModule({ declarations: [],
+@NgModule({
+    declarations: [],
     exports: [], imports: [CommonModule], providers: [
         AuthGuard,
         AdminGuard,
@@ -53,14 +55,20 @@ import { FileService } from './services/file.service';
             multi: true,
         },
         {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true
+        },
+        {
             provide: ErrorHandler,
             useClass: GlobalErrorHandler
         },
         { provide: 'LOCALSTORAGE', useValue: window.localStorage },
         provideHttpClient(withInterceptorsFromDi())
-    ] })
+    ]
+})
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
-  }
+    constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+        throwIfAlreadyLoaded(parentModule, 'CoreModule');
+    }
 }
