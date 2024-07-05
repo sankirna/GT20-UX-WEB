@@ -12,6 +12,8 @@
 .site-navbar, .site-footer{
     background-color: #aa000d;
     color: #ffffff;
+    background-image: url('./assets/images/bg-pattern.jpg');background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 .site-navbar a{
     color: #ffffff;

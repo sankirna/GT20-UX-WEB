@@ -7,10 +7,11 @@
                             <a (click)="detail(product)">
                                 <img src="{{product.file?.url}}" alt="Image placeholder" class="img-fluid"></a>
                         </figure>
-                        <div class="block-4-text p-4">
+                        <div class="block-4-text p-4 text-left">
                             <h3><a style="cursor: pointer;" (click)="detail(product)">{{product.name}}</a></h3>
-                            <p class="mb-0">{{product.startDateTime | date:'MMM-dd hh:mm:a'}}</p>
-                            <p class="mb-0">{{product.team1Detail?.name}} - {{product.team2Detail?.name}}</p>
+                            <p class="mb-0"><i class="icon icon-calendar"></i> {{product.startDateTime | date:'MMM-dd hh:mm:a'}}</p>
+                            <p class="mb-0">{{product.team1Detail?.shortName}} - {{product.team2Detail?.shortName}}</p>
+                            <p class="mb-0">${{product.productTicketCategories[0].price}} - ${{product.productTicketCategories[1].price}}</p>
                         </div>
                     </div>
                 </div>

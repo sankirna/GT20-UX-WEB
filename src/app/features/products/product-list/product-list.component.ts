@@ -11,6 +11,7 @@ import { TeamModel, TeamSearchModel } from 'src/app/models/team.model';
 import { TeamService } from 'src/app/core/services/team.service';
 import { CategoryModel, CategorySearchModel } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/core/services/category.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-product-list',
@@ -95,5 +96,13 @@ export class ProductListComponent implements OnInit {
   
   addNew(){
     this.router.navigateByUrl('/products/create');
+  }
+  getPriceRange(productTicketCategories :any){ 
+    const result = _.map( // map the groups
+      _.groupBy(productTicketCategories, 'price'), // group by the label
+      g => _.maxBy(g, 'price') // take the one with the highest value of each group
+    )
+   // var pr =  _.minBy(productTicketCategories,'price'); 
+    return '$'+result;
   }
 }

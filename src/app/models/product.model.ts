@@ -44,6 +44,7 @@ export class ProductModel {
   team2Detail: TeamModel| undefined;
   venueDetail: VenueModel| undefined;
   categoryDetail: CategoryModel| undefined;
+  productComboDetails:any|undefined;
 }
 
 // This class represents a paged list of products.
