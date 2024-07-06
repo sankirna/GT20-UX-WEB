@@ -3,21 +3,70 @@
     <img src="{{model?.file?.url}}" alt="Image" class="img-fluid">
   </div>
   <div class="col-md-6" *ngIf="!model?.productComboDetails">
-    <h2 class="text-black">{{model?.name}}</h2>
+    <!-- <h2 class="text-black">{{model?.name}}</h2>
     <p class="mb-4">{{model?.venueDetail?.stadiumName}}</p>
     <p class="mb-4"><i class="icon icon-calendar mr-2"></i>{{model?.startDateTime | date:'MMM-dd-yyyy hh:mm:a'}}</p>
     <p>{{model?.description}}</p>
+    -->
+
+    <table class="table border">
+      <thead>
+        <td>Match</td>
+        <td>Team1</td>
+        <td>Team2</td>
+        <td>Venue</td>
+        <td>Date</td>
+      </thead>
+      <tr>
+        <td> {{model?.name}}</td>
+        <td><img src="{{model?.team1Detail?.logo?.url}}" class="product-detail-image"><br> {{model?.team1Detail?.name}}
+        </td>
+        <td><img src="{{model?.team2Detail?.logo?.url}}" class="product-detail-image"><br> {{model?.team2Detail?.name}}
+        </td>
+        <td>{{model?.venueDetail?.stadiumName}}</td>
+        <td>{{model?.startDateTime | date:'MMM-dd-yyyy'}}<br> {{model?.startDateTime | date:'hh:mm:a'}}</td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          {{model?.description}}</td>
+      </tr>
+    </table>
     <p><strong class="text-danger h4">${{ticketPrice}}</strong></p>
+
+
+
   </div>
   <div class="col-md-6" *ngIf="model?.productComboDetails">
     <h2 class="text-black">{{model?.name}}</h2>
-    <div *ngFor="let item of model?.productComboDetails">
-      <h4 class="text-black">{{item?.name}}</h4> 
+    <div>
+      <table class="table border">
+        <thead>
+          <td>Match</td>
+          <td>Team1</td>
+          <td>Team2</td>
+          <td>Venue</td>
+          <td>Date</td>
+        </thead>
+        <tr *ngFor="let item of model?.productComboDetails">
+          <td> {{item?.name}}</td>
+          <td><img src="{{item?.team1Detail.logo?.url}}" class="product-detail-image"><br> {{item?.team1Detail?.name}}
+          </td>
+          <td><img src="{{item?.team2Detail.logo?.url}}" class="product-detail-image"><br> {{item?.team2Detail?.name}}
+          </td>
+          <td>{{item?.venueDetail?.stadiumName}}</td>
+          <td>{{item?.startDateTime | date:'MMM-dd-yyyy'}}<br> {{item?.startDateTime | date:'hh:mm:a'}}</td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            {{model?.description}}</td>
+        </tr>
+      </table>
+      <!-- <h4 class="text-black">{{item?.name}}</h4> 
       <span class="mb-4">{{item?.team1Detail?.name}}</span> vs
       <span class="mb-4">{{item?.team2Detail?.name}}</span><br>
       <span class="mb-4">{{item?.venueDetail?.stadiumName}}</span><br>
       <span class="mb-4"><i class="icon icon-calendar mr-2"></i>{{item?.startDateTime | date:'MMM-dd-yyyy hh:mm:a'}}</span>
-      <span>{{model?.description}}</span>
+      <span>{{model?.description}}</span> -->
     </div>
     <p><strong class="text-danger h4">${{ticketPrice}}</strong></p>
   </div>

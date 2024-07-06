@@ -7,8 +7,10 @@ import { environment } from '../../../environments/environment';
 import { of, EMPTY, Observable } from 'rxjs';
 import { ShoppingCartService } from './shopping-cart.service';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent, LoginComponentDialogModel } from 'src/app/features/auth/login/login.component';
+import { LoginComponent, LoginComponentDialogModel, RegisterComponentDialogModel, ResetPassowrdComponentDialogModel } from 'src/app/features/auth/login/login.component';
 import { NotificationService } from './notification.service';
+import { UserRegisterComponent } from 'src/app/features/auth/user-register/user-register.component'; 
+import { PasswordResetRequestComponent } from 'src/app/features/auth/password-reset-request/password-reset-request.component';
 
 @Injectable({
     providedIn: 'root'
@@ -90,4 +92,33 @@ export class AuthenticationService {
     passwordReset(email: string, token: string, password: string, confirmPassword: string): any {
         return of(true).pipe(delay(1000));
     }
+
+    userRegister(){
+        const dialogData = new RegisterComponentDialogModel();
+        const dialogRef = this.dialog.open(UserRegisterComponent, {
+          data: dialogData
+        });
+    
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if(dialogResult){
+              this.notificationService.openSnackBar('User has been succefully registered in!');
+          }else{
+          }
+        });
+      }
+
+
+      resetPassword(){
+        const dialogData = new ResetPassowrdComponentDialogModel();
+        const dialogRef = this.dialog.open(PasswordResetRequestComponent, {
+          data: dialogData
+        });
+    
+        dialogRef.afterClosed().subscribe(dialogResult => {
+          if(dialogResult){
+              this.notificationService.openSnackBar('User password has been succefully reset.!');
+          }else{
+          }
+        });
+      }
 }

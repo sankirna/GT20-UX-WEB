@@ -75,7 +75,8 @@ export class LoginComponent implements OnInit {
     }
 
     resetPassword() {
-        this.router.navigate(['/auth/password-reset-request']);
+        this.dialogRef.close(false);
+        this.authenticationService.resetPassword();
     }
 
     onConfirm(): void {
@@ -84,6 +85,11 @@ export class LoginComponent implements OnInit {
     
     onDismiss(): void {
         this.dialogRef.close(false);
+    }
+
+    register(){
+        this.dialogRef.close(false);
+        this.authenticationService.userRegister();
     }
 }
 
@@ -95,6 +101,18 @@ export class LoginComponent implements OnInit {
  * It has been kept here to keep it as part of shared component.
  */
 export class LoginComponentDialogModel {
+
+    constructor() {
+    }
+  }
+
+  export class RegisterComponentDialogModel {
+
+    constructor() {
+    }
+  }
+
+  export class ResetPassowrdComponentDialogModel {
 
     constructor() {
     }
