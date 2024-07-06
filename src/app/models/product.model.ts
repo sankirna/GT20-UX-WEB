@@ -18,8 +18,8 @@ export class ProductForSiteSearchModel extends BaseSearchModel {
   productTypeId: number | undefined ;
   teamId: string | undefined = "0";
   categoryId: string | undefined = "0";
-  minimumPrice: number | undefined ;
-  maximumPrice: number | undefined ;
+  minimumPrice: number | undefined=0 ;
+  maximumPrice: number | undefined=1000 ;
 }
 
 

@@ -65,17 +65,17 @@ export class ShoppingCartService {
         var userDetail = this.authenticationService.getCurrentUser();
         if (!userDetail) {
             // this.notificationService.openSnackBar('Please login before add ticket in cart.');
-            const message = `Please login before add ticket in cart`;
-            const dialogData = new ConfirmDialogModel("Login", message, "Login");
-            const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-                maxWidth: "400px",
-                data: dialogData
-            });
-            dialogRef.afterClosed().subscribe(dialogResult => {
-                if (dialogResult) {
-                    this.authenticationService.loginPopup();
-                }
-            });
+            // const message = `Please login before add ticket in cart`;
+            // const dialogData = new ConfirmDialogModel("Login", message, "Login");
+            // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            //     maxWidth: "400px",
+            //     data: dialogData
+            // });
+            // dialogRef.afterClosed().subscribe(dialogResult => {
+            //     if (dialogResult) {
+                     this.authenticationService.loginPopup();
+            //     }
+            // });
 
             return null;
         }

@@ -1,25 +1,29 @@
 <div class="row mb-5">
     <div class="col-md-9 order-2">
         <div class="row mb-5" >
-                <div class="col-sm-6 col-lg-4 mb-4 product-box" data-aos="fade-up" *ngFor="let product of list">
-                    <div class="block-4 text-center border">
+            <ng-container  *ngFor="let product of list">
+                <div class="col-sm-6 col-lg-4 mb-4 product-box" data-aos="fade-up" *ngIf="product.productTicketCategories">
+                    <div class="block-4 text-center border"  >
                         <figure class="block-4-image">
                             <a (click)="detail(product)">
                                 <img src="{{product.file?.url}}" alt="Image placeholder" class="img-fluid"></a>
                         </figure>
                         <div class="block-4-text p-4 text-left">
                             <h3><a style="cursor: pointer;" (click)="detail(product)">{{product.name}}</a></h3>
-                            <p class="mb-0"><i class="icon icon-calendar"></i> {{product.startDateTime | date:'MMM-dd hh:mm:a'}}</p>
+                            <p class="mb-0"><i class="icon icon-calendar"></i> {{product.startDateTime | date:'MMM-dd
+                                hh:mm:a'}}</p>
                             <p class="mb-0">{{product.team1Detail?.shortName}} - {{product.team2Detail?.shortName}}</p>
-                            <p class="mb-0">${{product.productTicketCategories[0].price}} - ${{product.productTicketCategories[1].price}}</p>
+                            <p class="mb-0">Min - ${{product.productTicketCategories[0].price}} </p>
                         </div>
                     </div>
                 </div>
+            </ng-container>
+            
         </div>
         <div class="row" data-aos="fade-up">
             <div class="col-md-12 text-center">
                 <app-custom-paginator [paggerModel]="paggerModel"
-                (changePage)="ChangePage($event)"></app-custom-paginator>
+                    (changePage)="ChangePage($event)"></app-custom-paginator>
             </div>
         </div>
     </div>
@@ -29,10 +33,12 @@
         <div class="border p-4 rounded mb-4">
             <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-                <mat-slider min="200" max="500">
+                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" (change)="pitch($event)"
+                    max="500"></mat-slider>
+                <!-- <mat-slider min="200" max="500">
                     <input value="{{searchModel.minimumPrice}}" matSliderStartThumb>
                     <input value="{{searchModel.maximumPrice}}" matSliderEndThumb>
-                </mat-slider>
+                </mat-slider> -->
 
             </div>
 

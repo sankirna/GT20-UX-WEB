@@ -41,6 +41,7 @@ export class HeaderComponent {
     this.shoppingCartService.clearShoppingCartModel();
     this.authenticationService.logout();
     this.notificationService.openSnackBar('User has been logged out!');
+    this.router.navigateByUrl('/products/list');
   }
   viewOrders(){
     this.router.navigateByUrl('/orders/list');

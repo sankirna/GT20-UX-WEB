@@ -105,4 +105,20 @@ export class ProductListComponent implements OnInit {
    // var pr =  _.minBy(productTicketCategories,'price'); 
     return '$'+result;
   }
+
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    if (value >= 1) {
+      return Math.round(value / 1);
+    }
+
+    return value;
+  }
+  pitch(event: any) {
+    this.searchModel.maximumPrice=event.value;
+    this.search();
+  }
 }
