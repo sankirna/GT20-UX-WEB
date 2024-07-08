@@ -45,7 +45,7 @@ export class AuthenticationService {
                     // set token property
                     // const decodedToken = jwt_decode(response['token']);
                     // store email and jwt token in local storage to keep user logged in between page refreshes
-                    this.localStorage.setItem('currentUser', JSON.stringify({
+                    this.localStorage.setItem('web-currentUser', JSON.stringify({
                         token: response.token,
                         user: response.user,
                         isAdmin: true,
@@ -62,13 +62,13 @@ export class AuthenticationService {
 
     logout(): void {
         // clear token remove user from local storage to log user out
-        this.localStorage.removeItem('currentUser');
+        this.localStorage.removeItem('web-currentUser');
        // this.shoppingCartService.clearShoppingCartModel();
     }
 
     getCurrentUser(): any {
         // TODO: Enable after implementation
-        let user = this.localStorage.getItem('currentUser');
+        let user = this.localStorage.getItem('web-currentUser');
         return user ? JSON.parse(user) : null;
         // return {
         //     token: 'aisdnaksjdn,axmnczm',

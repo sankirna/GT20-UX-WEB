@@ -55,3 +55,14 @@
 .auth-login-box{
     width: 350px;
 }
+
+.site-top-icons {
+    a{
+        cursor: pointer;
+    }
+}
+
+.site-navbar .site-top-icons ul, .site-navbar .site-top-icons ul li
+{
+    display: flex;
+}

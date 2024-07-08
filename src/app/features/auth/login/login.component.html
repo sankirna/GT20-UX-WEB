@@ -30,12 +30,13 @@
         <div fxLayout="row" fxLayoutAlign="start">
             <mat-slide-toggle formControlName="rememberMe">Remember my email address</mat-slide-toggle>
         </div>
+        <br>
         <div fxLayout="row" fxLayoutAlign="start">
+           
             <button class="btn btn-dark" (click)="register()">Register</button>
             <button class="btn btn-dark" (click)="resetPassword()">Reset Password</button>
         </div>
-        
-
+        <br>
         <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
              <button mat-raised-button color="warn" (click)="onDismiss()">Close</button>
             <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || loading"
