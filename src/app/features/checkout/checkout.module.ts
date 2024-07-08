@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CheckoutRoutingModule } from './checkout-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     CommonModule,
     CheckoutRoutingModule,
     SharedModule,
+    NgbAccordionModule
   ]
 })
 export class CheckoutModule { }

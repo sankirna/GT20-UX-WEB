@@ -1,10 +1,11 @@
-<div class="row">
+<form [formGroup]="form">
+    <div class="row">
 
-    <div class="col-md-6">
+        <div class="col-md-6">
 
-        <div class="row mb-5">
-            <div class="col-md-12" *ngIf="form">
-                <form [formGroup]="form">
+            <div class="row mb-5">
+                <div class="col-md-12" *ngIf="form">
+
                     <h2 class="h3 mb-3 text-black">Personal Information</h2>
                     <div class="p-3 p-lg-5 border">
                         <div class="input-group">
@@ -26,16 +27,15 @@
                             </mat-form-field>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <h2 class="h3 mb-3 text-black">Coupon Code</h2>
-                <div class="p-3 p-lg-5 border">
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <h2 class="h3 mb-3 text-black">Coupon Code</h2>
+                    <div class="p-3 p-lg-5 border">
 
-                    <!-- <label for="c_code" class="text-black mb-3">Enter your coupon code if you have one</label>
+                        <!-- <label for="c_code" class="text-black mb-3">Enter your coupon code if you have one</label>
                     <div class="input-group w-75">
                         <input type="text" class="form-control" id="c_code" placeholder="Coupon Code"
                             aria-label="Coupon Code" aria-describedby="button-addon2">
@@ -43,64 +43,120 @@
                             <button class="btn btn-dark" type="button" id="button-addon2">Apply</button>
                         </div>
                     </div> -->
-                    <app-shopping-cart-coupon (successCallback)="updateCouponCallback($event)"></app-shopping-cart-coupon>
+                        <app-shopping-cart-coupon
+                            (successCallback)="updateCouponCallback($event)"></app-shopping-cart-coupon>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="row mb-5" *ngIf="shoppingCart">
-            <div class="col-md-12">
-                <h2 class="h3 mb-3 text-black">Your Order</h2>
-                <div class="p-3 p-lg-5 border">
-                    <table class="table site-block-order-table mb-5">
-                        <thead>
-                            <th>Product</th>
-                            <th>Total</th>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let shoppingCartItem of shoppingCart?.items">
-                                <td>{{shoppingCartItem.productDetail?.name}} <strong class="mx-2">x</strong>
-                                    {{shoppingCartItem.quantity}}</td>
-                                <td>${{shoppingCartItem.total}}</td>
-                            </tr>
-                            <tr>
-                                <td class="text-black font-weight-bold"><strong>Gross Total</strong></td>
-                                <td class="text-black font-weight-bold"><strong>${{shoppingCart.grossTotal}}</strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-black font-weight-bold"><strong>Discount</strong></td>
-                                <td class="text-black font-weight-bold"><strong>${{shoppingCart.discount}}</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                <td class="text-black font-weight-bold"><strong>${{shoppingCart.grandTotal}}</strong>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="col-md-6">
+            <div class="row mb-5" *ngIf="shoppingCart">
+                <div class="col-md-12">
+                    <h2 class="h3 mb-3 text-black">Your Order</h2>
+                    <div class="p-3 p-lg-5 border">
+                        <table class="table site-block-order-table mb-5">
+                            <thead>
+                                <th>Product</th>
+                                <th>Total</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let shoppingCartItem of shoppingCart?.items">
+                                    <td>{{shoppingCartItem.productDetail?.name}} <strong class="mx-2">x</strong>
+                                        {{shoppingCartItem.quantity}}</td>
+                                    <td>${{shoppingCartItem.total}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-black font-weight-bold"><strong>Gross Total</strong></td>
+                                    <td class="text-black font-weight-bold">
+                                        <strong>${{shoppingCart.grossTotal}}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-black font-weight-bold"><strong>Discount</strong></td>
+                                    <td class="text-black font-weight-bold"><strong>${{shoppingCart.discount}}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                    <td class="text-black font-weight-bold">
+                                        <strong>${{shoppingCart.grandTotal}}</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <div class="border p-3 mb-3">
-                        <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#cash" role="button"
+                        <div class="border p-3 mb-3">
+                            <!-- <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#cash" role="button"
                                 aria-expanded="false" aria-controls="collapsebank">Cash</a></h3>
 
                         <div class="collapse" id="cash">
                             <div class="py-2">
                                 <p class="mb-0">Cash</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-danger btn-lg py-3 btn-block"
-                             (click)="onSubmit()">Place Order</button>
-                    </div>
+                        </div> -->
+                            <div ngbAccordion [closeOthers]="true">
+                                <div ngbAccordionItem [collapsed]="false">
+                                    <h2 ngbAccordionHeader>
+                                        <button ngbAccordionButton (click)="setPaymentMethod(2)">Cash</button>
+                                    </h2>
+                                    <div ngbAccordionCollapse>
+                                        <div ngbAccordionBody>
+                                            <ng-template>
+                                                <p>
+                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                    terry richardson ad squid. 3 wolf moon
+                                                    officia aute, non cupidatat skateboard dolor brunch. Food truck
+                                                    quinoa nesciunt laborum eiusmod. Brunch 3
+                                                    wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                                                    coffee nulla assumenda shoreditch et.
+                                                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                                    nesciunt sapiente ea proident. Ad vegan
+                                                    excepteur butcher vice lomo. Leggings occaecat craft beer
+                                                    farm-to-table, raw denim aesthetic synth nesciunt
+                                                    you probably haven't heard of them accusamus labore sustainable VHS.
+                                                </p>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div ngbAccordionItem [destroyOnHide]="false">
+                                    <h2 ngbAccordionHeader>
+                                        <button ngbAccordionButton (click)="setPaymentMethod(2)">POS</button>
+                                    </h2>
+                                    <div ngbAccordionCollapse>
+                                        <div ngbAccordionBody>
+                                            <ng-template>
+                                                <form formGroupName="processPaymentRequest">
+                                                    <p>
+                                                        <mat-form-field appearance="outline" class="w-100">
+                                                            <mat-label>POS Transaction Id</mat-label>
+                                                            <input matInput placeholder="Enter POS Transaction Id"
+                                                                formControlName="posTransactionId">
+                                                            <mat-error id="invalidEmailError"
+                                                                *ngIf="posTransactionIdControl.hasError('required')">
+                                                                Please enter a POS Transaction Id
+                                                            </mat-error>
+                                                        </mat-form-field>
+                                                    </p>
+                                                </form>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-danger btn-lg py-3 btn-block" (click)="onSubmit()">Place
+                                Order</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
-<!-- </form> -->
+</form>
