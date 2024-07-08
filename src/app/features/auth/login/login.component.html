@@ -1,8 +1,9 @@
-<div *ngIf="loginForm">
+<div fxFlex="100%" class="auth-box auth-login-box" *ngIf="loginForm">
+    <h2 class="h3 mb-3 text-black">Login</h2>
     <form [formGroup]="loginForm">
-        <h2 class="h3 mb-3 text-black">Log in to your account</h2>
-        <div class="input-group ">
-            <mat-form-field class="col-md-12">
+        <div fxLayout="row" fxLayoutAlign="start">
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>User Name</mat-label>
                 <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email"
                     type="email">
 
@@ -15,29 +16,34 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="input-group ">
-            <mat-form-field class="col-md-12">
+        <div fxLayout="row" fxLayoutAlign="start">
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Password</mat-label>
                 <input id="passwordInput" matInput placeholder="Password" formControlName="password" type="password"
-                    autocomplete="current-password">
-                <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['email'].hasError('required')">
-                    Password is
-                    <strong>required</strong>
-                </mat-error>
+                autocomplete="current-password">
+                  <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['email'].hasError('required')">
+                Password is
+                <strong>required</strong>
+            </mat-error>
             </mat-form-field>
         </div>
-        <div class="col-md-12 ">
+        <div fxLayout="row" fxLayoutAlign="start">
             <mat-slide-toggle formControlName="rememberMe">Remember my email address</mat-slide-toggle>
         </div>
-        <div class="input-group " fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutAlign="start">
             <button mat-button id="register" (click)="register()" type="button" color="gray">Register </button>
             <button mat-button id="resetPassword" (click)="resetPassword()" type="button" color="secondary">Reset
                 Password</button>
         </div>
-        <div class="col-md-12  " fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-            <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || loading"
-                (click)="login()">Login</button>
+        
 
-            <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+             <button mat-raised-button color="warn" (click)="onDismiss()">Close</button>
+            <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || loading"
+            (click)="login()">Login</button>
+
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
         </div>
     </form>
+
 </div>

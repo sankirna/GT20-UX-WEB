@@ -117,8 +117,11 @@ export class UserRegisterComponent implements OnInit {
   onClear() {
 
   }
-  gotoList() {
-    this.dialogRef.close(false);
+  gotoLogin(){
+    this.close();
     this.authenticationService.loginPopup();
+  }
+  close() {
+    this.dialogRef.close(false);
   }
 }
