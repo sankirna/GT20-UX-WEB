@@ -75,7 +75,6 @@ export class ProductComboTeamComponent {
   }
 
   loadSelectedProduct() {
-    debugger
     var self = this;
     this.forms.clear();
     var selectedProducts = this.selection.selected;

@@ -16,12 +16,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
        let errorMessage="";
         if(error && error.error && error.error.data)
         {
-            let apiErrorMessage = _.join(error.error.data.errors,"<br>");
-            let apiInnerErrorMessage = _.join(error.error.data.innerErrors,"<br>");
+            let apiErrorMessage = _.join(error.error.data,"<br>");
             this.toastService.error(apiErrorMessage);
-            if(apiInnerErrorMessage){
-                this.toastService.error(apiInnerErrorMessage);
-            }
         }
        else if (error.error instanceof ErrorEvent) {
           // Client-side error
