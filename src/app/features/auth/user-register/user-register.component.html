@@ -1,44 +1,46 @@
-<div fxFlex="100%" class="auth-box auth-box">
-  <h2 class="h3 mb-3 text-black">Register</h2>
+<div class="col-md-12">
   <form [formGroup]="form">
+    <h2 class="h3 mb-2 text-black">Register your account</h2>
+    <div class="p-3 p-lg-5 border">
+      <div class="input-group">
+        <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>User Name</mat-label>
+          <input matInput placeholder="User Name" formControlName="userName">
+          <mat-error id="requiredUserError" *ngIf="form.controls['userName'].hasError('required') && submitted">
+            UserName is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="input-group">
+        <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+          <mat-error id="requiredPasswordError" *ngIf="form.controls['password'].hasError('required') && submitted">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-    <div fxLayout="row" fxLayoutAlign="start">
-      <mat-form-field appearance="outline" fxFlex="100">
-        <mat-label>User Name</mat-label>
-        <input matInput placeholder="User Name" formControlName="userName">
-        <mat-error id="requiredUserError" *ngIf="form.controls['userName'].hasError('required') && submitted">
-          UserName is required
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start">
-      <mat-form-field appearance="outline" fxFlex="100">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Password" formControlName="password">
-        <mat-error id="requiredPasswordError" *ngIf="form.controls['password'].hasError('required') && submitted">
-          Password is required
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start">
-      <mat-form-field appearance="outline" fxFlex="100">
-        <mat-label>Phone Number</mat-label>
-        <input matInput placeholder="Phone Number" formControlName="phoneNumber">
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="start">
-      <mat-form-field appearance="outline" fxFlex="100">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" formControlName="email">
-        <mat-error id="invalidEmailError" *ngIf="form.controls['email'].hasError('email')">
-          Please enter a valid email address
-        </mat-error>
-        <mat-error id="requiredEmailError" *ngIf="form.controls['email'].hasError('required') && submitted">
-          Email is required
-        </mat-error>
-      </mat-form-field>
-    </div>
-    <!-- <div fxLayout="row" fxLayoutAlign="start" *ngIf="roles.length > 0" fxLayoutGap="30px">
+      <div class="input-group">
+
+        <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>Phone Number</mat-label>
+          <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+        </mat-form-field>
+      </div>
+      <div class="input-group">
+        <mat-form-field appearance="outline"  class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error id="invalidEmailError" *ngIf="form.controls['email'].hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error id="requiredEmailError" *ngIf="form.controls['email'].hasError('required') && submitted">
+            Email is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- <div fxLayout="row" fxLayoutAlign="start" *ngIf="roles.length > 0" fxLayoutGap="30px">
             <mat-form-field appearance="outline" fxFlex="50">
               <mat-label>Roles</mat-label>
               <mat-select formControlName="roleIds" multiple>
@@ -48,13 +50,13 @@
             </mat-form-field>
           </div> -->
 
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <button mat-button id="register" (click)="gotoLogin()" type="button" color="gray">Login </button>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
-      <button mat-raised-button color="warn" (click)="close()">Close</button>
-      <button mat-raised-button color="primary" (click)="onSubmit()">{{isEdit?'Update':'Create'}}</button>
+
+      <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+        <button mat-raised-button color="warn" (click)="gotoList()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()">{{isEdit?'Update':'Create'}}</button>
+      </div>
     </div>
   </form>
+
 
 </div>
