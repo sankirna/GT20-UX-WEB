@@ -1,23 +1,63 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center none">
-    <div fxFlex="95%">
-      <mat-card>
-        <mat-card-content>
-                <h2>Order Detail </h2> <a href="/orders/list">Back to order list</a>
-                <div fxLayout="row"  fxLayout.sm="column" fxLayout.xs="column">
-                    <div fxLayout="row" fxFlex="95%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayoutGap="10px"
-                        fxLayoutAlign="start center">
-                        <mat-tab-group fxFlex="95%"> 
-                            <mat-tab label="Order Detail">
-                                <app-order-information [model]="model"> </app-order-information>
-                                </mat-tab>
-                            <mat-tab label="Order Product Items"> 
-                                <app-order-product-items *ngIf="model.items" [orderProductItems]="model.items"></app-order-product-items>
-                            </mat-tab>
-                            <mat-tab label="QR Code"> QR Code </mat-tab>
-                          </mat-tab-group>
+<div class="site-section">
+    <div class="container">
+        <div>
+            <h2 class="text-black text-center">Order Detail</h2>
+        </div>
+        <div class="row border  rounded order-history" >
+            <div class=" col-md-6">
+                <div class="col-md-12">
+                    <p><strong>Order #: </strong>{{order.id}}</p>
+                    <h4 class="h3 mb-3 text-black">Personal Information</h4>
+                    <div class="p-3 p-lg-5 border">
+                        <p><strong>Name: </strong>{{order.name}}</p>
+                        <p><strong>Email: </strong>{{order.email}}</p>
+                        <p><strong>Phone Number: </strong>{{order.phoneNumber}}</p>
                     </div>
                 </div>
-            </mat-card-content>
-        </mat-card>
+            </div>
+            <div class=" col-md-6">
+                <div class="col-md-12">
+                    <h4 class="h3 mb-3 text-black">Payment Information</h4>
+                    <div class="p-3 p-lg-5 border">
+                        <p><strong>Payment: </strong>{{order.paymentId}}</p>
+                        <p><strong>Order Status: </strong>{{order.orderStatus}}</p>
+                        <p><strong>POS Transaction Id: </strong>{{order.posTransactionId}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border  rounded order-history" >
+            <div class="col-md-4">
+                <div class="row mb-5" *ngIf="order.items">
+                    <div class="col-md-12">
+                        <h4 class="h3 mb-3 text-black">Order Summary</h4>
+                        <div class="p-3 p-lg-5 border" >
+                            <table class="table border" *ngFor="let item of order.items">
+                                <thead>
+                                  <td>Match</td>
+                                  <td>Team1</td>
+                                  <td>Team2</td>
+                                  <td>Venue</td>
+                                  <td>Date</td>
+                                </thead>
+                                <tr>
+                                  <td> {{item.productDetail?.name}}</td>
+                                  <td><img src="{{item.productDetail?.team1Detail?.logo?.url}}" class="product-detail-image"><br> {{item.productDetail?.team1Detail?.name}}
+                                  </td>
+                                  <td><img src="{{item.productDetail?.team2Detail?.logo?.url}}" class="product-detail-image"><br> {{item.productDetail?.team2Detail?.name}}
+                                  </td>
+                                  <td>{{item.productDetail?.venueDetail?.stadiumName}}</td>
+                                  <td>{{item.productDetail?.startDateTime | date:'MMM-dd-yyyy'}}<br> {{item.productDetail?.startDateTime | date:'hh:mm:a'}}</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="5">
+                                    {{item.productDetail?.description}}</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>  
+</div>

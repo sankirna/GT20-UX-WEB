@@ -12,7 +12,7 @@ import { OrderDetailModel } from 'src/app/models/order.model';
 })
 export class OrderDetailComponent {
    id: number = 0;
-   model: OrderDetailModel= new  OrderDetailModel();
+   order: OrderDetailModel= new  OrderDetailModel();
 
    constructor(private orderService: OrderService
     , private commonService: CommonService
@@ -31,7 +31,7 @@ export class OrderDetailComponent {
   getData() {
     this.orderService.get(this.id).subscribe(
       (response) => {
-        this.model = response;
+        this.order = response;
       },
       (error) => {
         console.error(error);
