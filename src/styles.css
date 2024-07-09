@@ -47,9 +47,9 @@
 }
 
 .auth-box{
-    width: 400px;
+    width: 450px;
     .mat-form-field-appearance-outline .mat-form-field-wrapper{
-        padding: 0px 0px;
+        padding: 10px 0px;
     }
 }
 .auth-login-box{
