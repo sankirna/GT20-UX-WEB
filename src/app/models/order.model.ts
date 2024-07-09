@@ -1,5 +1,6 @@
 import { BasePagedListModel } from "./base-paged-list.model";
 import { BaseSearchModel } from "./base-search.model";
+import { FileUploadRequestModel } from "./file.model";
 import { ProductModel } from "./product.model";
 import { UserModel } from "./user.model";
 
@@ -52,6 +53,18 @@ export class OrderProductItemModel{
   total: number | undefined;
   isOutofStock: number | undefined;
   ProductDetail : ProductModel| undefined;
+  orderProductItemDetail : OrderProductItemDetailModel| undefined;
+}
+
+export class OrderProductItemDetailModel{
+  id: number | undefined;
+  userId: number | undefined;
+  orderProductItemId: number | undefined;
+  productComboId: number | undefined;
+  productId: number | undefined;
+  qrCode: string | undefined;
+  qrCodeFileId: number | undefined;
+  qrCodeFile: FileUploadRequestModel | undefined;
 }
 
 
