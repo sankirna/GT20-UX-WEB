@@ -38,6 +38,8 @@ export class OrderDetailModel{
   phoneNumber: string | undefined;
   orderStatusId: number | undefined;
   orderStatus: string | undefined;
+  paymentId: number | undefined;
+  posTransactionId: string|undefined;
   createdDateTime: string | undefined;
   updatedDateTime: string | undefined;
   userDetail: UserModel| undefined;
@@ -52,7 +54,7 @@ export class OrderProductItemModel{
   price: number | undefined;
   total: number | undefined;
   isOutofStock: number | undefined;
-  ProductDetail : ProductModel| undefined;
+  productDetail : ProductModel| undefined;
   orderProductItemDetail : OrderProductItemDetailModel| undefined;
 }
 

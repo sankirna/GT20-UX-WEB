@@ -22,8 +22,6 @@ export class OrderListComponent implements OnInit {
   paggerModel: PaggerModel = new PaggerModel();
   list: OrderDetailModel[] = [];
   orderStatuses: EnumModel[] |undefined =[];
-  displayedColumns: string[] = ['Name','Email', 'PhoneNumber','GrossTotal','Discount','GrandTotal','CreatedDate','Actions'];
-  dataSource: MatTableDataSource<OrderDetailModel>;
 
   constructor(private orderService: OrderService
     , private commonService: CommonService
@@ -32,7 +30,6 @@ export class OrderListComponent implements OnInit {
      , private dialog: MatDialog
      ,private authService: AuthenticationService,
   ) {
-    this.dataSource = new MatTableDataSource(this.list);
   }
 
   ngOnInit() {
@@ -57,10 +54,11 @@ export class OrderListComponent implements OnInit {
   search() {
     const user = this.authService.getCurrentUser();
     this.searchModel.userId=user.id;
+    this.searchModel.orderStatusId=40;
+    this.searchModel.length=5;
     this.orderService.getOrders(this.searchModel).subscribe(
       (response) => {
         this.list = <OrderDetailModel[]>response.data;
-        this.dataSource = new MatTableDataSource(this.list);
         this.paggerModel = <PaggerModel>response.paggerModel;
         console.log(this.paggerModel);
       },

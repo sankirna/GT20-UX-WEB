@@ -1,94 +1,74 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center none">
-    <div fxFlex="95%">
-        <mat-card>
-            <mat-card-content>
-                <h2>Orders</h2>
-                <!-- <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-                    <div fxLayout="row" fxFlex="35%" fxFlex.sm="95%" fxFlex.xs="95%" fxLayoutGap="10px"
-                        fxLayoutAlign="start center">
-
-                        <div fxLayout="row" fxLayoutAlign="start">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Order Status</mat-label>
-                                <mat-select [(ngModel)]="searchModel.orderStatusId">
-                                    <mat-option>ALL</mat-option>
-                                    <mat-option *ngFor="let orderStatus of orderStatuses" [value]="orderStatus.value">{{
-                                        orderStatus.key
-                                        }}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>From Date</mat-label>
-                                <input matInput [matDatepicker]="fromDateTimepicker" [(ngModel)]="searchModel.fromDate">
-                                <mat-datepicker-toggle matSuffix [for]="fromDateTimepicker"></mat-datepicker-toggle>
-                                <mat-datepicker #fromDateTimepicker></mat-datepicker>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline" fxFlex="50">
-                                <mat-label>To Date</mat-label>
-                                <input matInput [matDatepicker]="toDateTimepicker" [(ngModel)]="searchModel.toDate">
-                                <mat-datepicker-toggle matSuffix [for]="toDateTimepicker"></mat-datepicker-toggle>
-                                <mat-datepicker #toDateTimepicker></mat-datepicker>
-                            </mat-form-field>
+<div class="site-section">
+    <div class="container">
+        <div>
+            <h2 class="text-black text-center">Order History</h2>
+        </div>
+        <div class="row border  rounded order-history" *ngFor="let order of list">
+            <div class=" col-md-4">
+                <div class="col-md-12">
+                    <p><strong>Order #: </strong>{{order.id}}</p>
+                    <h4 class="h3 mb-3 text-black">Personal Information</h4>
+                    <div class="p-3 p-lg-5 border">
+                        <p><strong>Name: </strong>{{order.name}}</p>
+                        <p><strong>Email: </strong>{{order.email}}</p>
+                        <p><strong>Phone Number: </strong>{{order.phoneNumber}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-4">
+                <div class="col-md-12">
+                    <h4 class="h3 mb-3 text-black">Payment Information</h4>
+                    <div class="p-3 p-lg-5 border">
+                        <p><strong>Payment: </strong>{{order.paymentId}}</p>
+                        <p><strong>Order Status: </strong>{{order.orderStatus}}</p>
+                        <p><strong>POS Transaction Id: </strong>{{order.posTransactionId}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row mb-5" *ngIf="order.items">
+                    <div class="col-md-12">
+                        <h4 class="h3 mb-3 text-black">Order Summary</h4>
+                        <div class="p-3 p-lg-5 border">
+                           
+                            <table class="table site-block-order-table mb-5">
+                                <thead>
+                                    <th>Product</th>
+                                    <th>Total</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of order.items">
+                                        <td>{{item.productDetail?.name}} <strong class="mx-2">x</strong>
+                                            {{item.quantity}}</td>
+                                        <td>${{item.total}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Gross Total</strong></td>
+                                        <td class="text-black font-weight-bold">
+                                            <strong>${{order.grossTotal}}</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Discount</strong></td>
+                                        <td class="text-black font-weight-bold"><strong>${{order.discount}}</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                        <td class="text-black font-weight-bold">
+                                            <strong>${{order.grandTotal}}</strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div fxLayout="row" fxLayoutAlign="start">
-                            <button fxFlex="50" mat-raised-button (click)="clearFilter()">Clear</button>
-                            <button fxFlex="50" mat-raised-button color="primary" (click)="applyFilter()">Apply
-                                Filter</button> 
-                        </div>
-                    </div> 
-                </div> -->
-                <table mat-table [dataSource]="dataSource" matSort class="w-100">
-
-                    <!-- Code Column -->
-                    <ng-container matColumnDef="Name">
-                        <th mat-header-cell *matHeaderCellDef> Name </th>
-                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Email">
-                        <th mat-header-cell *matHeaderCellDef> Email </th>
-                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="PhoneNumber">
-                        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
-                        <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="GrossTotal">
-                        <th mat-header-cell *matHeaderCellDef> Sub Total </th>
-                        <td mat-cell *matCellDef="let element"> ${{element.grossTotal}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Discount">
-                        <th mat-header-cell *matHeaderCellDef> Discount </th>
-                        <td mat-cell *matCellDef="let element"> ${{element.discount}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="GrandTotal">
-                        <th mat-header-cell *matHeaderCellDef> Total </th>
-                        <td mat-cell *matCellDef="let element"> ${{element.grandTotal}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="CreatedDate">
-                        <th mat-header-cell *matHeaderCellDef> Order Date </th>
-                        <td mat-cell *matCellDef="let element"> {{element.createdDateTime | date:'MM/dd/yyyy'}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Actions">
-                        <th mat-header-cell *matHeaderCellDef> Actions </th>
-                        <td mat-cell *matCellDef="let row">
-                            <button mat-icon-button matTooltip="Click to View" class="iconbutton" color="primary"
-                                (click)="detail(row)">
-                                <mat-icon>View</mat-icon>
-                            </button>
-                            <!-- <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn"
-                                (click)="delete(row)">
-                                <mat-icon>delete</mat-icon>
-                            </button> -->
-                        </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <app-custom-paginator [paggerModel]="paggerModel"
-                    (changePage)="ChangePage($event)"></app-custom-paginator>
-            </mat-card-content>
-        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <app-custom-paginator [paggerModel]="paggerModel"
+            (changePage)="ChangePage($event)"></app-custom-paginator>
+        </div>
     </div>
 </div>
