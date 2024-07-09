@@ -1,5 +1,55 @@
-<div class="col-md-12" *ngIf="loginForm">
+<div class="col-md-12" *ngIf="loginForm"> 
     <form [formGroup]="loginForm">
+        <h4 class="h3 mb-2 text-black">Log in to your account</h4>
+        <div class="p-3 p-lg-5 border">
+            <div class="input-group">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input id="emailInput" matInput placeholder="Email" formControlName="email" autocomplete="email"
+                        type="email">
+                    <mat-error id="invalidEmailError" *ngIf="loginForm.controls['email'].hasError('email')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error id="requiredEmailError" *ngIf="loginForm.controls['email'].hasError('required')">
+                        Email is
+                        <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="input-group">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Password</mat-label>
+                    <input id="passwordInput" matInput placeholder="Password" formControlName="password" type="password"
+                        autocomplete="current-password">
+                    <mat-error id="requiredPasswordError" *ngIf="loginForm.controls['email'].hasError('required')">
+                        Password is
+                        <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="input-group mb-2">
+                <mat-slide-toggle formControlName="rememberMe">Remember my email address</mat-slide-toggle>
+            </div>
+            <div class="input-group row">
+                <div class="col-md-6">
+                    <button mat-raised-button id="login" class="btn btn-block" color="primary"
+                    [disabled]="loginForm.invalid || loading" (click)="login()">Login</button>
+                </div>
+                <div class="col-md-6">
+                <button mat-button id="resetPassword" class="btn btn-block" (click)="resetPassword()" type="button"
+                    color="secondary">Reset
+                    Password</button>
+                </div>
+                <div class="col-md-6">
+                <a class="text-primary pointer" (click)="register()">Click here to Register</a>  </div>
+                <!-- <button mat-button id="resetPassword"   class="btn btn-block"   type="button" color="secondary">
+                </button> -->
+                <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+            </div>
+        </div>
+    </form>
+
+    <!-- <form [formGroup]="loginForm">
         <h2 class="h3 mb-3 text-black">Log in to your account</h2>
         <div class="input-group ">
             <mat-form-field class="full-width">
@@ -25,17 +75,6 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="input-group ">
-            <mat-slide-toggle formControlName="rememberMe">Remember my email address</mat-slide-toggle>
-        </div>
-        <div class="input-group ">
-            <button mat-raised-button id="login" color="primary" [disabled]="loginForm.invalid || loading"
-                (click)="login()">Login</button>
-            <button mat-button id="resetPassword" (click)="resetPassword()" type="button" color="secondary">Reset
-                Password</button>
-                <button mat-button id="resetPassword" (click)="register()" type="button" color="secondary">Register </button>
-            <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-        </div>
-    </form>
+        
+    </form> -->
 </div>
-
