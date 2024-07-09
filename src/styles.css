@@ -70,3 +70,7 @@
 .order-history{
     margin: 10px 0px;
 }
+
+.order-history p{
+    margin: 5px 0;
+}

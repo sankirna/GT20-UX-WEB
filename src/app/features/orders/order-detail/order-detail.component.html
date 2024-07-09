@@ -1,60 +1,121 @@
-<div class="site-section">
-    <div class="container">
-        <div>
-            <h2 class="text-black text-center">Order Detail</h2>
+<div class="container">
+    <div>
+        <h2 class="text-black text-center">Order Detail</h2>
+    </div>
+    <div class="row order-history">
+        <div class="col-md-6">
+            <p><strong>Order #: </strong>{{order.id}}</p>
         </div>
-        <div class="row border  rounded order-history" >
-            <div class=" col-md-6">
-                <div class="col-md-12">
-                    <p><strong>Order #: </strong>{{order.id}}</p>
+        <div class="col-md-6 align-right">
+            <p><strong>Created On: </strong>{{order.createdDateTime | date: 'MMM-dd-yyyy
+                hh:mm:a'}}</p>
+        </div>
+    </div>
+    <div class="row  order-history">
+        <div class=" col-md-4">
+            <div class="col-md-12">
+                <div class="p-2 border">
                     <h4 class="h3 mb-3 text-black">Personal Information</h4>
-                    <div class="p-3 p-lg-5 border">
-                        <p><strong>Name: </strong>{{order.name}}</p>
-                        <p><strong>Email: </strong>{{order.email}}</p>
-                        <p><strong>Phone Number: </strong>{{order.phoneNumber}}</p>
-                    </div>
+                    <p><strong>Name: </strong>{{order.name}}</p>
+                    <p><strong>Email: </strong>{{order.email}}</p>
+                    <p><strong>Phone Number: </strong>{{order.phoneNumber}}</p>
                 </div>
             </div>
-            <div class=" col-md-6">
-                <div class="col-md-12">
+        </div>
+        <div class=" col-md-4">
+            <div class="col-md-12">
+                <div class="p-2 border">
                     <h4 class="h3 mb-3 text-black">Payment Information</h4>
-                    <div class="p-3 p-lg-5 border">
-                        <p><strong>Payment: </strong>{{order.paymentId}}</p>
-                        <p><strong>Order Status: </strong>{{order.orderStatus}}</p>
-                        <p><strong>POS Transaction Id: </strong>{{order.posTransactionId}}</p>
+                    <p><strong>Payment: </strong>{{order.paymentId}}</p>
+                    <p><strong>Order Status: </strong>{{order.orderStatus}}</p>
+                    <p><strong>POS Transaction Id: </strong>{{order.posTransactionId}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-5" *ngIf="order.items">
+                <div class="col-md-12">
+                    <div class="p-2 border">
+                        <h4 class="h3 mb-3 text-black">Order Summary</h4>
+                        <table class="table site-block-order-table mb-5">
+                            <thead>
+                                <th>Product</th>
+                                <th>Total</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-black font-weight-bold"><strong>Gross Total</strong></td>
+                                    <td class="text-black font-weight-bold">
+                                        <strong>${{order.grossTotal}}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-black font-weight-bold"><strong>Discount</strong></td>
+                                    <td class="text-black font-weight-bold"><strong>${{order.discount}}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                    <td class="text-black font-weight-bold">
+                                        <strong>${{order.grandTotal}}</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row border  rounded order-history" >
-            <div class="col-md-4">
-                <div class="row mb-5" *ngIf="order.items">
-                    <div class="col-md-12">
-                        <h4 class="h3 mb-3 text-black">Order Summary</h4>
-                        <div class="p-3 p-lg-5 border" >
-                            <table class="table border" *ngFor="let item of order.items">
-                                <thead>
-                                  <td>Match</td>
-                                  <td>Team1</td>
-                                  <td>Team2</td>
-                                  <td>Venue</td>
-                                  <td>Date</td>
-                                </thead>
-                                <tr>
-                                  <td> {{item.productDetail?.name}}</td>
-                                  <td><img src="{{item.productDetail?.team1Detail?.logo?.url}}" class="product-detail-image"><br> {{item.productDetail?.team1Detail?.name}}
-                                  </td>
-                                  <td><img src="{{item.productDetail?.team2Detail?.logo?.url}}" class="product-detail-image"><br> {{item.productDetail?.team2Detail?.name}}
-                                  </td>
-                                  <td>{{item.productDetail?.venueDetail?.stadiumName}}</td>
-                                  <td>{{item.productDetail?.startDateTime | date:'MMM-dd-yyyy'}}<br> {{item.productDetail?.startDateTime | date:'hh:mm:a'}}</td>
-                                </tr>
-                                <tr>
-                                  <td colspan="5">
-                                    {{item.productDetail?.description}}</td>
-                                </tr>
-                              </table>
-                        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row  ">
+        <h4 class="h3 mb-3 text-black">Order Summary</h4>
+        <div class="row    order-history border " *ngFor="let item of order.items">
+            <div class="row justify-content-center" *ngIf="item.productDetail?.productTypeId==1">
+                <div class="col-md-4">
+                    <img src="{{item.productDetail?.file?.url}}" class="img-fluid align-middle" />
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">{{item.productDetail?.name}}</p>
+                    <p ><strong>Categroy: </strong> {{item.productDetail?.categoryDetail?.name}}</p>
+                    <p><strong>Price: </strong>{{item.price }}</p>
+                    <p><strong>Quantity: </strong>{{item.quantity }}</p>
+                    <p><strong>Total: </strong>{{item.total }}</p>
+                </div>
+            </div>
+            <div class="row    order-history border  rounded"
+                *ngFor="let orderProductItemDetail of item.orderProductItemDetails">
+                <div class="col-md-2">
+                    <img src="{{orderProductItemDetail.productDetail?.file?.url}}" class="img-fluid align-middle" />
+                </div>
+                <div class="col-md-2">
+                    <img src="{{orderProductItemDetail.productDetail?.team1Detail?.logo?.url}}"
+                        class="img-fluid align-middle" />
+                    <p class="text-center">{{orderProductItemDetail.productDetail?.team1Detail?.name}}</p>
+                </div>
+                <div class="col-md-2">
+                    <img src="{{orderProductItemDetail.productDetail?.team2Detail?.logo?.url}}"
+                        class="img-fluid align-middle" />
+                    <p class="text-center">{{orderProductItemDetail.productDetail?.team2Detail?.name}}</p>
+                </div>
+                <div class="col-md-2">
+                    <img src="{{orderProductItemDetail?.qrCodeFile?.url}}" class="img-fluid" />
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">{{orderProductItemDetail.productDetail?.name}}</p>
+                    <p><strong>QR Code: </strong>{{orderProductItemDetail?.qrCode}}</p>
+                    <p><strong>Venue Name: </strong>{{orderProductItemDetail.productDetail?.venueDetail?.stadiumName}}
+                    </p>
+                    <p><strong>Match Date: </strong>{{orderProductItemDetail.productDetail?.startDateTime | date:
+                        'MMM-dd-yyyy
+                        hh:mm:a'}}
+                    </p>
+                    <div *ngIf="item.productDetail?.productTypeId==0">
+                        <p ><strong>Categroy: </strong> {{item.productDetail?.categoryDetail?.name}}</p>
+                        <p><strong>Price: </strong>{{item.price }}</p>
+                        <p><strong>Quantity: </strong>{{item.quantity }}</p>
+                        <p><strong>Total: </strong>{{item.total }}</p>
                     </div>
                 </div>
             </div>

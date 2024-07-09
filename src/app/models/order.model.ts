@@ -55,7 +55,7 @@ export class OrderProductItemModel{
   total: number | undefined;
   isOutofStock: number | undefined;
   productDetail : ProductModel| undefined;
-  orderProductItemDetail : OrderProductItemDetailModel| undefined;
+  orderProductItemDetails : OrderProductItemDetailModel[]| undefined;
 }
 
 export class OrderProductItemDetailModel{
@@ -64,6 +64,7 @@ export class OrderProductItemDetailModel{
   orderProductItemId: number | undefined;
   productComboId: number | undefined;
   productId: number | undefined;
+  productDetail : ProductModel| undefined;
   qrCode: string | undefined;
   qrCodeFileId: number | undefined;
   qrCodeFile: FileUploadRequestModel | undefined;
