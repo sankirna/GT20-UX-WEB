@@ -1,8 +1,6 @@
-<mat-radio-group  [(ngModel)]="selectedProductTicketCategorId" (change)="changeEvent()">
-  <div *ngFor="let productTicketCategory of productTicketCategories">
-      <mat-radio-button [value]="productTicketCategory.id">
-        <span class="d-inline-block text-black ml-2">{{productTicketCategory?.ticketCategoryName}}</span>
-        <span class="inline-block text-black ml-4">${{productTicketCategory?.price}}</span>
-      </mat-radio-button>
-  </div>
-</mat-radio-group>
+<div class="row">
+  <mat-button-toggle-group  *ngIf="productTicketCategories" multiple="false" [(ngModel)]="selectedProductTicketCategorId"  >
+    <mat-button-toggle   *ngFor="let productTicketCategory of productTicketCategories;" [value]="productTicketCategory.id" (change)="changeEvent()">
+      {{productTicketCategory?.ticketCategoryName}} ${{productTicketCategory?.price}}</mat-button-toggle>
+</mat-button-toggle-group>
+</div>

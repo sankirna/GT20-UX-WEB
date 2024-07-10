@@ -1,0 +1,14 @@
+
+.mat-button-toggle-group{
+    padding: 0px;
+    border: 0;
+}
+.mat-button-toggle{
+    background-color: #e6e7eb;
+    color: #000000;
+}
+
+.mat-button-toggle-checked {
+    background-color: #ec2c4c;
+    color: #fcfffc !important;
+}

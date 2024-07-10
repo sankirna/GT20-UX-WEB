@@ -19,7 +19,11 @@ export class ProductTicketCategoryListComponent {
     private  shoppingCartService: ShoppingCartService
   ) {
   }
+  buttonColor: string = 'warn';
 
+  setButtonColor(color: string) {
+    this.buttonColor = color;
+  }
   ngOnInit() {    
   }
 

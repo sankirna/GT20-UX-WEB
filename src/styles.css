@@ -2,13 +2,7 @@
 
 
 
-@media (min-width: 768px) {
-    .site-section {
-        padding: 2.5em 0; 
-        min-height: 495px;
-    }
-    
-}
+
 .site-navbar, .site-footer{
     background-color: #aa000d;
     color: #ffffff;

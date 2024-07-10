@@ -1,4 +1,4 @@
-<header class="site-navbar" role="banner">
+<header class="site-navbar fixed-top" role="banner">
       
     <nav class="site-navigation text-right text-md-center" role="navigation">
       <div class="container">
@@ -14,7 +14,7 @@
               <li><a  [routerLink]="['/products/list']" routerLinkActive="active" style="color: white;" >Shop</a></li>
             </ul>
           </div>
-          <div class="col-2 col-md-2 order-3 order-md-3">
+          <div class="col-2 col-md-2 order-3 order-md-3 text-right text-right-auth-icon">
               <div class="site-top-icons">
                 <ul>
                   <li *ngIf="isLogin">

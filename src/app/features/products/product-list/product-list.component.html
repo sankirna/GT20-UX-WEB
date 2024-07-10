@@ -1,20 +1,11 @@
+<div class="site-section">
+    <div class="container">
 <div class="row mb-5">
     <div class="col-md-9 order-2">
         <div class="row mb-5" >
             <ng-container  *ngFor="let product of list">
-                <div class="col-sm-6 col-lg-4 mb-4 product-box" data-aos="fade-up" >
-                    <div class="block-4 text-center border product-card"  >
-                        <figure class="block-4-image">
-                            <a (click)="detail(product)">
-                                <img src="{{product.file?.url}}" alt="Image placeholder" class="img-fluid"></a>
-                        </figure>
-                        <div class="block-4-text p-4 text-left">
-                            <h3><a style="cursor: pointer;" (click)="detail(product)">{{product.name}}</a></h3>
-                            <p class="mb-0" *ngIf="product.startDateTime"><i class="icon icon-calendar"></i> {{product.startDateTime | customDate:'short' }}</p>
-                            <p class="mb-0" *ngIf="product.team1Detail?.shortName && product.team2Detail?.shortName">{{product.team1Detail?.shortName}} - {{product.team2Detail?.shortName}}</p>
-                            <p class="mb-0" *ngIf="product.productTicketCategories[0].price > 0">Min - {{product.productTicketCategories[0].price | dollar}} </p>
-                        </div>
-                    </div>
+                <div class="col-sm-6 col-lg-6 mb-4 product-box" data-aos="fade-up" >
+                    <app-product-information [product]="product"></app-product-information>
                 </div>
             </ng-container>
             
@@ -61,3 +52,5 @@
             </div>
         </div>
     </div>
+     </div>
+</div>

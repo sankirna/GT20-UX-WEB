@@ -1,0 +1,13 @@
+.product-card {
+    max-height: 450px;
+}
+
+
+.img-fluid{
+    height: 150px;
+    width: 100%;
+}
+
+.btn-detail{
+    width: 100%;
+}
