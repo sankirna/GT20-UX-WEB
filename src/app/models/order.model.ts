@@ -43,7 +43,9 @@ export class OrderDetailModel{
   createdDateTime: string | undefined;
   updatedDateTime: string | undefined;
   userDetail: UserModel| undefined;
+  paymnetType: string| undefined; 
   items:OrderProductItemModel[]|undefined;
+
 }
 
 export class OrderProductItemModel{

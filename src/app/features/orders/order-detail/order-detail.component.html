@@ -4,18 +4,18 @@
     </div>
     <div class="row order-history">
         <div class="col-md-6">
-            <p><strong>Order #: </strong>{{order.id}}</p>
+            <p class="p-lg-4"><strong>Order #: </strong>{{order.id}}</p>
         </div>
         <div class="col-md-6 align-right">
-            <p><strong>Created On: </strong>{{order.createdDateTime | date: 'MMM-dd-yyyy
+            <p class="p-lg-4"><strong>Created On: </strong>{{order.createdDateTime | date: 'MMM-dd-yyyy
                 hh:mm:a'}}</p>
         </div>
     </div>
     <div class="row  order-history">
         <div class=" col-md-4">
             <div class="col-md-12">
-                <div class="p-2 border">
-                    <h4 class="h3 mb-3 text-black">Personal Information</h4>
+                <div class="p-2 p-lg-3 border">
+                    <h4 class="h4 mb-3 text-black">Personal Information</h4>
                     <p><strong>Name: </strong>{{order.name}}</p>
                     <p><strong>Email: </strong>{{order.email}}</p>
                     <p><strong>Phone Number: </strong>{{order.phoneNumber}}</p>
@@ -24,19 +24,19 @@
         </div>
         <div class=" col-md-4">
             <div class="col-md-12">
-                <div class="p-2 border">
-                    <h4 class="h3 mb-3 text-black">Payment Information</h4>
-                    <p><strong>Payment: </strong>{{order.paymentId}}</p>
+                <div class="p-2 p-lg-3 border">
+                    <h4 class="h4 mb-3 text-black">Payment Information</h4>
+                    <p><strong>Payment: </strong>{{order.paymnetType}}</p> 
                     <p><strong>Order Status: </strong>{{order.orderStatus}}</p>
-                    <p><strong>POS Transaction Id: </strong>{{order.posTransactionId}}</p>
+                    <p *ngIf="order.posTransactionId"><strong>POS Transaction Id: </strong>{{order.posTransactionId}}</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="row mb-5" *ngIf="order.items">
                 <div class="col-md-12">
-                    <div class="p-2 border">
-                        <h4 class="h3 mb-3 text-black">Order Summary</h4>
+                    <div class="p-2 p-lg-3 border">
+                        <h4 class="h4 mb-3 text-black">Order Summary</h4>
                         <table class="table site-block-order-table mb-5">
                             <thead>
                                 <th>Product</th>
@@ -70,9 +70,10 @@
 </div>
 <div class="container">
     <div class="row  ">
-        <h4 class="h3 mb-3 text-black">Order Summary</h4>
+        <h4 class="h4 mb-3 text-black">Product Detail</h4>
         <div class="row    order-history border " *ngFor="let item of order.items">
-            <div class="row justify-content-center" *ngIf="item.productDetail?.productTypeId==1">
+            <div class="row justify-content-center p-lg-3" >
+                <!-- *ngIf="item.productDetail?.productTypeId==1" -->
                 <div class="col-md-4">
                     <img src="{{item.productDetail?.file?.url}}" class="img-fluid align-middle" />
                 </div>
@@ -84,7 +85,7 @@
                     <p><strong>Total: </strong>{{item.total }}</p>
                 </div>
             </div>
-            <div class="row    order-history border  rounded"
+            <div class="row    order-history border  rounded p-lg-3"
                 *ngFor="let orderProductItemDetail of item.orderProductItemDetails">
                 <div class="col-md-2">
                     <img src="{{orderProductItemDetail.productDetail?.file?.url}}" class="img-fluid align-middle" />
