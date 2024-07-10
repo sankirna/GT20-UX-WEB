@@ -9,7 +9,7 @@ export class ProductTicketCategoryMapModel {
   available: number | undefined= 0;
   block: number | undefined= 0;
   sold: number | undefined= 0;
-  price:number | undefined= 0;
+  price:number = 0;
   file: FileUploadRequestModel | undefined;
 }
 

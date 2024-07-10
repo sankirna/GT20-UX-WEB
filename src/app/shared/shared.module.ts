@@ -8,6 +8,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ContentPlaceholderAnimationComponent } from './content-placeholder-animation/content-placeholder-animation.component';
 import { LocalDatePipe } from './pipes/local-date.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
+import { DollarPipe } from './pipes/currency.pipe';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { LayoutComponent } from './layout/layout.component';
 import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.component';
 import { ConfirmComponentDialogComponent } from './confirm-component-dialog/confirm-component-dialog.component';
@@ -23,7 +25,7 @@ import { ImageComponent } from './image/image.component';
 import { ShoppingCartCouponComponent } from './shopping-cart-coupon/shopping-cart-coupon.component';
 import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
-
+import { DatePipe } from '@angular/common';
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     parse: {
@@ -56,6 +58,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         LimitToPipe,
         LocalDatePipe,
         YesNoPipe,
+        DollarPipe,
+        CustomDatePipe,
         LayoutComponent,
         CustomPaginatorComponent,
         ConfirmComponentDialogComponent,
@@ -80,6 +84,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         ContentPlaceholderAnimationComponent,
         LocalDatePipe,
         YesNoPipe,
+        DollarPipe,
+        CustomDatePipe,
         CustomPaginatorComponent,
         ConfirmComponentDialogComponent,
         YearPickerComponent,
@@ -93,8 +99,9 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,
     ],
-    // providers: [
+  providers: [
+    DatePipe
     //     { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
-    //   ]
+  ]
 })
 export class SharedModule { }
