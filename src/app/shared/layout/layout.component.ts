@@ -3,7 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { timer } from 'rxjs';
 import { Subscription } from 'rxjs';
 
- import { AuthenticationService } from 'src/app/core/services/auth.service';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { SpinnerService } from '../../core/services/spinner.service';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { CommonService } from 'src/app/core/services/common.service';
@@ -19,7 +19,6 @@ export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     mobileQuery: MediaQueryList;
     showSpinner: boolean = false;
     userName: string = "";
-    isAdmin: boolean = false;
 
     private autoLogoutSubscription: Subscription = new Subscription;
 
@@ -38,9 +37,9 @@ export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit(): void {
         const user = this.authService.getCurrentUser();
-
-        this.isAdmin = user.isAdmin;
-        this.userName = user.fullName;
+        if (user && user.user) {
+            this.userName = user.user.userName;
+        }
 
         // Auto log-out subscription
         const timer$ = timer(2000, 5000);
@@ -58,5 +57,5 @@ export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     ngAfterViewInit(): void {
         this.changeDetectorRef.detectChanges();
     }
-    
+
 }

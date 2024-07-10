@@ -6,12 +6,10 @@ import { QrCodeGeneratorComponent } from './shared/qr-code-generator/qr-code-gen
 import { QrCodeScannerComponent } from './shared/qr-code-scanner/qr-code-scanner.component';
 
 const appRoutes: Routes = [
-  { path: 'scanner', component: QrCodeScannerComponent },
-  { path: 'generator', component: QrCodeGeneratorComponent },
-  {
-    path: 'auth',
-    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule),
-  },
+  // {
+  //   path: 'auth',
+  //   loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule),
+  // },
   {
     path: 'home',
     loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
@@ -44,7 +42,6 @@ const appRoutes: Routes = [
   {
     path: 'account',
     loadChildren: () => import('./features/account/account.module').then(m => m.AccountModule),
-    canActivate: [AuthGuard]
   },
   
   {

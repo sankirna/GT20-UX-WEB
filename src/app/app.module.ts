@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
+import { AuthModule } from './features/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
+    AuthModule,
     CustomMaterialModule.forRoot(),
     AppRoutingModule,
     // LoggerModule.forRoot({

@@ -18,7 +18,7 @@ export class DashboardHomeComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
-    this.titleService.setTitle('gt20 - Dashboard');
+    this.titleService.setTitle('GT 20 - Dashboard');
 
     setTimeout(() => {
       //this.notificationService.openSnackBar('Welcome!');

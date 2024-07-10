@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     loading!: boolean;
 
     constructor(private router: Router,
-        private titleService: Title,
         private notificationService: NotificationService,
         private authenticationService: AuthenticationService,
         private shoppingCartService: ShoppingCartService,
@@ -26,7 +25,6 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.titleService.setTitle('GT 20 - Login');
         this.authenticationService.logout();
         this.createForm();
     }
@@ -38,7 +36,7 @@ export class LoginComponent implements OnInit {
             email: new UntypedFormControl(savedUserEmail, [Validators.required]),
             password: new UntypedFormControl('', Validators.required),
             rememberMe: new UntypedFormControl(savedUserEmail !== null),
-            userTypeId:new UntypedFormControl(1)
+            userTypeId: new UntypedFormControl(1)
         });
     }
 
@@ -61,9 +59,9 @@ export class LoginComponent implements OnInit {
                             this.shoppingCartService.setShoppingCartModel(response);
                         },
                         (error) => {
-                          console.error(error);
+                            console.error(error);
                         }
-                      );;
+                    );;
                     this.onConfirm();
                     //this.router.navigate(['/']);
                 },
@@ -75,20 +73,24 @@ export class LoginComponent implements OnInit {
     }
 
     resetPassword() {
-        this.dialogRef.close(false);
+        this.onDismiss();
         this.authenticationService.resetPassword();
     }
 
     onConfirm(): void {
-        this.dialogRef.close(true);
-    }
-    
-    onDismiss(): void {
-        this.dialogRef.close(false);
+        if (this.dialogRef) {
+            this.dialogRef.close(true);
+        }
     }
 
-    register(){
-        this.dialogRef.close(false);
+    onDismiss(): void {
+        if (this.dialogRef) {
+            this.dialogRef.close(false);
+        }
+    }
+
+    register() {
+        this.onDismiss();
         this.authenticationService.userRegister();
     }
 }
@@ -104,16 +106,16 @@ export class LoginComponentDialogModel {
 
     constructor() {
     }
-  }
+}
 
-  export class RegisterComponentDialogModel {
-
-    constructor() {
-    }
-  }
-
-  export class ResetPassowrdComponentDialogModel {
+export class RegisterComponentDialogModel {
 
     constructor() {
     }
-  }
+}
+
+export class ResetPassowrdComponentDialogModel {
+
+    constructor() {
+    }
+}
