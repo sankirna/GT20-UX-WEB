@@ -23,12 +23,12 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
         AdminGuard,
         MediaMatcher,
         FileService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeApp,
-            deps: [CommonService],
-            multi: true
-        },
+        // {
+        //     provide: APP_INITIALIZER,
+        //     useFactory: initializeApp,
+        //     deps: [CommonService],
+        //     multi: true
+        // },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: RequestInterceptor,

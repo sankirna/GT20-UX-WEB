@@ -75,6 +75,7 @@ export class ShoppingCartComponent implements OnInit {
       if (updatedCall) {
         updatedCall.subscribe(
           (response) => {
+            debugger
             this.getShoppingCart();
             this.notificationService.openSnackBar('Shopping cart item(s) updated successfully !');
           },

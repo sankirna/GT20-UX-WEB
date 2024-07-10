@@ -117,6 +117,7 @@ export class ProductListComponent implements OnInit {
 
     return value;
   }
+  
   pitch(event: any) {
     this.searchModel.maximumPrice=event.value;
     this.search();

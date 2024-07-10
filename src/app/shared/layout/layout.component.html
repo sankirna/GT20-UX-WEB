@@ -1,6 +1,6 @@
 <app-header>
 </app-header>
-<div class="bg-light py-3" *ngIf="spinnerService.visibility | async">
+<div class="bg-light py-3" *ngIf="spinnerService && spinnerService.visibility | async">
     <div class="container">
         <div class="row">
             <mat-progress-bar color="accent" mode="indeterminate">
