@@ -28,9 +28,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
 
         // Optionally log the error to an external server
-        console.error(errorMessage);
+       // console.error(errorMessage);
 
-        return throwError(() => new Error(errorMessage));
+        return throwError(() => error);
       })
     );
   }

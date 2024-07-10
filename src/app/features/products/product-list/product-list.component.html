@@ -2,7 +2,7 @@
     <div class="col-md-9 order-2">
         <div class="row mb-5" >
             <ng-container  *ngFor="let product of list">
-                <div class="col-sm-6 col-lg-4 mb-4 product-box" data-aos="fade-up" *ngIf="product.productTicketCategories">
+                <div class="col-sm-6 col-lg-4 mb-4 product-box" data-aos="fade-up" >
                     <div class="block-4 text-center border"  >
                         <figure class="block-4-image">
                             <a (click)="detail(product)">
@@ -13,7 +13,7 @@
                             <p class="mb-0"><i class="icon icon-calendar"></i> {{product.startDateTime | date:'MMM-dd
                                 hh:mm:a'}}</p>
                             <p class="mb-0">{{product.team1Detail?.shortName}} - {{product.team2Detail?.shortName}}</p>
-                            <p class="mb-0">Min - ${{product.productTicketCategories[0].price}} </p>
+                            <p class="mb-0" *ngIf="product.productTicketCategories">Min - ${{product.productTicketCategories[0].price}} </p>
                         </div>
                     </div>
                 </div>
