@@ -15,7 +15,7 @@
         <div class="row  order-history">
             <div class=" col-md-4">
                 <div class="col-md-12">
-                    <div class="p-2 p-lg-3 border">
+                    <div class="p-2 p-lg-3 border shadow-sm ">
                         <h4 class="h4 mb-3 text-black">Personal Information</h4>
                         <p><strong>Name: </strong>{{order.name}}</p>
                         <p><strong>Email: </strong>{{order.email}}</p>
@@ -25,7 +25,7 @@
             </div>
             <div class=" col-md-4">
                 <div class="col-md-12">
-                    <div class="p-2 p-lg-3 border">
+                    <div class="p-2 p-lg-3 border shadow-sm ">
                         <h4 class="h4 mb-3 text-black">Payment Information</h4>
                         <p><strong>Payment: </strong>{{order.paymnetType}}</p>
                         <p><strong>Order Status: </strong>{{order.orderStatus}}</p>
@@ -37,7 +37,7 @@
             <div class="col-md-4">
                 <div class="row mb-5" *ngIf="order.items">
                     <div class="col-md-12">
-                        <div class="p-2 p-lg-3 border">
+                        <div class="p-2 p-lg-3 border shadow-sm ">
                             <h4 class="h4 mb-3 text-black">Order Summary</h4>
                             <table class="table site-block-order-table mb-5">
                                 <thead>
@@ -73,7 +73,7 @@
     <div class="container">
         <div class="row  ">
             <h4 class="h4 mb-3 text-black">Product Detail</h4>
-            <div class="row    order-history border " *ngFor="let item of order.items">
+            <div class="row    order-history border shadow-sm  " *ngFor="let item of order.items">
                 <div class="row justify-content-center p-lg-3">
                     <!-- *ngIf="item.productDetail?.productTypeId==1" -->
                     <div class="col-md-4">
@@ -87,7 +87,7 @@
                         <p><strong>Total: </strong>{{item.total }}</p>
                     </div>
                 </div>
-                <div class="row    order-history border  rounded p-lg-3"
+                <div class="row    order-history border shadow-sm   rounded p-lg-3"
                     *ngFor="let orderProductItemDetail of item.orderProductItemDetails">
                     <div class="col-md-2">
                         <img src="{{orderProductItemDetail.productDetail?.file?.url}}" class="img-fluid align-middle" />
@@ -104,17 +104,12 @@
                     </div>
                     <div class="col-md-2">
                         <img src="{{orderProductItemDetail?.qrCodeFile?.url}}" class="img-fluid" />
+                        <p class="text-center">{{orderProductItemDetail?.qrCode}}</p>
+                    
                     </div>
                     <div class="col-md-4">
-                        <p class="text-center">{{orderProductItemDetail.productDetail?.name}}</p>
-                        <p><strong>QR Code: </strong>{{orderProductItemDetail?.qrCode}}</p>
-                        <p><strong>Venue Name:
-                            </strong>{{orderProductItemDetail.productDetail?.venueDetail?.stadiumName}}
-                        </p>
-                        <p><strong>Match Date: </strong>{{orderProductItemDetail.productDetail?.startDateTime | date:
-                            'MMM-dd-yyyy
-                            hh:mm:a'}}
-                        </p>
+                        <app-product-information-short *ngIf="orderProductItemDetail.productDetail" [product]="orderProductItemDetail.productDetail"> </app-product-information-short>
+                        
                         <div *ngIf="item.productDetail?.productTypeId==0">
                             <p><strong>Categroy: </strong> {{item.productDetail?.categoryDetail?.name}}</p>
                             <p><strong>Price: </strong>{{item.price }}</p>
