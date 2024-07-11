@@ -33,12 +33,12 @@
         <div class="row ">
           <div class=" input-group " style=" width: 33.33%; max-width: 150px;">
             <div class="input-group-prepend">
-              <button class="btn btn-outline-danger js-btn-minus" type="button" (click)="decreaseQuantity()">−</button>
+              <button class="btn btn-secondary active js-btn-minus" type="button" (click)="decreaseQuantity()">−</button>
             </div>
-            <input type="text" class="form-control text-center" [(ngModel)]="quantity" placeholder=""
+            <input type="text" disabled class="form-control text-center" [(ngModel)]="quantity" placeholder=""
               aria-label="Example text with button addon" aria-describedby="button-addon1">
             <div class="input-group-append">
-              <button class="btn btn-outline-danger js-btn-plus" type="button" (click)="increaseQuantity()">+</button>
+              <button class="btn btn-secondary active js-btn-plus" type="button" (click)="increaseQuantity()">+</button>
             </div>
           </div>
         </div>

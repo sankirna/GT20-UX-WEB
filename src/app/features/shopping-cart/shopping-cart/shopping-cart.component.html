@@ -37,14 +37,14 @@
                 <td>
                   <div class="input-group mb-3" style="max-width: 120px;">
                     <div class="input-group-prepend">
-                      <button class="btn btn-outline-danger js-btn-minus" type="button"
+                      <button class="btn btn-secondary active js-btn-minus" type="button"
                         (click)="decreaseQuantity(shoppingCartItem)">−</button>
                     </div>
-                    <input  class="form-control text-center" [(ngModel)]="shoppingCartItem.quantity"
+                    <input  class="form-control text-center" disabled [(ngModel)]="shoppingCartItem.quantity"
                       [ngModelOptions]="{standalone: true}" placeholder="" aria-label="Example text with button addon"
                       aria-describedby="button-addon1">
                     <div class="input-group-append">
-                      <button class="btn btn-outline-danger js-btn-plus" type="button"
+                      <button class="btn btn-secondary active js-btn-plus" type="button"
                         (click)="increaseQuantity(shoppingCartItem)">+</button>
                     </div>
                     <!-- <div class="input-group-prepend">
@@ -76,7 +76,7 @@
         <button class="btn btn-danger btn-sm btn-block">Update Cart</button>
       </div> -->
           <div class="col-md-6 ">
-            <a [routerLink]="['/products/list']" class="btn btn-outline-danger btn-sm btn-block">Continue Shopping</a>
+            <a [routerLink]="['/products/list']" class="btn btn-danger btn-sm btn-block">Continue Shopping</a>
           </div>
         </div>
         <div class="p-3 p-lg-5 border shadow-sm ">
