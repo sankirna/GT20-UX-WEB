@@ -26,6 +26,7 @@ import { ShoppingCartCouponComponent } from './shopping-cart-coupon/shopping-car
 import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { DatePipe } from '@angular/common';
+import { ProductInformationShortComponent } from './product-information-short/product-information-short.component';
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     parse: {
@@ -72,7 +73,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         FooterComponent,
         ImageComponent,
         ShoppingCartCouponComponent,
-        ToastContainerComponent
+        ToastContainerComponent,
+        ProductInformationShortComponent
     ],
     exports: [
         FormsModule,
@@ -94,7 +96,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         QrCodeScannerComponent,
         ImageComponent,
         ShoppingCartCouponComponent,
-        ToastContainerComponent
+        ToastContainerComponent,
+        ProductInformationShortComponent
         // NgxMatDatetimePickerModule,
         // NgxMatTimepickerModule,
         // NgxMatNativeDateModule,

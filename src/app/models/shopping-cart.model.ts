@@ -24,7 +24,7 @@ export class ShoppingCartItemModel{
   total: number | undefined;
   isOutofStock: number | undefined;
   productDetail : ProductModel| undefined;
-  productTicketCategoryMapModel : ProductTicketCategoryMapModel|undefined;
+  productTicketCategoryMapDetail : ProductTicketCategoryMapModel|undefined;
 }
 
 

@@ -4,11 +4,12 @@
             <img src="{{product.file?.url}}" alt="Image placeholder" class="img-fluid"></a>
     </figure>
     <div class="block-4-text p-3 text-left">
-        <h3 class="mb-4">{{product.name}}</h3>
-        <p class="mb-0" ><span *ngIf="product.startDateTime"><i class="icon icon-calendar"></i>  {{product.startDateTime | customDate:'short' }}</span></p>
+        <!-- <h3 class="mb-4">{{product.name}}</h3>
+        <p class="mb-0" ><span *ngIf="product.startDateTime"><i class="icon icon-calendar"></i>  {{product.startDateTime | customDate:'short' }}</span></p> -->
+        <app-product-information-short [product]="product"></app-product-information-short>
         <!-- <p class="mb-0" *ngIf="product.team1Detail?.shortName && product.team2Detail?.shortName">{{product.team1Detail?.shortName}} - {{product.team2Detail?.shortName}}</p> -->
         <!-- <p class="mb-4" *ngIf="product.productTicketCategories[0].price > 0">Min - {{product.productTicketCategories[0].price | dollar}} </p> -->
-        <p class="mb-4"> <span>{{product.venueDetail?.stadiumName}} </span>{{product.venueDetail?.location}}</p>
+        <!-- <p class="mb-4"> <span>{{product.venueDetail?.stadiumName}} </span>{{product.venueDetail?.location}}</p> -->
         <p > <button (click)="detail(product)" class="btn-detail btn  btn-danger">Find Ticket </button></p> 
     </div>
 </div>

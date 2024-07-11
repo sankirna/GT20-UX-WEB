@@ -4,7 +4,7 @@
             <h2 class="text-black text-center">Order History</h2>
         </div>
         <div class="row border  rounded order-history" *ngFor="let order of list">
-            <p class="p-lg-4"><strong>Order #: </strong>{{order.id}}<button (click)="detail(order)" class="btn btn-sm btn-dark float-right">Order Detail</button></p>
+            <p class="p-lg-4"><strong>Order #: </strong>{{order.id}}<button (click)="detail(order)" class="btn btn-sm btn-secondary active float-right">Order Detail</button></p>
             <div class=" col-md-4">
                 <div class="col-md-12">
                    

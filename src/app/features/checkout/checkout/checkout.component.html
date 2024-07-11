@@ -42,7 +42,7 @@
                         <input type="text" class="form-control" id="c_code" placeholder="Coupon Code"
                             aria-label="Coupon Code" aria-describedby="button-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-dark" type="button" id="button-addon2">Apply</button>
+                            <button class="btn btn-secondary active" type="button" id="button-addon2">Apply</button>
                         </div>
                     </div> -->
                                 <app-shopping-cart-coupon
@@ -64,7 +64,7 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let shoppingCartItem of shoppingCart?.items">
-                                            <td>{{shoppingCartItem.productDetail?.name}} <strong class="mx-2">x</strong>
+                                            <td>{{shoppingCartItem.productDetail?.name}} ({{shoppingCartItem.productTicketCategoryMapDetail?.ticketCategoryName}}) <strong class="mx-2">x</strong>
                                                 {{shoppingCartItem.quantity}}</td>
                                             <td>${{shoppingCartItem.total}}</td>
                                         </tr>
@@ -89,19 +89,11 @@
                                     </tbody>
                                 </table>
 
-                                <div class="border p-3 mb-3">
-                                    <!-- <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#cash" role="button"
-                                aria-expanded="false" aria-controls="collapsebank">Cash</a></h3>
-
-                        <div class="collapse" id="cash">
-                            <div class="py-2">
-                                <p class="mb-0">Cash</p>
-                            </div>
-                        </div> -->
+                                <div class=" p-3 mb-3">
                                     <div ngbAccordion [closeOthers]="true">
                                         <div ngbAccordionItem [collapsed]="false">
                                             <h2 ngbAccordionHeader>
-                                                <button ngbAccordionButton (click)="setPaymentMethod(2)">Cash</button>
+                                                <button class="btn btn-secondary active" ngbAccordionButton (click)="setPaymentMethod(2)">Cash</button>
                                             </h2>
                                             <div ngbAccordionCollapse>
                                                 <div ngbAccordionBody>
@@ -130,8 +122,8 @@
                                         </div>
 
                                         <div ngbAccordionItem [destroyOnHide]="false">
-                                            <h2 ngbAccordionHeader>
-                                                <button ngbAccordionButton (click)="setPaymentMethod(2)">POS</button>
+                                            <h2 ngbAccordionHeader >
+                                                <button  class="btn btn-secondary active"  ngbAccordionButton (click)="setPaymentMethod(2)">POS</button>
                                             </h2>
                                             <div ngbAccordionCollapse>
                                                 <div ngbAccordionBody>
@@ -155,10 +147,9 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-danger btn-lg py-3 btn-block" (click)="onSubmit()">Place
+                                    <button class="btn btn-secondary active btn-lg py-3 btn-block" (click)="onSubmit()">Place
                                         Order</button>
                                 </div>
 

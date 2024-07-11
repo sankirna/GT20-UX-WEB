@@ -15,11 +15,12 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="row" *ngIf="!model?.productComboDetails">
-          <h2 class="mb-4 text-black">{{model?.name}}</h2>
+        <div class="row" *ngIf="model && !model?.productComboDetails">
+          <!-- <h2 class="mb-4 text-black">{{model?.name}}</h2>
           <p class="mb-2"> <span>{{model?.venueDetail?.stadiumName}} </span>{{model?.venueDetail?.location}}</p>
           <p class="mb-2"><i class="icon icon-calendar mr-2"></i>{{model?.startDateTime | date:'MMM-dd-yyyy hh:mm:a'}}
-          </p>
+          </p> -->
+          <app-product-information-short [product]="model"> </app-product-information-short>
           <p>{{model?.description}}</p>
           <p><strong class="text-danger h4">${{ticketPrice}}</strong></p>
         </div>
@@ -48,7 +49,7 @@
         </div>
         <div class="row ">
           <div class="col-4 input-group">
-            <button (click)="addToCart()" class="buy-now btn btn-sm btn-dark">Add To Cart</button>
+            <button (click)="addToCart()" class="buy-now btn btn-sm btn-secondary active">Add To Cart</button>
           </div>
         </div>
       </div>

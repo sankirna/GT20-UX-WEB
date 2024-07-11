@@ -23,6 +23,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductInformationRegularComponent } from './shared/product-information-regular/product-information-regular.component';
 import { ProductInformationComboComponent } from './shared/product-information-combo/product-information-combo.component';
+import { ProductInformationShortComponent } from '../../shared/product-information-short/product-information-short.component';
 
 
 @NgModule({

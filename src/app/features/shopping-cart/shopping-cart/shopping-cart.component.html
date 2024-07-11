@@ -17,7 +17,7 @@
             <thead>
               <tr>
                 <th class="product-thumbnail">Image</th>
-                <th class="product-name">Product</th>
+                <th class="product-name">Match</th>
                 <th class="product-price">Price</th>
                 <th class="product-quantity">Quantity</th>
                 <th class="product-total">Total</th>
@@ -30,7 +30,8 @@
                   <app-image [file]="shoppingCartItem?.productDetail?.file"></app-image>
                 </td>
                 <td class="product-name">
-                  <h2 class="h5 text-black"> {{ shoppingCartItem.productDetail?.name}}</h2>
+                  <app-product-information-short *ngIf="shoppingCartItem.productDetail" [product]="shoppingCartItem.productDetail"> </app-product-information-short>
+                  <p class="text-left"><strong>Ticket Category: </strong>{{shoppingCartItem.productTicketCategoryMapDetail?.ticketCategoryName}}</p>
                 </td>
                 <td>{{ shoppingCartItem.price}}</td>
                 <td>
@@ -39,7 +40,7 @@
                       <button class="btn btn-outline-danger js-btn-minus" type="button"
                         (click)="decreaseQuantity(shoppingCartItem)">−</button>
                     </div>
-                    <input type="number" class="form-control text-center" [(ngModel)]="shoppingCartItem.quantity"
+                    <input  class="form-control text-center" [(ngModel)]="shoppingCartItem.quantity"
                       [ngModelOptions]="{standalone: true}" placeholder="" aria-label="Example text with button addon"
                       aria-describedby="button-addon1">
                     <div class="input-group-append">
@@ -115,7 +116,7 @@
 
             <div class="row">
               <div class="col-md-12">
-                <button class="btn btn-danger btn-lg py-3 btn-block" (click)="checkoutClick()">Proceed To
+                <button class="btn btn-secondary active btn-lg py-3 btn-block" (click)="checkoutClick()">Proceed To
                   Checkout</button>
               </div>
             </div>

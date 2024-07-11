@@ -1,6 +1,6 @@
 <div class="row">
   <mat-button-toggle-group  *ngIf="productTicketCategories" multiple="false" [(ngModel)]="selectedProductTicketCategorId"  >
     <mat-button-toggle   *ngFor="let productTicketCategory of productTicketCategories;" [value]="productTicketCategory.id" (change)="changeEvent()">
-      {{productTicketCategory?.ticketCategoryName}} ${{productTicketCategory?.price}}</mat-button-toggle>
+      {{productTicketCategory?.ticketCategoryName}}</mat-button-toggle>
 </mat-button-toggle-group>
 </div>

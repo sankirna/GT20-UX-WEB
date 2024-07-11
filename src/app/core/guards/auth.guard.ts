@@ -22,13 +22,13 @@ export class AuthGuard  {
             } else {
                 localStorage.removeItem('currentUser');
                 localStorage.removeItem('shoppingCart');
-                this.notificationService.openSnackBar('Your session has expired');
-                this.router.navigate(['auth/login']);
+                // this.notificationService.openSnackBar('Your session has expired');
+                // this.router.navigate(['auth/login']);
                 return false;
             }
         }
 
-        this.router.navigate(['auth/login']);
+        //this.router.navigate(['auth/login']);
         return false;
     }
 }
