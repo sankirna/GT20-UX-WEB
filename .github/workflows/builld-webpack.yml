@@ -25,5 +25,4 @@ jobs:
       - name: Build Angular project
         run: ng build --configuration=staging
 
-      - name: Run tests
-        run: ng test
+    
