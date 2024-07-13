@@ -1,6 +1,6 @@
 <div class="site-section">
   <div class="container">
-   
+
     <div class="row" *ngIf="!shoppingCart || shoppingCart.items.length<=0 ">
       <div class="col-md-12 text-center">
         <span class="icon icon-shopping_cart display-3 text-success"></span>
@@ -30,8 +30,10 @@
                   <app-image [file]="shoppingCartItem?.productDetail?.file"></app-image>
                 </td>
                 <td class="product-name">
-                  <app-product-information-short *ngIf="shoppingCartItem.productDetail" [product]="shoppingCartItem.productDetail"> </app-product-information-short>
-                  <p class="text-left"><strong>Ticket Category: </strong>{{shoppingCartItem.productTicketCategoryMapDetail?.ticketCategoryName}}</p>
+                  <app-product-information-short *ngIf="shoppingCartItem.productDetail"
+                    [product]="shoppingCartItem.productDetail"> </app-product-information-short>
+                  <p class="text-left"><strong>Ticket Category:
+                    </strong>{{shoppingCartItem.productTicketCategoryMapDetail?.ticketCategoryName}}</p>
                 </td>
                 <td>{{ shoppingCartItem.price}}</td>
                 <td>
@@ -40,13 +42,15 @@
                       <button class="btn btn-secondary active js-btn-minus" type="button"
                         (click)="decreaseQuantity(shoppingCartItem)">−</button>
                     </div>
-                    <input  class="form-control text-center" disabled [(ngModel)]="shoppingCartItem.quantity"
+                    <input class="form-control text-center" disabled [(ngModel)]="shoppingCartItem.quantity"
                       [ngModelOptions]="{standalone: true}" placeholder="" aria-label="Example text with button addon"
                       aria-describedby="button-addon1">
                     <div class="input-group-append">
                       <button class="btn btn-secondary active js-btn-plus" type="button"
                         (click)="increaseQuantity(shoppingCartItem)">+</button>
                     </div>
+
+                    
                     <!-- <div class="input-group-prepend">
                     <button class="btn btn-outline-danger js-btn-minus" type="button">&minus;</button>
                   </div>
@@ -55,7 +59,13 @@
                     <button class="btn btn-outline-danger js-btn-plus" type="button">&plus;</button>
                   </div> -->
                   </div>
-
+                  <ng-container *ngIf="shoppingCartItem.productTicketCategoryMapDetail?.isOutOfStock">
+                    <div class="row ">
+                      <div class="col-4 input-group mb-3">
+                        <button class="btn btn-outline-danger btn-sm " disabled>SOLD OUT</button>
+                      </div>
+                    </div>
+                  </ng-container>
                 </td>
                 <td> {{shoppingCartItem.total}}</td>
                 <td>
@@ -80,9 +90,9 @@
           </div>
         </div>
         <div class="p-3 p-lg-5 border shadow-sm ">
-        <app-shopping-cart-coupon (successCallback)="updateCouponCallback($event)"></app-shopping-cart-coupon>
+          <app-shopping-cart-coupon (successCallback)="updateCouponCallback($event)"></app-shopping-cart-coupon>
+        </div>
       </div>
-    </div>
       <div class="col-md-6 pl-5">
         <div class="row justify-content-end">
           <div class="col-md-7">

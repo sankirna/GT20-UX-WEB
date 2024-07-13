@@ -24,34 +24,45 @@
           <p>{{model?.description}}</p>
           <p><strong class="text-danger h4">${{ticketPrice}}</strong></p>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!model?.isOutOfStock">
           <app-product-ticket-category-list [productTicketCategories]="model?.productTicketCategories"
             [selectedProductTicketCategorId]="selectedProductTicketCategoryId"
             (changeProductTicketCategory)="selectedProductTicketCategorytegory($event)">
           </app-product-ticket-category-list>
         </div>
-        <div class="row ">
-          <div class=" input-group " style=" width: 33.33%; max-width: 150px;">
-            <div class="input-group-prepend">
-              <button class="btn btn-secondary active js-btn-minus" type="button" (click)="decreaseQuantity()">−</button>
+        <ng-container  *ngIf="!isOutOfStock">
+          <div class="row ">
+            <div class=" input-group " style=" width: 33.33%; max-width: 150px;">
+              <div class="input-group-prepend">
+                <button class="btn btn-secondary active js-btn-minus" type="button"
+                  (click)="decreaseQuantity()">−</button>
+              </div>
+              <input type="text" disabled class="form-control text-center" [(ngModel)]="quantity" placeholder=""
+                aria-label="Example text with button addon" aria-describedby="button-addon1">
+              <div class="input-group-append">
+                <button class="btn btn-secondary active js-btn-plus" type="button"
+                  (click)="increaseQuantity()">+</button>
+              </div>
             </div>
-            <input type="text" disabled class="form-control text-center" [(ngModel)]="quantity" placeholder=""
-              aria-label="Example text with button addon" aria-describedby="button-addon1">
-            <div class="input-group-append">
-              <button class="btn btn-secondary active js-btn-plus" type="button" (click)="increaseQuantity()">+</button>
+          </div>
+          <div class="row">
+            <div class="col-12 input-group" *ngIf="totalPrice>0">
+              <div><strong>Total Amount: </strong>{{totalPrice}}</div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-12 input-group" *ngIf="totalPrice>0">
-            <div ><strong>Total Amount: </strong>{{totalPrice}}</div>
+          <div class="row ">
+            <div class="col-4 input-group">
+              <button (click)="addToCart()" class="buy-now btn btn-sm btn-secondary active">Add To Cart</button>
+            </div>
           </div>
-        </div>
-        <div class="row ">
-          <div class="col-4 input-group">
-            <button (click)="addToCart()" class="buy-now btn btn-sm btn-secondary active">Add To Cart</button>
+        </ng-container>
+        <ng-container  *ngIf="model?.isOutOfStock || isOutOfStock">
+          <div class="row ">
+            <div class="col-4 input-group">
+              <button class="btn btn-outline-danger btn-sm " disabled>SOLD OUT</button>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </div>
@@ -64,11 +75,11 @@
       </div>
     </div>
     <div class="row">
-      <ng-container  *ngFor="let product of model?.productComboDetails">
-        <div class="col-sm-4 col-lg-4 mb-4 product-box" data-aos="fade-up" >
-            <app-product-information [product]="product"></app-product-information>
+      <ng-container *ngFor="let product of model?.productComboDetails">
+        <div class="col-sm-4 col-lg-4 mb-4 product-box" data-aos="fade-up">
+          <app-product-information [product]="product"></app-product-information>
         </div>
-    </ng-container>
+      </ng-container>
     </div>
   </div>
 </div>

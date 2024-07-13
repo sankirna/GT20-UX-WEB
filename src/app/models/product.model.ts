@@ -37,6 +37,7 @@ export class ProductModel {
   scheduleDateTime: string | undefined;
   description: string | undefined;
   fileId: number | undefined ;
+  isOutOfStock:boolean=false;
   file: FileUploadRequestModel | undefined;
   productTicketCategories: ProductTicketCategoryMapModel[]=[];
   productCombos:ProductCombosModel[]=[];

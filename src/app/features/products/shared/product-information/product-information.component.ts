@@ -24,8 +24,8 @@ export class ProductInformationComponent implements OnInit, AfterViewInit {
   }
 
   detail(row: ProductModel){
-    //window.location.href ='/products/details/'+ row.id;
-    this.router.navigateByUrl('/products/details/'+ row.id);
+    window.location.href ='/products/details/'+ row.id;
+    //this.router.navigateByUrl('/products/details/'+ row.id);
   }
 
 }

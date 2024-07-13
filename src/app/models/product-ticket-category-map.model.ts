@@ -10,6 +10,7 @@ export class ProductTicketCategoryMapModel {
   block: number | undefined= 0;
   sold: number | undefined= 0;
   price:number = 0;
+  isOutOfStock:boolean=false;
   file: FileUploadRequestModel | undefined;
 }
 

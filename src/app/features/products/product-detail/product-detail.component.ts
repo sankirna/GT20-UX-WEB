@@ -54,6 +54,10 @@ export class ProductDetailComponent implements OnInit {
     return this.shoppingCartService.getShoppingCartModel();
   }
 
+  get isOutOfStock(){
+    return (this.selectedProductTicketCategory && this.selectedProductTicketCategory.isOutOfStock);
+  }
+
   ngOnInit() {
     this.id = <number><unknown>this.route.snapshot.paramMap.get('id');
     this.getData();
