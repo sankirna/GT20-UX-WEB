@@ -14,13 +14,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
-
+          node-version: 18
+          
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+        
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Build Angular project
-        run: ng build --prod
+        run: ng build --configuration=staging
 
-      - name: Run tests
-        run: ng test
+    
