@@ -23,5 +23,6 @@
 }
 
 .input-group{
-    padding:  10px 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

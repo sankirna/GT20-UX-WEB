@@ -12,3 +12,8 @@
     background-color: #ec2c4c;
     color: #fcfffc !important;
 }
+
+.input-group{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

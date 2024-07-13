@@ -132,8 +132,12 @@ export class ProductDetailComponent implements OnInit {
       let cartProductTicketCategory = this.shoppingCartService.getProductTicketCategory(this.selectedProductTicketCategory.id);
       if (cartProductTicketCategory && cartProductTicketCategory.quantity) {
         this.quantity = cartProductTicketCategory.quantity;
-        this.totalPrice = this.ticketPrice * this.quantity;
       }
+      else{
+        this.quantity=1;
+      }
+      this.totalPrice = this.ticketPrice * this.quantity;
+
     }
   }
 
