@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 import { LoginComponent, LoginComponentDialogModel } from 'src/app/features/auth/login/login.component';
 
 @Component({
@@ -15,7 +16,7 @@ export class HeaderComponent {
 
   constructor(private authenticationService: AuthenticationService
     , private dialog: MatDialog,private router: Router
-    , private notificationService: NotificationService
+    , public toastService: ToastService
     , private shoppingCartService: ShoppingCartService
   ) {
     
@@ -40,7 +41,7 @@ export class HeaderComponent {
   logout(){
     this.shoppingCartService.clearShoppingCartModel();
     this.authenticationService.logout();
-    this.notificationService.openSnackBar('User has been logged out!');
+    this.toastService.success('User has been logged out!');
     this.router.navigateByUrl('/products/list');
   }
   viewOrders(){

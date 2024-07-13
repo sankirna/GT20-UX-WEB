@@ -1,3 +1,24 @@
 .text-right-auth-icon{
     float: right;
 }
+
+.count a{
+    margin-right :0px;
+}
+
+.site-navbar{
+    height: 80px;
+}
+
+.site-navigation{
+    padding:7px 0px; 
+}
+.site-menu {
+    padding: 0px; 
+    font-size: 20px;
+}
+
+.site-navbar .site-top-icons ul, .site-navbar .site-top-icons ul li
+{
+    display: inline-block;
+}

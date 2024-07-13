@@ -84,11 +84,11 @@ a {
     -webkit-box-shadow: none !important;
     box-shadow: none !important; }
 
-.site-section {
-  padding: 2.5em 0; }
+/* .site-section {
+  padding: 2.5em 0; } */
   @media (min-width: 768px) {
     .site-section {
-      padding: 5em 0; } }
+      padding: 2.5em 0; } }
   .site-section.site-section-sm {
     padding: 4em 0; }
 
@@ -227,7 +227,7 @@ a {
         text-transform: uppercase;
         letter-spacing: .05em;
         color: #25262a;
-        font-size: 15px;
+        font-size: 20px;
         text-decoration: none !important; }
         .site-navbar .site-navigation .site-menu > li > a:hover {
           color: #db4f4f; }

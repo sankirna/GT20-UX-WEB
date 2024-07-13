@@ -11,6 +11,7 @@ import { LoginComponent, LoginComponentDialogModel, RegisterComponentDialogModel
 import { NotificationService } from './notification.service';
 import { UserRegisterComponent } from 'src/app/features/auth/user-register/user-register.component'; 
 import { PasswordResetRequestComponent } from 'src/app/features/auth/password-reset-request/password-reset-request.component';
+import { ToastService } from './toast.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthenticationService {
     constructor(private http: HttpClient,
         @Inject('LOCALSTORAGE') private localStorage: Storage,
         private dialog: MatDialog, 
-        private notificationService: NotificationService) {
+        private toastService: ToastService) {
     }
 
     loginPopup(){
@@ -31,7 +32,7 @@ export class AuthenticationService {
     
         dialogRef.afterClosed().subscribe(dialogResult => {
           if(dialogResult){
-              this.notificationService.openSnackBar('User has been succefully logged in!');
+              this.toastService.success('User has been succefully logged in!');
           }else{
           }
         });
@@ -101,7 +102,7 @@ export class AuthenticationService {
     
         dialogRef.afterClosed().subscribe(dialogResult => {
           if(dialogResult){
-              this.notificationService.openSnackBar('User has been succefully registered in!');
+            this.toastService.success('User has been succefully registered in!');
           }else{
           }
         });
@@ -116,7 +117,7 @@ export class AuthenticationService {
     
         dialogRef.afterClosed().subscribe(dialogResult => {
           if(dialogResult){
-              this.notificationService.openSnackBar('User password has been succefully reset.!');
+            this.toastService.success('User password has been succefully reset.!');
           }else{
           }
         });

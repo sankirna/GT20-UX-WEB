@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-shopping-cart-coupon',
@@ -13,7 +14,7 @@ export class ShoppingCartCouponComponent implements OnInit {
   @Output() successCallback: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(public shoppingCartService: ShoppingCartService
     , private fb: FormBuilder
-    , private notificationService: NotificationService
+    , private toastService: ToastService
   ) {
 
   }
@@ -41,7 +42,7 @@ export class ShoppingCartCouponComponent implements OnInit {
     if (updateCall) {
       updateCall.subscribe(
         (response) => {
-          this.notificationService.openSnackBar(isAdd ? 'Applied!' : 'Removed');
+          this.toastService.success(isAdd ? 'Applied!' : 'Removed');
           this.buildForm();
           this.successCallback.emit(true);
         },

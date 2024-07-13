@@ -17,6 +17,7 @@ import { TicketCategoryModel, TicketCategorySearchModel } from 'src/app/models/t
 import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -41,7 +42,7 @@ export class ProductDetailComponent implements OnInit {
     , public shoppingCartService: ShoppingCartService
     , public fileService: FileService
     , private fb: FormBuilder
-    , private notificationService: NotificationService
+    , private toastService: ToastService
     , private authenticationService: AuthenticationService) {
   }
 
@@ -116,7 +117,7 @@ export class ProductDetailComponent implements OnInit {
       this.totalPrice = this.ticketPrice * this.quantity;
     }
     else {
-      this.notificationService.openSnackBar('Quantity should no be less or zero.');
+      this.toastService.warning('Quantity should no be less or zero.');
     }
   }
 
@@ -143,7 +144,7 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart() {
     if (this.quantity == 0) {
-      this.notificationService.openSnackBar('Please add quantity.');
+      this.toastService.warning('Please add quantity.');
     }
     if (this.selectedProductTicketCategory
       && this.selectedProductTicketCategory.productId
@@ -159,7 +160,7 @@ export class ProductDetailComponent implements OnInit {
         updatedCall.subscribe(
           (response) => {
             this.shoppingCartService.setShoppingCartModel(response);
-            this.notificationService.openSnackBar('Shopping cart item(s) updated successfully !');
+            this.toastService.success('Shopping cart item(s) updated successfully !');
           },
           (error) => {
             console.error(error);

@@ -16,7 +16,6 @@ export class ShoppingCartComponent implements OnInit {
    *
    */
   constructor(public shoppingCartService: ShoppingCartService
-    , public notificationService: NotificationService
     , public toastService: ToastService
     , private router: Router
   ) {
@@ -43,8 +42,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   increaseQuantity(shoppingCartItemModel: ShoppingCartItemModel) {
-    this.toastService.success('This is a toast message!');
-
     shoppingCartItemModel.quantity = <number>shoppingCartItemModel.quantity + 1;
     shoppingCartItemModel.total = <number>shoppingCartItemModel.price * shoppingCartItemModel.quantity;
     this.updateCartItem(shoppingCartItemModel);
@@ -57,7 +54,7 @@ export class ShoppingCartComponent implements OnInit {
       this.updateCartItem(shoppingCartItemModel);
     }
     else {
-      this.notificationService.openSnackBar('Quantity should no be less or zero.');
+      this.toastService.warning('Quantity should no be less or zero.');
     }
 
   }
@@ -75,9 +72,8 @@ export class ShoppingCartComponent implements OnInit {
       if (updatedCall) {
         updatedCall.subscribe(
           (response) => {
-            debugger
             this.getShoppingCart();
-            this.notificationService.openSnackBar('Shopping cart item(s) updated successfully !');
+            this.toastService.success('Shopping cart item(s) updated successfully !');
           },
           (error) => {
             console.error(error);
@@ -94,7 +90,7 @@ export class ShoppingCartComponent implements OnInit {
         updatedCall.subscribe(
           (response) => {
             this.getShoppingCart();
-            this.notificationService.openSnackBar('Shopping cart item remove successfully !');
+            this.toastService.success('Shopping cart item remove successfully !');
           },
           (error) => {
             console.error(error);

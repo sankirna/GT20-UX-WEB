@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
     selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     loading!: boolean;
 
     constructor(private router: Router,
-        private notificationService: NotificationService,
+        private toastService: ToastService,
         private authenticationService: AuthenticationService,
         private shoppingCartService: ShoppingCartService,
         public dialogRef: MatDialogRef<LoginComponent>) {
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
                     //this.router.navigate(['/']);
                 },
                 error => {
-                    this.notificationService.openSnackBar(error.error.title);
+                    this.toastService.error(error.error.title);
                     this.loading = false;
                 }
             );

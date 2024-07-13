@@ -7,20 +7,14 @@
     max-height: 400px;
 }
 
-@media (min-width: 768px) {
-    .site-blocks-cover {
-        padding-top: 4em;
-    }
-}
+
 
 .site-blocks-cover{
     min-height: auto;
     height:auto;
 }
 
-.site-section {
-    padding: 2.5em 0;
-}
+
 
 .input-group{
     padding-top: 10px;

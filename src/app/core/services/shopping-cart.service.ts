@@ -7,6 +7,7 @@ import { AuthenticationService } from "./auth.service";
 import { ConfirmDialogComponent, ConfirmDialogModel } from "src/app/shared/confirm-dialog/confirm-dialog.component";
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { LoginComponentDialogModel } from "src/app/features/auth/login/login.component";
+import { ToastService } from "./toast.service";
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class ShoppingCartService {
     constructor(
         private http: HttpClient
         , @Inject('LOCALSTORAGE') private localStorage: Storage
-        , private notificationService: NotificationService
+        , private toastService: ToastService
         , private authenticationService: AuthenticationService
         , private dialog: MatDialog
     ) {
@@ -58,13 +59,13 @@ export class ShoppingCartService {
         , productTicketCategoryMapId: number
         , quantity: number) {
         if (quantity <= 0) {
-            this.notificationService.openSnackBar('Please add quantity.');
+            
+            this.toastService.warning('Please add quantity.');
             return null;
         }
 
         var userDetail = this.authenticationService.getCurrentUser();
         if (!userDetail) {
-            // this.notificationService.openSnackBar('Please login before add ticket in cart.');
             // const message = `Please login before add ticket in cart`;
             // const dialogData = new ConfirmDialogModel("Login", message, "Login");
             // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -107,7 +108,6 @@ export class ShoppingCartService {
         // .subscribe(
         //         (response) => {
         //             this.setShoppingCartModel(response);
-        //             this.notificationService.openSnackBar('Shopping cart item(s) updated successfully !');
         //         },
         //         (error) => {
         //             console.error(error);
@@ -117,7 +117,7 @@ export class ShoppingCartService {
 
     deleteProductTicketCategroy(productTicketCategoryMapId: number) {
         if (!productTicketCategoryMapId) {
-            this.notificationService.openSnackBar('Invalid ticket category.');
+            this.toastService.error('Invalid ticket category.');
             return null;
         }
         let shoppingCart = this.getShoppingCartModel();

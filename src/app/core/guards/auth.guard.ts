@@ -9,7 +9,6 @@ import { NotificationService } from '../services/notification.service';
 export class AuthGuard  {
 
     constructor(private router: Router,
-        private notificationService: NotificationService,
         private authService: AuthenticationService) { }
 
     canActivate() {
@@ -22,8 +21,6 @@ export class AuthGuard  {
             } else {
                 localStorage.removeItem('currentUser');
                 localStorage.removeItem('shoppingCart');
-                // this.notificationService.openSnackBar('Your session has expired');
-                // this.router.navigate(['auth/login']);
                 return false;
             }
         }

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-password-reset',
@@ -22,7 +23,7 @@ export class PasswordResetComponent implements OnInit {
   constructor(private activeRoute: ActivatedRoute,
     private router: Router,
     private authService: AuthenticationService,
-    private notificationService: NotificationService,
+    private toastService: ToastService,
     private titleService: Title) {
 
     this.titleService.setTitle('gt20 - Password Reset');
@@ -52,7 +53,7 @@ export class PasswordResetComponent implements OnInit {
     const passwordConfirm = this.form.get('newPasswordConfirm')?.value;
 
     if (password !== passwordConfirm) {
-      this.notificationService.openSnackBar('Passwords do not match');
+      this.toastService.error('Passwords do not match');
       return;
     }
 
@@ -61,11 +62,11 @@ export class PasswordResetComponent implements OnInit {
     this.authService.passwordReset(this.email, this.token, password, passwordConfirm)
       .subscribe(
         () => {
-          this.notificationService.openSnackBar('Your password has been changed.');
+          this.toastService.success('Your password has been changed.');
           this.router.navigate(['/auth/login']);
         },
         (error: any) => {
-          this.notificationService.openSnackBar(error.error);
+          this.toastService.error(error.error);
           this.loading = false;
         }
       );

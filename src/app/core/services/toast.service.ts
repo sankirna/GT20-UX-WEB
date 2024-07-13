@@ -11,15 +11,15 @@ export class ToastService {
   }
 
   success(message: string){
-    this.show(message, { classname: 'bg-success text-light', delay: 5000 });
+    this.show(message, { classname: 'bg-success toast-container text-light end-0 ', delay: 5000 });
   }
 
   warning(message: string){
-    this.show(message, { classname: 'bg-warning text-light', delay: 5000 });
+    this.show(message, { classname: 'bg-warning toast-container text-light end-0 ', delay: 5000 });
   }
 
   error(message: string){
-    this.show(message, { classname: 'bg-danger text-light', delay: 5000 });
+    this.show(message, { classname: 'bg-error toast-container text-light end-0 ', delay: 5000 });
   }
 
   remove(toast: any) {

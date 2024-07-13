@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 
 @Component({
@@ -22,8 +23,7 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
     private spinnerService: SpinnerService,
-    private notificationService: NotificationService) {
-
+    private toastService: ToastService) {
     this.hideCurrentPassword = true;
     this.hideNewPassword = true;
   }
@@ -52,7 +52,7 @@ export class ChangePasswordComponent implements OnInit {
   changePassword() {
 
     if (this.newPassword !== this.newPasswordConfirm) {
-      this.notificationService.openSnackBar('New passwords do not match.');
+      this.toastService.error('New passwords do not match.');
       return;
     }
 
@@ -62,10 +62,10 @@ export class ChangePasswordComponent implements OnInit {
       .subscribe(
         data => {
           this.form.reset();
-          this.notificationService.openSnackBar('Your password has been changed.');
+          this.toastService.success('Your password has been changed.');
         },
         error => {
-          this.notificationService.openSnackBar(error.error);
+          this.toastService.error(error.error);
         }
       );
   }
