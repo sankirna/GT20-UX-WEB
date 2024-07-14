@@ -43,9 +43,9 @@ jobs:
           path: dist/
 
       - name: Deploy to FTP server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        uses: airvzxf/ftp-deployment-action@latest
         with:
-          server: ftp://13.60.47.237/
+          server: ftp://13.60.47.237
           username: gt20_ftp
           password: Rinku@661988
           local-dir: dist/
