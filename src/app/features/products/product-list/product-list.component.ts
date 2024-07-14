@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, TemplateRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { TeamService } from 'src/app/core/services/team.service';
 import { CategoryModel, CategorySearchModel } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/core/services/category.service';
 import * as _ from 'lodash';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-list',
@@ -34,6 +35,7 @@ export class ProductListComponent implements OnInit {
      , private dialog: MatDialog
   ) {
   }
+  private offcanvasService = inject(NgbOffcanvas);
 
   ngOnInit() {
     this.getTeams();
@@ -69,6 +71,10 @@ export class ProductListComponent implements OnInit {
       }
     );
   }
+
+  openBottom(content: TemplateRef<any>) {
+		this.offcanvasService.open(content, { position: 'bottom',panelClass:'h-auto'  });
+	}
 
   search() {
     this.productService.listForSite(this.searchModel).subscribe(

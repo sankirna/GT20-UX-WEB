@@ -16,9 +16,27 @@
 .site-menu {
     padding: 0px; 
     font-size: 20px;
+    margin-right: 120px;
 }
 
 .site-navbar .site-top-icons ul, .site-navbar .site-top-icons ul li
 {
     display: inline-block;
+}
+
+.text-right-auth-icon{
+    position: absolute;
+    top: 0px;
+    right: 0;
+}
+
+.site-mobile-nav-container {
+    li {
+        list-style: none;
+        a{
+        text-decoration: none;
+        color: rgb(44, 31, 31) !important;
+        }
+    }
+ 
 }

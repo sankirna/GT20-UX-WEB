@@ -1,62 +1,67 @@
 <header class="site-navbar fixed-top" role="banner">
-      
-    <nav class="site-navigation text-right text-md-center" role="navigation">
-      <div class="container">
-        <div class="row col-md-12">
-          <div class="col-2 col-md-2  order-1 order-md-1  align-middel">
-            <div class="site-logo1">
-              <a href="/" class="js-logo-clone"><img src="./assets/images/GT20-LOGO.png" style="width: 70px !important;" ></a>
-            </div>
-          </div>
-          <div class="col-8 col-md-8 order-2 order-md-2">
-            <ul class="site-menu js-clone-nav d-none d-md-block">
-              <li class="has-children active">
-              <li><a  [routerLink]="['/products/list']" routerLinkActive="active" style="color: white;" >Shop</a></li>
-            </ul>
-          </div>
-          <div class="col-2 col-md-2 order-3 order-md-3 text-right text-right-auth-icon">
-              <div class="site-top-icons">
-                <ul>
-                  <li *ngIf="isLogin">
-                    <a [routerLink]="['/shopping-cart']" class="site-cart">
-                      <span class="icon icon-shopping_cart"></span>
-                      <span class="count"><a>{{noOfCartItem}}</a></span>
-                    </a>
-                  </li> 
-                  <li *ngIf="!isLogin" ><a (click)="loginPopup()">LOGIN</a></li>
-                  <li *ngIf="isLogin">
-                    <div class="dropdown">
-                      <a  id="profileMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon icon-person"></span></a>
-                      
-                      <div class="dropdown-menu" aria-labelledby="profileMenuButton">
-                        <a class="dropdown-item" >{{user.user.userName}}</a>
-                        <a class="dropdown-item" (click)="viewOrders()">ORDERS</a>
-                        <a class="dropdown-item" (click)="logout()">LOGOUT</a>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="d-inline-block d-md-none ml-md-0">
-                    <a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a>
-                  </li>
-                </ul>
-              </div> 
-            </div>
-        </div>
-       
-       
-      </div>
-    </nav>
-       <!-- <div class="site-navbar-top">
-      <div class="container">
-        <div class="row align-items-center">
 
-       <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-            <form action="" class="site-block-top-search">
-              <span class="icon icon-search2"></span>
-              <input type="text" class="form-control border-0" placeholder="Search">
-            </form>
-          </div> 
+  <nav class="site-navigation text-right text-md-center" role="navigation">
+    <div class="container">
+      <div class="row col-md-12">
+        <div class="col-2 col-md-2  order-1 order-md-1  align-middel">
+          <div class="site-logo1">
+            <a href="/" class="js-logo-clone"><img src="./assets/images/GT20-LOGO.png"
+                style="width: 70px !important;"></a>
+          </div>
         </div>
+        <div class="col-10 col-md-10 order-2 order-md-2">
+          <ng-container *ngTemplateOutlet="siteMenuRef"></ng-container>
+          <div class=" text-right text-right-auth-icon">
+            <div class="site-top-icons">
+              <ul>
+                <li *ngIf="isLogin">
+                  <a [routerLink]="['/shopping-cart']" class="site-cart">
+                    <span class="icon icon-shopping_cart"></span>
+                    <span class="count"><a>{{noOfCartItem}}</a></span>
+                  </a>
+                </li>
+                <li *ngIf="!isLogin"><a (click)="loginPopup()">LOGIN</a></li>
+                <li *ngIf="isLogin">
+                  <div class="dropdown">
+                    <a id="profileMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                        class="icon icon-person"></span></a>
+
+                    <div class="dropdown-menu" aria-labelledby="profileMenuButton">
+                      <a class="dropdown-item" >{{user.user.userName}}</a>
+                      <a class="dropdown-item" (click)="viewOrders()">ORDERS</a>
+                      <a class="dropdown-item" (click)="logout()">LOGOUT</a>
+                    </div>
+                  </div>
+                </li>
+                <li class="d-inline-block d-md-none ml-md-0" *isMobile>
+                  <a class="site-menu-toggle js-menu-toggle" (click)="openEnd(content)"><span
+                      class="icon-menu"></span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div> -->
-  </header>
+
+
+    </div>
+  </nav>
+</header>
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+  <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="site-mobile-nav-container">
+      <ng-container *ngTemplateOutlet="siteMenuRef"></ng-container>
+    </div>
+  </div>
+</ng-template>
+<ng-template #siteMenuRef>
+
+  <ul class="site-menu js-clone-nav ">
+    <li class="has-children active">
+    <li><a [routerLink]="['/products/list']" routerLinkActive="active">Shop</a></li>
+  </ul>
+</ng-template>

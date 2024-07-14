@@ -27,6 +27,7 @@ import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { DatePipe } from '@angular/common';
 import { ProductInformationShortComponent } from './product-information-short/product-information-short.component';
+import { IsMobileDirective } from './Directives/is.mobile.directive';
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     parse: {
@@ -74,7 +75,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
         ImageComponent,
         ShoppingCartCouponComponent,
         ToastContainerComponent,
-        ProductInformationShortComponent
+        ProductInformationShortComponent,
+        IsMobileDirective
     ],
     exports: [
         FormsModule,

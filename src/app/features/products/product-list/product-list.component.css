@@ -1,0 +1,8 @@
+.offcanvas-bottom {
+    min-height: 200px !important;
+}
+
+.site-mobile-product-search{
+    position: absolute;
+    right: 0;
+}

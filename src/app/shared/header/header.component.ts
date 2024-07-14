@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ShoppingCartService } from 'src/app/core/services/shopping-cart.service';
@@ -22,6 +23,8 @@ export class HeaderComponent {
     
   }
 
+  private offcanvasService = inject(NgbOffcanvas);
+
   get user(){
     return this.authenticationService.getCurrentUser();
   }
@@ -37,6 +40,10 @@ export class HeaderComponent {
   loginPopup(){
     this.authenticationService.loginPopup();
   }
+
+  openEnd(content: TemplateRef<any>) {
+		this.offcanvasService.open(content, { position: 'end' });
+	}
 
   logout(){
     this.shoppingCartService.clearShoppingCartModel();

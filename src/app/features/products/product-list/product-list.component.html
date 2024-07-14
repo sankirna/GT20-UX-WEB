@@ -1,34 +1,55 @@
 <div class="site-section">
     <div class="container">
-<div class="row mb-5">
-    <div class="col-md-9 order-2">
-        <div class="row mb-5" >
-            <ng-container  *ngFor="let product of list">
-                <div class="col-sm-6 col-lg-6 mb-4 product-box " data-aos="fade-up" >
-                    <app-product-information [product]="product"></app-product-information>
+        <div class="row mb-5">
+            <div class="col-md-9 order-2">
+                <div class="row mb-5">
+                    <ng-container *ngFor="let product of list">
+                        <div class="col-sm-6 col-lg-6 mb-4 product-box " data-aos="fade-up">
+                            <app-product-information [product]="product"></app-product-information>
+                        </div>
+                    </ng-container>
+
                 </div>
-            </ng-container>
-            
-        </div>
-        <div class="row" data-aos="fade-up">
-            <div class="col-md-12 text-center">
-                <app-custom-paginator [paggerModel]="paggerModel"
-                    (changePage)="ChangePage($event)"></app-custom-paginator>
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-12 text-center">
+                        <app-custom-paginator [paggerModel]="paggerModel"
+                            (changePage)="ChangePage($event)"></app-custom-paginator>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 order-1 mb-5 mb-md-0">
+                <div class="d-none d-md-block">
+                    <ng-container *ngTemplateOutlet="siteProductFilterRef"></ng-container>
+                </div>
+
             </div>
         </div>
     </div>
+    <div class="site-mobile-product-search" *isMobile><button type="button" class="btn btn-danger" (click)="openBottom(content)"><span
+        class="icon-filter" ></span></button></div>
 
-    <div class="col-md-3 order-1 mb-5 mb-md-0">
 
-        <div class="border shadow-sm  p-4 rounded mb-4">
+        <ng-template #content let-offcanvas>
+            <div class="offcanvas-header">
+            <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div class="site-mobile-nav-container">
+                <ng-container *ngTemplateOutlet="siteProductFilterRef"></ng-container>
+              </div>
+            </div>
+          </ng-template>
+    <ng-template #siteProductFilterRef>
+        <div class="border shadow-sm  p-4 rounded mb-4 ">
             <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
                 <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" (change)="pitch($event)"
                     max="500"></mat-slider>
                 <!-- <mat-slider min="200" max="500">
-                    <input value="{{searchModel.minimumPrice}}" matSliderStartThumb>
-                    <input value="{{searchModel.maximumPrice}}" matSliderEndThumb>
-                </mat-slider> -->
+                <input value="{{searchModel.minimumPrice}}" matSliderStartThumb>
+                <input value="{{searchModel.maximumPrice}}" matSliderEndThumb>
+            </mat-slider> -->
 
             </div>
 
@@ -51,6 +72,4 @@
 
             </div>
         </div>
-    </div>
-     </div>
-</div>
+    </ng-template>
