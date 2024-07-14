@@ -49,6 +49,6 @@ jobs:
           username: gt20_ftp
           password: Rinku@661988
           local-dir: dist/
-          server-dir: /root_web
+          server-dir: /root_web/
 
     
