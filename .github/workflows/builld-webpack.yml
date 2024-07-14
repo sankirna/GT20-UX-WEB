@@ -25,4 +25,30 @@ jobs:
       - name: Build Angular project
         run: ng build --configuration=staging
 
+         - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist/
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: dist/
+
+      - name: Deploy to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ftp://13.60.47.237
+          username: gt20_ftp
+          password: Rinku@661988
+          local-dir: dist/GT20-UX-WEB
+          server-dir: /root_web
+
     
