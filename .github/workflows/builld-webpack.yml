@@ -32,7 +32,7 @@ jobs:
           path: dist/
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
 
     steps:
@@ -42,13 +42,13 @@ jobs:
           name: build
           path: dist/
 
-      # - name: Deploy to FTP server
-      #   uses: airvzxf/ftp-deployment-action@latest
-      #   with:
-      #     server: ftp://13.60.47.237
-      #     username: gt20_ftp
-      #     password: Rinku@661988
-      #     local-dir: dist/
-      #     server-dir: /root_web/
+      - name: Deploy to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ftp://13.60.47.237
+          username: gt20_ftp
+          password: Rinku@661988
+          local-dir: dist/
+            server-dir: /root_web/
 
     

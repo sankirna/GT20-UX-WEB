@@ -73,7 +73,7 @@ export class ProductListComponent implements OnInit {
   }
 
   openBottom(content: TemplateRef<any>) {
-		this.offcanvasService.open(content, { position: 'bottom',panelClass:'h-auto'  });
+		this.offcanvasService.open(content, { position: 'bottom', panelClass:'h-auto'  });
 	}
 
   search() {
